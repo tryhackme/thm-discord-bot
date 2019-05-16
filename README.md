@@ -22,14 +22,3 @@ TryHackMe Python Discord Bot
 
 - !ping
   - Bot will reply with "Pong!"
-
-  TODO:
-  - Add get-write-up command
-  - Implement rank api
-  - Implement level api
-  - Implement new-box api
-  - Finalize latency check command
-  - Socials command
-  - !help command
-  - !rules command
-  - Bot status
