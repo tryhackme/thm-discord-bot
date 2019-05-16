@@ -32,4 +32,4 @@ async def ping(ctx):
     await ctx.send("Pong!")
 
 
-bot.run("NDg1ODkzMTUwNDY4OTk3MTIx.XN2T6A.6G5CHdWjOzhNbtNBwMXJ536wboY")
+bot.run(TOKEN)
