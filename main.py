@@ -4,8 +4,8 @@ import discord
 from discord.ext import commands
 
 inputFile = "token.txt"
-workingFile = open(inputFile)
-TOKEN = workingFile.readline()
+#workingFile = open(inputFile)
+#TOKEN = workingFile.readline()
 prefix = "!"
 bot = commands.Bot(command_prefix=prefix)
 extensions = ["cogs.room", "cogs.social"]
@@ -32,4 +32,4 @@ async def ping(ctx):
     await ctx.send("Pong!")
 
 
-bot.run(TOKEN)
+bot.run("NDg1ODkzMTUwNDY4OTk3MTIx.XN2T6A.6G5CHdWjOzhNbtNBwMXJ536wboY")
