@@ -4,8 +4,9 @@ import discord
 from discord.ext import commands
 
 inputFile = "token.txt"
-#workingFile = open(inputFile)
-#TOKEN = workingFile.readline()
+workingFile = open(inputFile)
+TOKEN = workingFile.readline()
+
 prefix = "!"
 bot = commands.Bot(command_prefix=prefix)
 extensions = ["cogs.room", "cogs.social"]
