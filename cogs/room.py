@@ -27,6 +27,7 @@ class Room(commands.Cog):
                 await channel.send(embed=embed)
                 with open("storage.json", "w") as file:
                     file.write(text)
+                    file.close()
             await asyncio.sleep(60)
 
     @commands.Cog.listener()
