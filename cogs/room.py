@@ -2,7 +2,7 @@ from discord.ext import commands
 import discord, random, time, asyncio, requests, json
 
 
-class Test(commands.Cog):
+class Room(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -35,7 +35,7 @@ class Test(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Test(bot))
+    bot.add_cog(Room(bot))
 
 
 
