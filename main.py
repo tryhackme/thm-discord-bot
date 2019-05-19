@@ -9,11 +9,11 @@ TOKEN = workingFile.readline()
 
 prefix = "!"
 bot = commands.Bot(command_prefix=prefix)
-extensions = ["cogs.room", "cogs.social"]
+
+extensions = ["cogs.room", "cogs.social", "cogs.rank"]
 if __name__ == "__main__":
     for extension in extensions:
         bot.load_extension(extension)
-
 
 @bot.event
 async def on_ready():
@@ -31,6 +31,15 @@ async def on_member_join(member: discord.Member):
 @bot.command()
 async def ping(ctx):
     await ctx.send("Pong!")
+
+
+if __name__ == "__main__":
+	for extension in initial_extensions:
+		try:
+			bot.load_extension(extension)
+			print(f"{extension} loaded successfully.\n")
+		except Exception as e:
+			print(f"Error occured while loading {extension}")
 
 
 bot.run(TOKEN)
