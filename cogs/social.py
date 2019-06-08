@@ -38,6 +38,7 @@ Website: https://www.tryhackme.com
         for tweet in tryhackme_tweets:
             if not tweet.in_reply_to_screen_name:
                 await ctx.send("https://twitter.com/RealTryHackMe/status/" + str(tweet.id))
+                break
 
 def setup(bot):
     bot.add_cog(Social(bot))
