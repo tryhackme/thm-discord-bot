@@ -30,6 +30,7 @@ Website: https://www.tryhackme.com
         )
     @commands.command()
     async def tweet(self,ctx):
+        #consumer key,consumer secret, api key, api secret
         creds = [cred.replace("\n","") for cred in open("creds.txt","r")]
         auth = tweepy.OAuthHandler(creds[0], creds[1])
         auth.set_access_token(creds[2], creds[3])
