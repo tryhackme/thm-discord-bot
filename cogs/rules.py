@@ -20,4 +20,4 @@ class Rules(commands.Cog,name="Rank Commands"):
             await ctx.send("```{}```".format(data))
 
 def setup(bot):
-	bot.add_cog(Rules(bot)
+        bot.add_cog(Rules(bot)
