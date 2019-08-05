@@ -51,6 +51,4 @@ async def on_member_join(member: discord.Member):
 async def ping(ctx):
     await ctx.send("Pong!")
 
-
-
 bot.run(TOKEN)
