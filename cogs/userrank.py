@@ -11,9 +11,9 @@ class Userrank(commands.Cog,name="Rank Commands"):
     async def rank(self,ctx,*,user):
         try:
             url = "https://tryhackme.com/api/usersRank/{}".format(user)
-            with aiohttp.ClientSession() as session:
-                with session.get(url) as data:
-                    data = await dat.read()
+            async with aiohttp.ClientSession() as session:
+                async with session.get(url) as data:
+                    data = await data.read()
                     data = json.loads(data)
                     response = discord.Embed(color=0x148f77)
                     response.add_field(name='{} Rank'.format(user),value="Username: {}\nRank: {}".format(user,data.get('userRank')))
