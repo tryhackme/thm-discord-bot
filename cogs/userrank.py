@@ -16,7 +16,7 @@ class Userrank(commands.Cog,name="Rank Commands"):
                     data = await data.read()
                     data = json.loads(data)
                     response = discord.Embed(color=0x148f77)
-                    response.add_field(name='{} Rank'.format(user),value="Username: {}\nRank: {}".format(user,data.get('userRank')))
+                    response.add_field(name='{}\'s Rank'.format(user),value="Username: {}\nRank: {}".format(user,data.get('userRank')))
                     response.set_footer(text="From TryHackMe Official API!",icon_url="https://tryhackme.com/img/THMlogo.png")
             await ctx.send(embed=response)
         
