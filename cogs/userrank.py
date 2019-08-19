@@ -15,18 +15,13 @@ class Userrank(commands.Cog,name="Rank Commands"):
                 async with session.get(url) as data:
                     data = await data.read()
                     data = json.loads(data)
-<<<<<<< HEAD
+
                     if data,get('userRank') != 0:
                         response = discord.Embed(color=0x148f77)
                         response.add_field(name='{} Rank'.format(user),value="Username: {}\nRank: {}".format(user,data.get('userRank')))
                         response.set_footer(text="From TryHackMe Official API!",icon_url="https://tryhackme.com/img/THMlogo.png")
                     else:
                         response.add_field(text="**Username not found**")
-=======
-                    response = discord.Embed(color=0x148f77)
-                    response.add_field(name='{}\'s Rank'.format(user),value="Username: {}\nRank: {}".format(user,data.get('userRank')))
-                    response.set_footer(text="From TryHackMe Official API!",icon_url="https://tryhackme.com/img/THMlogo.png")
->>>>>>> a9153fcd97c6822b7520be2f6f9a38f73a2344b2
             await ctx.send(embed=response)
         
         except:
