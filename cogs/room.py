@@ -1,5 +1,5 @@
 from discord.ext import commands
-import discord, random, time, asyncio, aiohttp, json
+import discord, random, time, asyncio, aiohttp, json, grequests
 
 
 class Room(commands.Cog):
@@ -24,6 +24,8 @@ class Room(commands.Cog):
                         description = json_data[0]["description"]
                         embed = discord.Embed(title=title, description=description, url=code)
                         embed.set_image(url=img)
+                        embed.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
+                        embed.set_footer(text="From the TryHackMe Official API!")
                         await channel.send("NEW ROOM")
                         await channel.send(embed=embed)
                         with open("storage.json", "w") as file:

@@ -7,27 +7,45 @@ class Social(commands.Cog):
 
     @commands.command("twitter")
     async def twitter(self, ctx):
-        await ctx.send("https://twitter.com/realtryhackme")
+        response = discord.Embed(color=0x08a0e9)
+        response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
+        response.set_thumbnail(url="https://i.imgur.com/rImenvh.png")
+        response.add_field(name="TryHackMe's Twitter Account:", value="https://twitter.com/realtryhackme")
+        await ctx.send(embed=response)
 
     @commands.command()
     async def reddit(self, ctx):
-        await ctx.send("https://www.reddit.com/r/tryhackme/")
+        response = discord.Embed(color=0xff4500)
+        response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
+        response.set_thumbnail(url="https://i.imgur.com/rgK8YTD.png")
+        response.add_field(name="TryHackMe's Subreddit:", value="https://www.reddit.com/r/tryhackme/")
+        await ctx.send(embed=response)
 
     @commands.command()
     async def website(self, ctx):
-        await ctx.send("https://www.tryhackme.com")
+        response = discord.Embed(color=0x000000)
+        response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
+        response.set_thumbnail(url="https://tryhackme.com/img/THMlogo.png")
+        response.add_field(name="TryHackMe:", value="https://tryhackme.com/")
+        await ctx.send(embed=response)
 
     @commands.command()
     async def social(self, ctx):
-        await ctx.send(
-            """
-```
-Twitter: https://twitter.com/realtryhackme
-Reddit: https://www.reddit.com/r/tryhackme/
-Website: https://www.tryhackme.com
-```
-"""
-        )
+        response = discord.Embed(color=0x08a0e9)
+        response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
+        response.set_thumbnail(url="https://i.imgur.com/rImenvh.png")
+        response.add_field(name="TryHackMe's Twitter Account:", value="https://twitter.com/realtryhackme")
+        await ctx.send(embed=response)
+        response = discord.Embed(color=0xff4500)
+        response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
+        response.set_thumbnail(url="https://i.imgur.com/rgK8YTD.png")
+        response.add_field(name="TryHackMe's Subreddit:", value="https://www.reddit.com/r/tryhackme/")
+        await ctx.send(embed=response)
+        response = discord.Embed(color=0x000000)
+        response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
+        response.set_thumbnail(url="https://tryhackme.com/img/THMlogo.png")
+        response.add_field(name="TryHackMe:", value="https://tryhackme.com/")
+        await ctx.send(embed=response)
     @commands.command()
     async def tweet(self,ctx):
         #consumer key,consumer secret, api key, api secret
