@@ -2,6 +2,8 @@ import discord
 from discord.ext import commands
 import time
 
+
+
 inputFile = "token.txt"
 workingFile = open(inputFile)
 TOKEN = workingFile.readline()
