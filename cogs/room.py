@@ -1,5 +1,5 @@
 from discord.ext import commands
-import discord, random, time, asyncio, aiohttp, json, grequests
+import discord, random, time, asyncio, aiohttp, json
 
 
 class Room(commands.Cog):
