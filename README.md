@@ -17,7 +17,8 @@ TryHackMe Python Discord Bot
 
 - Robin
 - lollava
-- SherlockSec
+- Yume
+- Dan @SherlockSec
 
 ***Commands:***
 
