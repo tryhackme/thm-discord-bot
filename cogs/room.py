@@ -27,7 +27,7 @@ class Room(commands.Cog):
                         await channel.send("NEW ROOM")
                         await channel.send(embed=embed)
                         with open("storage.json", "w") as file:
-                            file.write(text)
+                            file.write(text.decode("utf-8"))
                             file.close()
             await asyncio.sleep(60)
 
