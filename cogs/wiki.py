@@ -21,6 +21,8 @@ class Utility(commands.Cog):
                     content = data['extract'].split(".")
                     response = discord.Embed(color=0xffffff)
                     response.add_field(name=title,value=''.join(content[:2]))
+                    response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
+                    response.set_footer(text="From the Wikipedia Official API!")
             await ctx.send(embed=response)
         except:
             await ctx.send("Some Error Occured!")
