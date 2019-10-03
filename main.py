@@ -11,7 +11,7 @@ prefix = "!"
 bot = commands.Bot(command_prefix=prefix)
 
 
-extensions = ["cogs.room", "cogs.social", "cogs.rank","cogs.userrank","cogs.rules","cogs.wiki","cogs.linkfetch"]
+extensions = ["cogs.room", "cogs.social", "cogs.rank","cogs.userrank","cogs.rules","cogs.wiki","cogs.linkfetch","cogs.xkcd"]
 
 if __name__ == "__main__":
     for extension in extensions:
