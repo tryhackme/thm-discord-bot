@@ -2,6 +2,8 @@ import discord
 from discord.ext import commands
 import time
 
+
+
 inputFile = "token.txt"
 workingFile = open(inputFile)
 TOKEN = workingFile.readline()
@@ -10,8 +12,7 @@ TOKEN = workingFile.readline()
 prefix = "!"
 bot = commands.Bot(command_prefix=prefix)
 
-
-extensions = ["cogs.room", "cogs.social", "cogs.rank","cogs.userrank","cogs.rules","cogs.wiki","cogs.linkfetch","cogs.xkcd"]
+extensions = ["cogs.room", "cogs.social", "cogs.rank","cogs.userrank","cogs.rules","cogs.wiki","cogs.linkfetch","cogs.xkcd","cogs.partner"]
 
 if __name__ == "__main__":
     for extension in extensions:
