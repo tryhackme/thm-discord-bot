@@ -22,6 +22,8 @@ class xkcdCog(commands.Cog):
 				response = discord.Embed(color=0xffb6b9)
 				response.add_field(name=title,value=alt)
 				response.set_image(url=img)
+				response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
+				response.set_footer(text="From the XKCD Official API!")
 		await ctx.send(embed=response)
 		
 def setup(bot):
