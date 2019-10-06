@@ -25,10 +25,10 @@ class Fun(commands.Cog, name="Fun Commands"):
                     print("Boop")
                     #user = "<@{}>".format(member)
                     desc = "<@{}> was booped by <@{}>!".format(member.id, ctx.author.id)
-                    response = discord.Embed(title="!boop", description=desc, color=0xFFFFFF)
-                    response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
-                    response.set_image(url="http://giphygifs.s3.amazonaws.com/media/99LhY1qc6jG8w/giphy.gif")
-                    await ctx.send(embed=response)
+                response = discord.Embed(title="!boop", description=desc, color=0xFFFFFF)
+                response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
+                response.set_image(url="http://giphygifs.s3.amazonaws.com/media/99LhY1qc6jG8w/giphy.gif")
+                await ctx.send(embed=response)
         else:
             return
 
