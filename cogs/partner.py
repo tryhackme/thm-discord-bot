@@ -14,9 +14,10 @@ class Partner(commands.Cog, name="Partner Commands"):
         #Pending Approval
         response.add_field(name="Name:", value="LOCKE", inline=True)
         response.add_field(name="Link:", value="https://discord.gg/9NedjUm", inline=True)
-        '''
-        response.add_field(name="Name:", value="Official HackTheBox Discord", inline=True)
+        
+        response.add_field(name="Name:", value="HackTheBox", inline=True)
         response.add_field(name="Link:", value="https://discord.gg/hackthebox", inline=True)
+        '''
         await ctx.send(embed=response)
 
 def setup(bot):
