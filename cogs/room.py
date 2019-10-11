@@ -1,6 +1,6 @@
 from discord.ext import commands
 import discord, random, time, asyncio, aiohttp, json
-
+import ast
 
 class Room(commands.Cog):
     def __init__(self, bot):
@@ -10,7 +10,7 @@ class Room(commands.Cog):
         while True:
             channel = self.bot.get_channel(546650767495397376)
             json_file = open("storage.json", "r+")
-            stored_data = json.load(json_file)
+            stored_data = json.load(ast.literal_eval(json_file))
             async with aiohttp.ClientSession() as session:
                 async with session.get("https://tryhackme.com/api/newrooms") as new_data:
                     text = await new_data.read()
