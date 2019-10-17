@@ -40,7 +40,7 @@ async def uptime(self, ctx):
     current_time = time.time()
     difference = int(round(current_time - START_TIME))
     text = str(datetime.timedelta(seconds=difference))
-    embed = discord.Embed(colour=ctx.message.author.top_role.colour)
+    embed = discord.Embed(colour=0x3289a8)
     embed.add_field(name="Uptime", value=text)
     embed.set_footer(text="TryHackMe")
     await self.bot.say("Current uptime: " + text)
