@@ -77,7 +77,7 @@ def getSubStatus(username):
     return check
 
 def sanitize_check(data):
-    chars = ["/",";","-",">","<",":","`","'\""]
+    chars = ["/",";","-",">","<",":","`","'\"","|"]
     if any((c in chars) for c in data):
         return True
     else:
