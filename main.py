@@ -1,8 +1,9 @@
 import discord
 from discord.ext import commands
 import time
+import datetime
 
-
+START_TIME = time.time()
 
 inputFile = "token.txt"
 workingFile = open(inputFile)
@@ -34,6 +35,15 @@ async def on_member_join(member: discord.Member):
         f"<@{member.id}>Welcome to the server!\nBe sure to review the **!rules** and if you have any questions fire way in #support"
     )
 
+@bot.command()
+async def uptime(self, ctx):
+    current_time = time.time()
+    difference = int(round(current_time - START_TIME))
+    text = str(datetime.timedelta(seconds=difference))
+    embed = discord.Embed(colour=0x3289a8)
+    embed.add_field(name="Uptime", value=text)
+    embed.set_footer(text="TryHackMe")
+    await self.bot.say("Current uptime: " + text)
 
 @bot.command()
 async def ping(ctx):
