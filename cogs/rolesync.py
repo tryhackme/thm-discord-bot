@@ -49,7 +49,7 @@ class RoleSync(commands.Cog,name="Verifying/Role Assigning Commands"):
                 # If not DM, clear the message so that the token isn't kept publicly.
                 if not isinstance(ctx.channel, DMChannel):
                         await ctx.message.delete()
-                        await ctx.send("This command should be sent in private only!")
+                        await ctx.send("This command should be sent in private only!\n\nDM me (the bot) with this command instead!")
                         return
 
                 async with aiohttp.ClientSession() as session:
