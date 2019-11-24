@@ -5,12 +5,23 @@ import datetime
 
 import random
 
-START_TIME = time.time()
 
+# Reading the token.
 inputFile = "token.txt"
 workingFile = open(inputFile)
-TOKEN = workingFile.readline()
+token = workingFile.readline()
 
+# Setting up the bot and prefix.
+prefix = "!"
+bot = commands.Bot(command_prefix=prefix)
+
+# Saving the starting time.
+start_time = time.time()
+
+# Setting up extentions. (cogs)
+extensions = ["cogs.room", "cogs.social", "cogs.rank","cogs.userrank","cogs.rolesync","cogs.rules","cogs.wiki","cogs.linkfetch","cogs.xkcd", "cogs.fun", "cogs.devrole"]
+
+# Quotes for the welcoming messages.
 quotes = [
     "C4n y0u pwn th4 m4chin3?",
     "Hacker man 0x1 0x0 0x1",
@@ -41,11 +52,7 @@ quotes = [
 def getMoto():
     return quotes[random.randint(0, len(quotes) - 1)]
 
-prefix = "!"
-bot = commands.Bot(command_prefix=prefix)
-
-extensions = ["cogs.room", "cogs.social", "cogs.rank","cogs.userrank","cogs.rolesync","cogs.rules","cogs.wiki","cogs.linkfetch","cogs.xkcd", "cogs.fun", "cogs.devrole"]
-
+# Loading the cogs.
 if __name__ == "__main__":
     for extension in extensions:
         try:
@@ -54,11 +61,13 @@ if __name__ == "__main__":
         except Exception as e:
             print(f"Error occurred while loading {extension}")
 
+# Logging the starting of the bot into the console.
 @bot.event
 async def on_ready():
     print("Logged in as {0.user}".format(bot))
 
 
+# Welcoming messages to new users.
 @bot.event
 async def on_member_join(member: discord.Member):
     channel = bot.get_channel(521382216304033794)
@@ -69,20 +78,28 @@ async def on_member_join(member: discord.Member):
     response.add_field(name="Hey there!", value=f"<@{member.id}> , Welcome to the server!\n Be sure to review the !rules in #bot-commands. If you need help with a room, ask in #rooms-help.\nTo get your THM's level and if you are a subscriber DM the bot with !verify <token>. You can find the token on your profile. (Discord Token)")
     await channel.send(embed=response)
 
+
+## Other commands.
+# Uptime command.
 @bot.command()
-async def uptime(self, ctx):
+async def uptime(ctx):
     current_time = time.time()
-    difference = int(round(current_time - START_TIME))
+    difference = int(round(current_time - start_time))
     text = str(datetime.timedelta(seconds=difference))
+    
     embed = discord.Embed(colour=0x3289a8)
     embed.add_field(name="Uptime", value=text)
     embed.set_footer(text="TryHackMe")
-    await self.bot.say("Current uptime: " + text)
 
+    await ctx.channel.send(embed=embed)
+
+# Ping command.
 @bot.command()
 async def ping(ctx):
     await ctx.send("Pong!")
     ping = await ctx.send("**__Calculating Elapsed Time__**")
     await ping.edit(content="**Calculated:\nPing rate:** {}ms".format(round(bot.latency, 3)))
 
-bot.run(TOKEN)
+
+# Starting the bot.
+bot.run(token)
