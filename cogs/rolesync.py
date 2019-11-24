@@ -43,16 +43,6 @@ class RoleSync(commands.Cog,name="Verifying/Role Assigning Commands"):
         def __init__(self,bot):
                 self.bot = bot
 
-        # Handles the command without the token (public and DM).
-        @commands.command()
-        async def verify(self, ctx):
-                cmdResult = "Usage: !verify <token>\nGet your token from https://tryhackme.com/profile."
-
-                if not isinstance(ctx.channel, DMChannel):
-                        cmdResult += "\nPlease send the command in DM (to the BOT) in order to keep your token private."
-                        ctx.message.delete()
-                await ctx.send(cmdResult)
-
         @commands.command()
         async def verify(self, ctx, userToken=None):
 
