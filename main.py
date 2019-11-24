@@ -44,7 +44,7 @@ def getMoto():
 prefix = "!"
 bot = commands.Bot(command_prefix=prefix)
 
-extensions = ["cogs.room", "cogs.social", "cogs.rank","cogs.userrank","cogs.rolesync","cogs.rules","cogs.wiki","cogs.linkfetch","cogs.xkcd","cogs.partner", "cogs.fun", "cogs.devrole"]
+extensions = ["cogs.room", "cogs.social", "cogs.rank","cogs.userrank","cogs.rolesync","cogs.rules","cogs.wiki","cogs.linkfetch","cogs.xkcd", "cogs.fun", "cogs.devrole"]
 
 if __name__ == "__main__":
     for extension in extensions:
