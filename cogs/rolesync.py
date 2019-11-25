@@ -81,7 +81,7 @@ class RoleSync(commands.Cog,name="Verifying/Role Assigning Commands"):
                                                         await ctx.send("An unexpected error has occured. Please contact THM's BOT maintainers.\nERROR: User not found.")
                                                         return
 
-                                                level = json.loads(data)["level"]
+                                                level = json.loads(data)["level"] - 1
                                                 sub = json.loads(data)["subscribed"]
 
                                                 # Checks for the users' rank.
