@@ -70,7 +70,8 @@ async def on_ready():
 # Welcoming messages to new users.
 @bot.event
 async def on_member_join(member: discord.Member):
-    channel = bot.get_channel(521382216304033794)
+    channel = bot.get_channel(648878292551598080)
+    time.sleep(5)
     quip = getMoto()
     response = discord.Embed(title="Welcome!", description=quip, color=0xa20606)
     response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
