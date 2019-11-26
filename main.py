@@ -75,7 +75,7 @@ async def on_member_join(member: discord.Member):
     response = discord.Embed(title="Welcome!", description=quip, color=0xa20606)
     response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
     response.set_thumbnail(url="https://cdn.discordapp.com/icons/521382216299839518/c0c7e9f1e258dd6d030fde8823bf8657.webp")
-    response.add_field(name="Hey there!", value=f"<@{member.id}> , Welcome to the server!\n Be sure to review the !rules in #bot-commands. If you need help with a room, ask in #rooms-help.\nTo get your THM's level and if you are a subscriber DM the bot with !verify <token>. You can find the token on your profile. (Discord Token)")
+    response.add_field(name="Hey there!", value=f"<@{member.id}> , Welcome to the server!\n Be sure to review the !rules in #bot-commands. If you need help with a room, ask in #rooms-help.\n\n You can also sync your THM rank on the discord! Use !verify in #bot-commands for more information!")
     await channel.send(embed=response)
 
 
