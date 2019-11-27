@@ -9,8 +9,8 @@ class Room(commands.Cog):
     async def new_room(self):
         while True:
             channel = self.bot.get_channel(546650767495397376)
-            json_file = open("config/storage.json", "r").read()
-            stored_data = json.loads(ast.literal_eval(json_file))
+            json_file = open("config/storage.json", "r", encoding="utf-16").read()
+            stored_data = json.loads(json_file)
             async with aiohttp.ClientSession() as session:
                 async with session.get("https://tryhackme.com/api/newrooms") as new_data:
                     text = await new_data.read()
