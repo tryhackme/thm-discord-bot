@@ -30,37 +30,6 @@ specialQuotes = quotesF["specialQuotes"]
 regularQuotes = quotesF["regularQuotes"]
 welcomeChanID = channelsF["welcome"]
 
-# Quotes for the welcoming messages.
-# specialQuotes = [
-#     "special_quote",
-#     "bLuE iS nOt BrOkEn. -DarkStar, probably."
-# ]
-# quotes = [
-#     "C4n y0u pwn th4 m4chin3?",
-#     "Hacker man 0x1 0x0 0x1",
-#     "The quieter you become the more you are able to hear",
-#     "\*Morpheus\*: Red or Blue pill?",
-#     "Access security... Access security grid... YOU DIDN'T SAY THE MAGIC WORD!",
-#     "Just hack the mainframe.",
-#     "Z2VsdW5weHpyLnBieg==",
-#     "The Matrix is real",
-#     "No place like 127.0.0.1",
-#     "Hack the planet",
-#     "Just obfuscate it...",
-#     "Armitage + Hail Mary",
-#     "WEP, WPA, WAH?",
-#     "admin:password",
-#     "rockyou.txt",
-#     "tmux > screens",
-#     "tabs or spaces?",
-#     "Leeerrrroy Jeekinnnns...",
-#     "Enumeration is key",
-#     "Try harder..",
-#     "https://discord.gg/zGdzUad",
-#     "Satoshi Nakamoto",
-#     "Mining Bitcoin...",
-#     "Configuring neural network"
-#     ]
 
 def getMoto():
     #About 10% chance to have a special quote.
@@ -98,10 +67,6 @@ async def on_member_join(member: discord.Member):
     response.add_field(name="Hey there!", value=f"<@{member.id}> , Welcome to the server!\n Be sure to review the !rules in #bot-commands. If you need help with a room, ask in #rooms-help.\n\n You can also sync your THM rank on the discord! Use !verify in #bot-commands for more information!")
     await channel.send(embed=response)
 
-@bot.command()
-async def testme(ctx):
-    channel = bot.get_channel(welcomeChanID)
-    await channel.send(getMoto())
 
 ## Other commands.
 # Uptime command.
