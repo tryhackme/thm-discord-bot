@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import time
 import datetime
+import json
 
 import random
 
@@ -22,35 +23,53 @@ start_time = time.time()
 extensions = ["cogs.room", "cogs.social", "cogs.rank","cogs.userrank","cogs.rolesync","cogs.rules","cogs.wiki","cogs.linkfetch","cogs.xkcd", "cogs.fun", "cogs.devrole"]
 
 # Quotes for the welcoming messages.
-quotes = [
-    "C4n y0u pwn th4 m4chin3?",
-    "Hacker man 0x1 0x0 0x1",
-    "The quieter you become the more you are able to hear",
-    "\*Morpheus\*: Red or Blue pill?",
-    "Access security... Access security grid... YOU DIDN'T SAY THE MAGIC WORD!",
-    "Just hack the mainframe.",
-    "Z2VsdW5weHpyLnBieg==",
-    "The Matrix is real",
-    "No place like 127.0.0.1",
-    "Hack the planet",
-    "Just obfuscate it...",
-    "Armitage + Hail Mary",
-    "WEP, WPA, WAH?",
-    "admin:password",
-    "rockyou.txt",
-    "tmux > screens",
-    "tabs or spaces?",
-    "Leeerrrroy Jeekinnnns...",
-    "Enumeration is key",
-    "Try harder..",
-    "https://discord.gg/zGdzUad",
-    "Satoshi Nakamoto",
-    "Mining Bitcoin...",
-    "Configuring neural network"
-    ]
+quotesF = json.loads(open("config/quotes.json", "r").read())
+channelsF = json.loads(open("config/channels.json", "r").read())
+
+specialQuotes = quotesF["specialQuotes"]
+regularQuotes = quotesF["regularQuotes"]
+welcomeChanID = channelsF["welcome"]
+
+# Quotes for the welcoming messages.
+# specialQuotes = [
+#     "special_quote",
+#     "bLuE iS nOt BrOkEn. -DarkStar, probably."
+# ]
+# quotes = [
+#     "C4n y0u pwn th4 m4chin3?",
+#     "Hacker man 0x1 0x0 0x1",
+#     "The quieter you become the more you are able to hear",
+#     "\*Morpheus\*: Red or Blue pill?",
+#     "Access security... Access security grid... YOU DIDN'T SAY THE MAGIC WORD!",
+#     "Just hack the mainframe.",
+#     "Z2VsdW5weHpyLnBieg==",
+#     "The Matrix is real",
+#     "No place like 127.0.0.1",
+#     "Hack the planet",
+#     "Just obfuscate it...",
+#     "Armitage + Hail Mary",
+#     "WEP, WPA, WAH?",
+#     "admin:password",
+#     "rockyou.txt",
+#     "tmux > screens",
+#     "tabs or spaces?",
+#     "Leeerrrroy Jeekinnnns...",
+#     "Enumeration is key",
+#     "Try harder..",
+#     "https://discord.gg/zGdzUad",
+#     "Satoshi Nakamoto",
+#     "Mining Bitcoin...",
+#     "Configuring neural network"
+#     ]
 
 def getMoto():
-    return quotes[random.randint(0, len(quotes) - 1)]
+    #About 10% chance to have a special quote.
+    isSpecial = random.randint(0,100)
+
+    if isSpecial <= 10:
+        return specialQuotes[random.randint(0, len(specialQuotes)-1)]
+    else:
+        return regularQuotes[random.randint(0, len(regularQuotes) - 1)]
 
 # Loading the cogs.
 if __name__ == "__main__":
@@ -70,7 +89,7 @@ async def on_ready():
 # Welcoming messages to new users.
 @bot.event
 async def on_member_join(member: discord.Member):
-    channel = bot.get_channel(648878292551598080)
+    channel = bot.get_channel(welcomeChanID)
     time.sleep(5)
     quip = getMoto()
     response = discord.Embed(title="Welcome!", description=quip, color=0xa20606)
@@ -79,6 +98,10 @@ async def on_member_join(member: discord.Member):
     response.add_field(name="Hey there!", value=f"<@{member.id}> , Welcome to the server!\n Be sure to review the !rules in #bot-commands. If you need help with a room, ask in #rooms-help.\n\n You can also sync your THM rank on the discord! Use !verify in #bot-commands for more information!")
     await channel.send(embed=response)
 
+@bot.command()
+async def testme(ctx):
+    channel = bot.get_channel(welcomeChanID)
+    await channel.send(getMoto())
 
 ## Other commands.
 # Uptime command.
