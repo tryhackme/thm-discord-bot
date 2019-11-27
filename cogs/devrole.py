@@ -7,9 +7,12 @@ from discord.ext import commands
 from discord import guild
 from discord.channel import DMChannel
 
-# This config will soon be into a JSON file.
-devLeadID = 578349526574694421
-devID = 578056412790390785
+
+rolesF = json.loads(open("config/roles.json", "r").read())
+
+devLeadID = rolesF["devLead"]
+devID = rolesF["dev"]
+
 
 # Role managment
 def hasRole(member, id):
@@ -24,14 +27,16 @@ class DevRole(commands.Cog,name="BOT Dev"):
                 self.bot = bot
 
         @commands.command()
-        async def botdev(self, ctx, member):
+        async def botdev(self, ctx, member: discord.Member):
 
-                devLeadRole = ctx.guild.get_role(devLeadID)
                 devRole = ctx.guild.get_role(devID)
-
-                if(hasRole(ctx.author, devLeadRole)):
-                        await member.add_roles(member, devRole)
+                
+                if (hasRole(ctx.author, devLeadID) and not (hasRole(member, devID))):
+                        await member.add_roles(devRole)
                         await ctx.send("Welcome on the BOT Dev team, " + member.mention + "!")
+                elif (hasRole(ctx.author, devLeadID) and (hasRole(member, devID))):
+                        await member.remove_roles(devRole)
+                        await ctx.send(member.mention + " left the BOT Dev team!")
             
 
 def setup(bot):
