@@ -7,13 +7,13 @@ from discord.ext import commands
 from discord import guild
 from discord.channel import DMChannel
 
-# This config will soon be into a JSON file.
-# Guild ID
-guildID = 521382216299839518
-# Rank roles ID respectively from 0x1 to 0xD
-rolesID = [638047504822173726, 638047659541790760, 638047662893039634, 638047665766137876, 638047668597162006, 638047670878863390, 638047673173409811, 638047675845181461, 638047678432804925, 638047682232975371, 638047685340954634, 638047689380069404, 638047691800313866]
-# Subscriber role ID
-subID = 538509395605061653
+
+guildF = json.loads(open("config/guild.json", "r").read())
+rolesF = json.loads(open("config/roles.json", "r").read())
+
+guildID = guildF["server"]
+rolesID = rolesF["ranks"]
+subID = rolesF["sub"]
 
 
 async def deleteCommand(ctx):
