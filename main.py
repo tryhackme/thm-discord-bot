@@ -29,15 +29,16 @@ specialQuotes = quotesF["specialQuotes"]
 regularQuotes = quotesF["regularQuotes"]
 welcomeChanID = channelsF["welcome"]
 
+def getRegularQuote():
+    return regularQuotes[random.randint(0, len(regularQuotes) - 1)]
 
-def getMoto():
+def getSpecialQuote():
+    return specialQuotes[random.randint(0, len(specialQuotes)-1)]
+
+def isSpecialQuote():
     #About 10% chance to have a special quote.
     isSpecial = random.randint(0,100)
-
-    if isSpecial <= 10:
-        return specialQuotes[random.randint(0, len(specialQuotes)-1)]
-    else:
-        return regularQuotes[random.randint(0, len(regularQuotes) - 1)]
+    return isSpecial <= 10
 
 async def send_rules(member):
     response = discord.Embed(title="!rules", color=0xffff00)
@@ -76,8 +77,13 @@ async def on_ready():
 async def on_member_join(member: discord.Member):
     channel = bot.get_channel(welcomeChanID)
 
-    quip = getMoto()
-    response = discord.Embed(title="Welcome!", description=quip, color=0xa20606)
+    if isSpecialQuote():
+        quip = getSpecialQuote()
+        response = discord.Embed(title="Welcome!", description=quip, color=0xf5b400)
+    else:
+        quip = getRegularQuote()
+        response = discord.Embed(title="Welcome!", description=quip, color=0xa20606)
+
     response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
     response.set_thumbnail(url="https://cdn.discordapp.com/icons/521382216299839518/c0c7e9f1e258dd6d030fde8823bf8657.webp")
     response.add_field(name="Hey there!", value=member.mention + ", Welcome to the server!\nIf you need help with a room, ask in #rooms-help.\n\n You can also sync your THM rank on the discord! Use !verify in #bot-commands for more information!")
