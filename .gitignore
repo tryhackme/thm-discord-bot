@@ -1,5 +1,6 @@
 #Bot Controller Items
 token.txt
+creds.txt
 *.data
 
 #Debugging Items
