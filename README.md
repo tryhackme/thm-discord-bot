@@ -47,7 +47,7 @@ TryHackMe Python Discord Bot
   - verify      
 - xkcdCog:
   - xkcd        
-​- No Category:
+- No Category:
   - help
   - ping	      
   - uptime
