@@ -62,7 +62,7 @@ class Room(commands.Cog):
                         embed.set_footer(text="From the TryHackMe Official API!")
 
                         # Send messages.
-                        await channel.send("A new room is available!  |  Check it out: https://tryhackme.com/room/"+code)
+                        await channel.send("A new room is available!  |  Check it out: "+code)
                         await channel.send(embed=embed)
 
                         # Updates local file.
