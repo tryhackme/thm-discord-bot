@@ -60,17 +60,18 @@ async def send_rules(member):
 
 # Loading the cogs.
 if __name__ == "__main__":
+    print("Loading the COGS:")
     for extension in extensions:
         try:
             bot.load_extension(extension)
-            print(f"{extension} loaded successfully.\n")
+            print(f"\t{extension} loaded successfully.\n")
         except Exception as e:
-            print(f"Error occurred while loading {extension}")
+            print(f"\tError occurred while loading {extension}")
 
 # Logging the starting of the bot into the console.
 @bot.event
 async def on_ready():
-    print("Logged in as {0.user}".format(bot))
+    print("#- Logged in as {0.user}".format(bot)+"\n")
 
 
 # Welcoming messages to new users.
