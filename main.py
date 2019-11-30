@@ -29,28 +29,30 @@ specialQuotes = quotesF["specialQuotes"]
 regularQuotes = quotesF["regularQuotes"]
 welcomeChanID = channelsF["welcome"]
 
+def getRegularQuote():
+    return regularQuotes[random.randint(0, len(regularQuotes) - 1)]
 
-def getMoto():
+def getSpecialQuote():
+    return specialQuotes[random.randint(0, len(specialQuotes)-1)]
+
+def isSpecialQuote():
     #About 10% chance to have a special quote.
     isSpecial = random.randint(0,100)
-
-    if isSpecial <= 10:
-        return specialQuotes[random.randint(0, len(specialQuotes)-1)]
-    else:
-        return regularQuotes[random.randint(0, len(regularQuotes) - 1)]
+    return isSpecial <= 10
 
 async def send_rules(member):
-    response = discord.Embed(title="!rules", color=0xffff00)
+    response = discord.Embed(title="Rules", color=0xffff00)
     response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
     response.set_thumbnail(url="https://tryhackme.com/img/THMlogo.png")
-            
-    response.add_field(name="1.", value="No unsolicited direct messages (DMs) to other members of the discord. This includes staff. Verify that the member you are messaging is ok with you sending them DMs.")
-    response.add_field(name="2.", value="No personal drama or drama from any other discord community is allowed to be brought into this discord. This is a space for infosec discussions and learning, keep it that way.")
-    response.add_field(name="3.", value="No excessive self promotion. Linking to another discord server is strictly prohibited, just don't turn it into advertising.")
-    response.add_field(name="4.", value="Keep it civil. If action is necessary in a dispute or any other sort of disruption on this discord punishment will be doled out evenly both to the individual(s) who started the issue and to those who reacted inappropriately in their response.")
-    response.add_field(name="5.", value="No cheating is allowed whatsoever within this discord. Any cheating (other than specifically within a developmental environment where it has been preapproved by staff) will result in an immediate and permanent ban.")
-    response.add_field(name="6.", value="Racism is not tolerated and will result in a permanent ban.")
-    response.add_field(name="7.", value="Administrators reserve the right to modify the rules at any time and extend them accordingly to cover infractions which may not be currently included in these rules.")
+    
+    rulesF = json.loads(open("config/rules.json", "r").read())
+    rules = rulesF["rules"]
+    i = 0
+
+    for rule in rules:
+        response.add_field(name=(str(i+1) + "."), value=rule)
+        i = i + 1
+
     response.set_footer(text="From the TryHackMe Official API!")
     
     channel = await member.create_dm()
@@ -58,17 +60,18 @@ async def send_rules(member):
 
 # Loading the cogs.
 if __name__ == "__main__":
+    print("Loading the COGS:")
     for extension in extensions:
         try:
             bot.load_extension(extension)
-            print(f"{extension} loaded successfully.\n")
+            print(f"\t{extension} loaded successfully.\n")
         except Exception as e:
-            print(f"Error occurred while loading {extension}")
+            print(f"\tError occurred while loading {extension}")
 
 # Logging the starting of the bot into the console.
 @bot.event
 async def on_ready():
-    print("Logged in as {0.user}".format(bot))
+    print("#- Logged in as {0.user}".format(bot)+"\n")
 
 
 # Welcoming messages to new users.
@@ -76,8 +79,13 @@ async def on_ready():
 async def on_member_join(member: discord.Member):
     channel = bot.get_channel(welcomeChanID)
 
-    quip = getMoto()
-    response = discord.Embed(title="Welcome!", description=quip, color=0xa20606)
+    if isSpecialQuote():
+        quip = getSpecialQuote()
+        response = discord.Embed(title="Welcome!", description=quip, color=0xf5b400)
+    else:
+        quip = getRegularQuote()
+        response = discord.Embed(title="Welcome!", description=quip, color=0xa20606)
+
     response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
     response.set_thumbnail(url="https://cdn.discordapp.com/icons/521382216299839518/c0c7e9f1e258dd6d030fde8823bf8657.webp")
     response.add_field(name="Hey there!", value=member.mention + ", Welcome to the server!\nIf you need help with a room, ask in #rooms-help.\n\n You can also sync your THM rank on the discord! Use !verify in #bot-commands for more information!")

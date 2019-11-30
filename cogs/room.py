@@ -1,4 +1,5 @@
 from discord.ext import commands
+from shutil import copyfile
 import discord, random, time, asyncio, aiohttp, json
 import ast
 
@@ -7,30 +8,67 @@ class Room(commands.Cog):
         self.bot = bot
 
     async def new_room(self):
+        # Setup the channel to send the announcements into.
+        channelJson = open("config/channels.json", "r").read()
+        channelID = json.loads(channelJson)["announcements"]
+        channel = self.bot.get_channel(channelID)
+        
         while True:
-            channel = self.bot.get_channel(546650767495397376)
-            json_file = open("config/storage.json", "r", encoding="utf-16").read()
-            stored_data = json.loads(json_file)
+
+            # Reading the json and loading it.
+            # Try-except to avoid wrongly parsed files. (making the bot more stable thx to this)
+            try:
+                roomJson = open("config/storage.json", "r").read()
+                stored_data = json.loads(roomJson)
+            except:
+                copyfile("config/storage_default.json", "config/storage.json")
+
+                roomJson = open("config/storage.json", "r").read()
+                stored_data = json.loads(roomJson)
+
+            # Getting infos from the API.
             async with aiohttp.ClientSession() as session:
                 async with session.get("https://tryhackme.com/api/newrooms") as new_data:
+
                     text = await new_data.read()
                     json_data = json.loads(text)
-                    # check for new data
-                    if json_data[0]["title"] != stored_data[0]["title"]:
-                        # set up embed
-                        img = "http://tryhackme.com/" + json_data[0]["image"]
+
+                    # Getting the titles from both JSONs.
+                    # Try-except to avoid wrongly [...] (making the bot more stable thx to this)
+                    try:
+                        titleJsonData = json_data[0]["title"]
+                        titleStoredData = stored_data[0]["title"]
+                    except:
+                        copyfile("config/storage_default.json", "config/storage.json")
+                        
+                        roomJson = open("config/storage.json", "r").read()
+
+                        titleJsonData = json_data[0]["title"]
+                        titleStoredData = stored_data[0]["title"]
+
+
+                    # check for new data.
+                    if titleJsonData != titleStoredData:
+                       
+                        # set up embed.
+                        img = json_data[0]["image"]
                         title = json_data[0]["title"]
                         code = "http://tryhackme.com/room/" + json_data[0]["code"]
                         description = json_data[0]["description"]
+
                         embed = discord.Embed(title=title, description=description, url=code)
                         embed.set_image(url=img)
                         embed.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
                         embed.set_footer(text="From the TryHackMe Official API!")
-                        await channel.send("NEW ROOM")
+
+                        # Send messages.
+                        await channel.send("A new room is available!  |  Check it out: https://tryhackme.com/room/"+code)
                         await channel.send(embed=embed)
+
+                        # Updates local file.
                         with open("config/storage.json", "w") as file:
-                            file.write(text)
-                            file.close()
+                            json.dump(json_data, file)
+                            
             await asyncio.sleep(60)
 
     @commands.Cog.listener()
