@@ -71,6 +71,7 @@ if __name__ == "__main__":
 # Logging the starting of the bot into the console.
 @bot.event
 async def on_ready():
+    await bot.change_presence(activity=discord.Game("DM me with !verify"))
     print("#- Logged in as {0.user}".format(bot)+"\n")
 
 
