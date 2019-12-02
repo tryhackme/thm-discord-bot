@@ -41,7 +41,7 @@ def getUserImg(username):
     extensions = ["png", "jpg", "jpeg", "gif"]
     retUrl = "https://tryhackme.com/img/THMlogo.png"
     for i in range(0, len(extensions)):
-        url = "https://tryhackme.com/uploaded/user_avatars/{}.{}".format(username, extensions[i])
+        url = "https://tryhackme-images.s3.amazonaws.com/user-avatars/{}.{}".format(username, extensions[i])
         try:
             response = requests.get(url)
         except HTTPError as http_err:
