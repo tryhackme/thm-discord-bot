@@ -42,6 +42,7 @@ def getUserImg(username):
     retUrl = "https://tryhackme.com/img/THMlogo.png"
     for i in range(0, len(extensions)):
         url = "https://tryhackme-images.s3.amazonaws.com/user-avatars/{}.{}".format(username, extensions[i])
+        print(url)
         try:
             response = requests.get(url)
         except HTTPError as http_err:
@@ -49,11 +50,11 @@ def getUserImg(username):
         except Exception as err:
             print(f'Other error occurred: {err}')
         else:
-            if "text/html" in response.headers['Content-Type']:
-                #print("Not Image")
+            if "AccessDenied" in response.text:
+                print("Not Image")
                 pass
             else:
-                #print("Probably Image")
+                print("Probably Image")
                 retUrl = url
     return retUrl
 
