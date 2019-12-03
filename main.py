@@ -24,7 +24,7 @@ bot = commands.Bot(command_prefix=prefix)
 start_time = time.time()
 
 # Setting up extentions. (cogs)
-extensions = ["cogs.room", "cogs.social", "cogs.rank", "cogs.userrank","cogs.rolesync","cogs.rules","cogs.wiki","cogs.linkfetch","cogs.xkcd", "cogs.fun", "cogs.devrole"]
+extensions = ["cogs.room", "cogs.social", "cogs.rank","cogs.userrank","cogs.rolesync","cogs.rules","cogs.wiki","cogs.linkfetch", "cogs.fun", "cogs.devrole"]
 
 # Quotes for the welcoming messages.
 quotesF = json.loads(open("config/quotes.json", "r").read())
@@ -76,6 +76,7 @@ if __name__ == "__main__":
 # Logging the starting of the bot into the console.
 @bot.event
 async def on_ready():
+    await bot.change_presence(activity=discord.Game("DM me with !verify"))
     print("#- Logged in as {0.user}".format(bot)+"\n")
 
 
@@ -95,8 +96,9 @@ async def on_member_join(member: discord.Member):
     response.set_thumbnail(url="https://cdn.discordapp.com/icons/521382216299839518/c0c7e9f1e258dd6d030fde8823bf8657.webp")
     response.add_field(name="Hey there!", value=member.mention + ", Welcome to the server!\nIf you need help with a room, ask in #rooms-help.\n\n You can also sync your THM rank on the discord! Use !verify in #bot-commands for more information!")
 
-    await send_rules(member)
-    await channel.send(embed=response)
+    if member not None:
+        await send_rules(member)
+        await channel.send(embed=response)
 
 
 ## Other commands.
