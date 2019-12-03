@@ -4,6 +4,11 @@ import time
 import datetime
 import json
 import random
+from PIL import Image, ImageOps, ImageDraw, ImageFont
+import requests
+import io
+from io import BytesIO
+import json
 
 
 # Reading the token.
@@ -19,7 +24,7 @@ bot = commands.Bot(command_prefix=prefix)
 start_time = time.time()
 
 # Setting up extentions. (cogs)
-extensions = ["cogs.room", "cogs.social", "cogs.rank","cogs.userrank","cogs.rolesync","cogs.rules","cogs.wiki","cogs.linkfetch","cogs.xkcd", "cogs.fun", "cogs.devrole"]
+extensions = ["cogs.room", "cogs.social", "cogs.rank", "cogs.userrank","cogs.rolesync","cogs.rules","cogs.wiki","cogs.linkfetch","cogs.xkcd", "cogs.fun", "cogs.devrole"]
 
 # Quotes for the welcoming messages.
 quotesF = json.loads(open("config/quotes.json", "r").read())
@@ -114,7 +119,6 @@ async def ping(ctx):
     await ctx.send("Pong!")
     ping = await ctx.send("**__Calculating Elapsed Time__**")
     await ping.edit(content="**Calculated:\nPing rate:** {}ms".format(round(bot.latency, 3)))
-
 
 # Starting the bot.
 bot.run(token)
