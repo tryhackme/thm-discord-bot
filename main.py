@@ -2,16 +2,7 @@ import discord
 from discord.ext import commands
 import time
 import datetime
-import json
-import random
-from PIL import Image, ImageOps, ImageDraw, ImageFont
-import requests
-import io
-from io import BytesIO
-import json
 
-
-# Reading the token.
 inputFile = "token.txt"
 workingFile = open(inputFile)
 token = workingFile.readline()
