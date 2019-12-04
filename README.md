@@ -19,8 +19,35 @@ TryHackMe Python Discord Bot
 - lollava
 - Yume
 - Dan @SherlockSec
+- Horshark
 
 ***Commands:***
 
-- !ping
-  - Bot will reply with "Pong!"
+- Blog commands:
+  - blog        
+  - github      
+- Fun Commands:
+  - boop        
+  - honk        
+- Partner Commands:
+  - partner     
+- Rank Commands:
+  - leaderboard 
+  - rank        
+  - rules       
+- Social:
+  - reddit      
+  - social      
+  - tweet       
+  - twitter     
+  - website     
+- Utility:
+  - wiki        
+- Verifying/Role Assigning Commands:
+  - verify      
+- xkcdCog:
+  - xkcd        
+- No Category:
+  - help
+  - ping	      
+  - uptime

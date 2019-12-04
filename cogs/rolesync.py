@@ -1,0 +1,109 @@
+import discord
+import aiohttp
+import asyncio
+import json
+from discord.utils import get
+from discord.ext import commands
+from discord import guild
+from discord.channel import DMChannel
+
+
+guildF = json.loads(open("config/guild.json", "r").read())
+rolesF = json.loads(open("config/roles.json", "r").read())
+
+guildID = guildF["server"]
+rolesID = rolesF["ranks"]
+subID = rolesF["sub"]
+
+
+async def deleteCommand(ctx):
+        await ctx.send("Updating roles for " + ctx.message.author.mention + "!")
+        await ctx.bot.delete_message(ctx.message)
+
+# Role managment
+def hasRole(member, id):
+        for role in member.roles:
+                if id == role.id:
+                        return True
+        return False
+
+async def removeLevelRoles(member):
+        for rId in rolesID:
+                if hasRole(member, rId):
+                        await member.remove_roles(get(member.guild.roles, id=rId))
+
+async def removeSubRole(member):
+        await member.remove_roles(get(member.guild.roles, id=subID))
+
+async def addRole(member, id):
+        await member.add_roles(get(member.guild.roles, id=id))
+
+# Actual command
+class RoleSync(commands.Cog,name="Verifying/Role Assigning Commands"):
+        def __init__(self,bot):
+                self.bot = bot
+
+        @commands.command()
+        async def verify(self, ctx, userToken=None):
+
+                # If not DM, clear the message so that the token isn't kept publicly.
+                if not isinstance(ctx.channel, DMChannel):
+                        await ctx.message.delete()
+                        await ctx.send("Please send that command to the bot in a DM. This is to stop other people from using using your token :slight_smile:")
+                        return
+
+                # If no token sends message...
+                if userToken == None:
+                        await ctx.send("Usage: !verify <token>\nGet your token from https://tryhackme.com/profile.")
+                        return
+                # Otherwise, keeps going:
+                else:
+                        async with aiohttp.ClientSession() as session:
+                                async with session.get("https://tryhackme.com/tokens/discord/" + userToken) as data:
+
+                                        cmdResult = ""
+
+                                        data = await data.read()
+                                        success = json.loads(data)["success"]
+
+                                        if success == False:
+                                                cmdResult = "I'm sorry but I couldn't find the specified token!"
+                                        else:
+                                                server = self.bot.get_guild(guildID)
+                                                if server == None:
+                                                        await ctx.send("An unexpected error has occured. Please contact THM's BOT maintainers.\nERROR: Server not found.")
+                                                        return
+
+                                                user = ctx.message.author
+                                                member = server.get_member(user.id)
+
+                                                if user == None or member == None:
+                                                        await ctx.send("An unexpected error has occured. Please contact THM's BOT maintainers.\nERROR: User not found.")
+                                                        return
+
+                                                level = json.loads(data)["level"] - 1
+                                                sub = json.loads(data)["subscribed"]
+
+                                                # Checks for the users' rank.
+                                                if hasRole(member, rolesID[level]):
+                                                        cmdResult += "Your rank is already up-to-date!\n"
+                                                else:
+                                                        await removeLevelRoles(member)
+                                                        await addRole(member, rolesID[level])
+                                                        cmdResult += "Your rank has been updated!\n"
+
+                                                # Checks for the users' sub status.
+                                                if sub == 0:
+                                                        if hasRole(member, subID):
+                                                                await removeSubRole(member)
+                                                                cmdResult += "You are not longer a subscriber!"
+                                                else:
+                                                        if not hasRole(member, subID):
+                                                                await addRole(member, subID)
+                                                                cmdResult += "You are now a subscriber, thanks!"
+                                        
+                                        await ctx.send(cmdResult)
+            
+
+def setup(bot):
+        bot.add_cog(RoleSync(bot))

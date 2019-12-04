@@ -37,25 +37,13 @@ quotes = [
 def getMoto():
     return quotes[random.randint(0, len(quotes) - 1)]
 
-def getUserImg(username):
-    extensions = ["png", "jpg", "jpeg", "gif"]
-    retUrl = "https://tryhackme.com/img/THMlogo.png"
-    for i in range(0, len(extensions)):
-        url = "https://tryhackme.com/uploaded/user_avatars/{}.{}".format(username, extensions[i])
-        try:
-            response = requests.get(url)
-        except HTTPError as http_err:
-            print(f'HTTP error occurred: {http_err}')
-        except Exception as err:
-            print(f'Other error occurred: {err}')
-        else:
-            if "text/html" in response.headers['Content-Type']:
-                #print("Not Image")
-                pass
-            else:
-                #print("Probably Image")
-                retUrl = url
-    return retUrl
+def getAvatars(username):
+    response = requests.get("https://tryhackme.com/api/leaderboards")
+    data = response.text
+    data = json.loads(data)["topUsers"]
+    for dict in data:
+        if dict['username'] == username:
+            return dict['avatar']
 
 def getSubStatus(username):
     url = "https://tryhackme.com/p/{}".format(username)
@@ -104,7 +92,7 @@ class Userrank(commands.Cog,name="Rank Commands"):
                             quip = "*{}*".format(quip)
                             response = discord.Embed(title="!rank", description=quip, color=0x148f77)
                             response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
-                            userImg = getUserImg(user)
+                            userImg = getAvatars(user)
                             response.set_thumbnail(url=userImg)
                             response.add_field(name="Username:", value=user, inline=True)
                             response.add_field(name="Rank:", value=data.get('userRank'), inline=True)
@@ -116,7 +104,7 @@ class Userrank(commands.Cog,name="Rank Commands"):
                             quip = "*{}*".format(quip)
                             response = discord.Embed(title="!rank", description=quip, color=0xdc143c)
                             response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
-                            userImg = getUserImg(user)
+                            userImg = getAvatars(user)
                             response.set_thumbnail(url=userImg)
                             response.add_field(name="Username:", value=user, inline=True)
                             response.add_field(name="Rank:", value="**Error: Username Not Found!**", inline=True)
