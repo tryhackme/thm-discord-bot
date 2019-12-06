@@ -14,7 +14,7 @@ class Room(commands.Cog):
         channel = self.bot.get_channel(channelID)
         
         while True:
-
+          
             # Reading the json and loading it.
             # Try-except to avoid wrongly parsed files. (making the bot more stable thx to this)
             try:

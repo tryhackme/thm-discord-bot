@@ -37,25 +37,24 @@ quotes = [
 def getMoto():
     return quotes[random.randint(0, len(quotes) - 1)]
 
-def getUserImg(username):
-    extensions = ["png", "jpg", "jpeg", "gif"]
-    retUrl = "https://tryhackme.com/img/THMlogo.png"
-    for i in range(0, len(extensions)):
-        url = "https://tryhackme.com/uploaded/user_avatars/{}.{}".format(username, extensions[i])
-        try:
-            response = requests.get(url)
-        except HTTPError as http_err:
-            print(f'HTTP error occurred: {http_err}')
-        except Exception as err:
-            print(f'Other error occurred: {err}')
-        else:
-            if "text/html" in response.headers['Content-Type']:
-                #print("Not Image")
-                pass
-            else:
-                #print("Probably Image")
-                retUrl = url
-    return retUrl
+def getAvatars(username):
+    response = requests.get("https://tryhackme.com/api/user/{}".format(username))
+    data = response.text
+    data = json.loads(data)
+    return data['avatar']
+    
+def getPoints(username):
+    response = requests.get("https://tryhackme.com/api/user/{}".format(username))
+    data = response.text
+    data = json.loads(data)
+    return data['points']
+
+def getRank(username):
+    response = requests.get("https://tryhackme.com/api/user/{}".format(username))
+    data = response.text
+    data = json.loads(data)
+    return data['userRank']
+
 
 def getSubStatus(username):
     url = "https://tryhackme.com/p/{}".format(username)
@@ -69,10 +68,8 @@ def getSubStatus(username):
     else:
         #print(response.text)
         if "<span>Subscribed</span>" in response.text:
-            print("Sub")
             check = "Yes!"
         else:
-            print("Not Sub")
             check = "No!"
     return check
 
@@ -93,38 +90,34 @@ class Userrank(commands.Cog,name="Rank Commands"):
             await ctx.send("Sorry, the characters you have entered are blacklisted, instead of trying anything here, try some rooms.")
         else:
             try:
-                url = "https://tryhackme.com/api/usersRank/{}".format(user)
-                async with aiohttp.ClientSession() as session:
-                    async with session.get(url) as data:
-                        data = await data.read()
-                        data = json.loads(data)
+                if getRank(user) != 0:
+                    quip = getMoto()
+                    quip = "*{}*".format(quip)
+                    response = discord.Embed(title="!rank", description=quip, color=0x148f77)
+                    response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
+                    userImg = getAvatars(user)
+                    Points = getPoints(user)
+                    rank = getRank(user)
+                    response.set_thumbnail(url=userImg)
+                    response.add_field(name="Username:", value=user, inline=True)
+                    response.add_field(name="Rank:", value= rank, inline=True)
+                    response.add_field(name="Points:", value=Points, inline=True)
+                    sub = getSubStatus(user)
+                    response.add_field(name="Subscribed?", value=sub, inline=True)
+                    response.set_footer(text="From the TryHackMe Official API!")
+                else:
+                    quip = getMoto()
+                    quip = "*{}*".format(quip)
+                    response = discord.Embed(title="!rank", description=quip, color=0xdc143c)
+                    response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
+                    userImg = "https://tryhackme.com/img/favicon.png"
+                    response.set_thumbnail(url=userImg)
+                    response.add_field(name="Username:", value=user, inline=True)
+                    response.add_field(name="Rank:", value="**Error: Username Not Found!**", inline=True)
+                    response.set_footer(text="From the TryHackMe Official API!")
 
-                        if data.get('userRank') != 0:
-                            quip = getMoto()
-                            quip = "*{}*".format(quip)
-                            response = discord.Embed(title="!rank", description=quip, color=0x148f77)
-                            response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
-                            userImg = getUserImg(user)
-                            response.set_thumbnail(url=userImg)
-                            response.add_field(name="Username:", value=user, inline=True)
-                            response.add_field(name="Rank:", value=data.get('userRank'), inline=True)
-                            sub = getSubStatus(user)
-                            response.add_field(name="Subscribed?", value=sub, inline=True)
-                            response.set_footer(text="From the TryHackMe Official API!")
-                        else:
-                            quip = getMoto()
-                            quip = "*{}*".format(quip)
-                            response = discord.Embed(title="!rank", description=quip, color=0xdc143c)
-                            response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
-                            userImg = getUserImg(user)
-                            response.set_thumbnail(url=userImg)
-                            response.add_field(name="Username:", value=user, inline=True)
-                            response.add_field(name="Rank:", value="**Error: Username Not Found!**", inline=True)
-                            sub = getSubStatus(user)
-                            response.add_field(name="Subscribed?", value=sub, inline=True)
-                            response.set_footer(text="From the TryHackMe Official API!")
                             
-                    await ctx.send(embed=response)
+                await ctx.send(embed=response)
             except:
                 await ctx.send("**An issue has occured.**")
         
