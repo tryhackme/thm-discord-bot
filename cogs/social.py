@@ -6,16 +6,19 @@ credsFile = "twitter_creds.txt"
 
 # Embeds data.
 ## URLs.
+gitURL = "https://github.com/DarkStar7471/THM-Bot"
 twitterURL = "https://twitter.com/realtryhackme"
 redditURL = "https://www.reddit.com/r/tryhackme/"
 websiteURL = "https://tryhackme.com/"
 
 ## Titles.
+gitTitle = "Bot's Github Repository Link"
 twitterTitle = "TryHackMe's Twitter Account:"
 redditTitle = "TryHackMe's Subreddit:"
 websiteTitle = "TryHackMe:"
 
 ## Pictures.
+gitPic = "https://raw.githubusercontent.com/DarkStar7471/THM-Bot/master/images/computer.png"
 twitterPic = "https://i.imgur.com/rImenvh.png"
 redditPic = "https://i.imgur.com/rgK8YTD.png"
 websitePic = "https://tryhackme.com/img/THMlogo.png"
@@ -24,20 +27,25 @@ websitePic = "https://tryhackme.com/img/THMlogo.png"
 twitterColor = 0x08a0e9
 redditColor = 0xff5700
 websiteColor = 0x000000
+gitColor = 0x0463C4
 
 # Make embeds.
 def getEmbedSocial(n, v, t, c):
     response = discord.Embed(color=c)
     response.set_author(name="TryHackMe",icon_url=websitePic)
     response.set_thumbnail(url=t)
-    response.add_field(name=n, value=t)
+    response.add_field(name=n, value=v)
     return response
 
 class Social(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command("twitter")
+    @commands.command()
+    async def github(self, ctx):
+        response = getEmbedSocial(gitTitle, gitURL, gitPic, gitColor)
+        await ctx.send(embed=response)
+    @commands.command()
     async def twitter(self, ctx):
         response = getEmbedSocial(twitterTitle, twitterURL, twitterPic, twitterColor)
         await ctx.send(embed=response)
