@@ -6,5 +6,8 @@ creds.txt
 #Local storage
 config/storage.json
 
+#Leaderboard
+images/temp*
+
 #Debugging Items
 *.7z
