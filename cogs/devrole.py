@@ -38,6 +38,8 @@ class DevRole(commands.Cog,name="BOT Dev"):
                 elif (hasRole(ctx.author, devLeadID) and (hasRole(member, devID))):
                         await member.remove_roles(devRole)
                         await ctx.send(member.mention + " left the BOT Dev team!")
+                else:
+                        await ctx.send("Sorry, " + ctx.author.mention + " but you do not have the permission to do that.")
             
 
 def setup(bot):
