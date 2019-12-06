@@ -171,8 +171,8 @@ class Rank(commands.Cog,name="Rank Commands"):
 
 
                 large_img = img.resize((img.size[0]*4, img.size[1]*4))
-                large_img.save('images/image.png')
-                await ctx.send(file=discord.File('images/image.png'))
+                large_img.save('images/leaderboard_output.png')
+                await ctx.send(file=discord.File('images/leaderboard_output.png'))
             
 
 def setup(bot):
