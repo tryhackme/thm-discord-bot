@@ -17,7 +17,6 @@ gray = (52,60,66)
 green = (136,204,20)
 white = (255, 255, 255)
 
-# 
 apiURL = "https://tryhackme.com/api/leaderboards"
 pages = {1:5,2:10,3:15,4:20,5:25,6:30,7:35,8:40,9:45,10:50}
 
