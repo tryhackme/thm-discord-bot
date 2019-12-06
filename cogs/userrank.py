@@ -38,12 +38,18 @@ def getMoto():
     return quotes[random.randint(0, len(quotes) - 1)]
 
 def getAvatars(username):
-    response = requests.get("https://tryhackme.com/api/leaderboards")
+    response = requests.get("https://tryhackme.com/api/user/{}".format(username))
     data = response.text
-    data = json.loads(data)["topUsers"]
-    for dict in data:
-        if dict['username'] == username:
-            return dict['avatar']
+    data = json.loads(data)
+    return data['avatar']
+    
+def getPoints(username):
+    response = requests.get("https://tryhackme.com/api/user/{}".format(username))
+    data = response.text
+    data = json.loads(data)
+    return data['points']
+
+
 
 def getSubStatus(username):
     url = "https://tryhackme.com/p/{}".format(username)
@@ -57,10 +63,8 @@ def getSubStatus(username):
     else:
         #print(response.text)
         if "<span>Subscribed</span>" in response.text:
-            print("Sub")
             check = "Yes!"
         else:
-            print("Not Sub")
             check = "No!"
     return check
 
@@ -93,9 +97,11 @@ class Userrank(commands.Cog,name="Rank Commands"):
                             response = discord.Embed(title="!rank", description=quip, color=0x148f77)
                             response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
                             userImg = getAvatars(user)
+                            Points = getPoints(user)
                             response.set_thumbnail(url=userImg)
                             response.add_field(name="Username:", value=user, inline=True)
                             response.add_field(name="Rank:", value=data.get('userRank'), inline=True)
+                            response.add_field(name="Points:", value=user, inline=True)
                             sub = getSubStatus(user)
                             response.add_field(name="Subscribed?", value=sub, inline=True)
                             response.set_footer(text="From the TryHackMe Official API!")
@@ -104,13 +110,15 @@ class Userrank(commands.Cog,name="Rank Commands"):
                             quip = "*{}*".format(quip)
                             response = discord.Embed(title="!rank", description=quip, color=0xdc143c)
                             response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
-                            userImg = getAvatars(user)
-                            response.set_thumbnail(url=userImg)
-                            response.add_field(name="Username:", value=user, inline=True)
-                            response.add_field(name="Rank:", value="**Error: Username Not Found!**", inline=True)
-                            sub = getSubStatus(user)
-                            response.add_field(name="Subscribed?", value=sub, inline=True)
-                            response.set_footer(text="From the TryHackMe Official API!")
+                            try:
+                                userImg = getAvatars(user)
+                                response.set_thumbnail(url=userImg)
+                            except:
+                                response.add_field(name="Username:", value=user, inline=True)
+                                response.add_field(name="Rank:", value="**Error: Username Not Found!**", inline=True)
+                                sub = getSubStatus(user)
+                                response.add_field(name="Subscribed?", value=sub, inline=True)
+                                response.set_footer(text="From the TryHackMe Official API!")
                             
                     await ctx.send(embed=response)
             except:
