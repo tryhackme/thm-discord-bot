@@ -56,7 +56,6 @@ def getRank(username):
     return data['userRank']
 
 
-
 def getSubStatus(username):
     url = "https://tryhackme.com/p/{}".format(username)
     check = "No!"
@@ -116,6 +115,7 @@ class Userrank(commands.Cog,name="Rank Commands"):
                     response.add_field(name="Username:", value=user, inline=True)
                     response.add_field(name="Rank:", value="**Error: Username Not Found!**", inline=True)
                     response.set_footer(text="From the TryHackMe Official API!")
+
                             
                 await ctx.send(embed=response)
             except:
