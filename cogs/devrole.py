@@ -31,6 +31,7 @@ class DevRole(commands.Cog,name="BOT Dev"):
 
                 devRole = ctx.guild.get_role(devID)
                 
+                # Check if the user has the requiered role to issue the command. (DEV LEAD)
                 if (hasRole(ctx.author, devLeadID) and not (hasRole(member, devID))):
                         await member.add_roles(devRole)
                         await ctx.send("Welcome on the BOT Dev team, " + member.mention + "!")

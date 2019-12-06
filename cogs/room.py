@@ -47,10 +47,10 @@ class Room(commands.Cog):
                         titleStoredData = stored_data[0]["title"]
 
 
-                    # check for new data.
+                    # Check for new data.
                     if titleJsonData != titleStoredData:
                        
-                        # set up embed.
+                        # Set up embed.
                         img = json_data[0]["image"]
                         title = json_data[0]["title"]
                         code = "http://tryhackme.com/room/" + json_data[0]["code"]

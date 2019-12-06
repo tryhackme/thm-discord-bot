@@ -37,6 +37,7 @@ quotes = [
 def getMoto():
     return quotes[random.randint(0, len(quotes) - 1)]
 
+# Getting infos.
 def getAvatars(username):
     response = requests.get("https://tryhackme.com/api/user/{}".format(username))
     data = response.text
@@ -54,7 +55,6 @@ def getRank(username):
     data = response.text
     data = json.loads(data)
     return data['userRank']
-
 
 def getSubStatus(username):
     url = "https://tryhackme.com/p/{}".format(username)
