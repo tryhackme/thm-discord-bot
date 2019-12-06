@@ -90,7 +90,7 @@ async def on_member_join(member: discord.Member):
     response.set_thumbnail(url="https://cdn.discordapp.com/icons/521382216299839518/c0c7e9f1e258dd6d030fde8823bf8657.webp")
     response.add_field(name="Hey there!", value=member.mention + ", Welcome to the server!\nIf you need help with a room, ask in #rooms-help.\n\n You can also sync your THM rank on the discord! Use !verify in #bot-commands for more information!")
     
-    if member not None:
+    if member is not None:
         await send_rules(member)
         await channel.send(embed=response)
 
