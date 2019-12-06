@@ -132,7 +132,7 @@ class Rank(commands.Cog,name="Rank Commands"):
         @commands.command()
         async def leaderboard(self,ctx,*,page: int=1):
                 #image_gen(page)
-                print("generating...")
+                print("Generating leaderboard...\n")
                 emoji = "\N{Waving White Flag}"
                 await ctx.message.add_reaction(emoji)
                 img = Image.new('RGB', (1000, 1000), color=gray)
@@ -158,7 +158,7 @@ class Rank(commands.Cog,name="Rank Commands"):
                 for x in usernames:
                         response = requests.get(avatars[index])
                         temp_img = Image.open(BytesIO(response.content))
-                        temp_img.save('temp{}.png'.format(index))
+                        temp_img.save('images/temp{}.png'.format(index))
                         output = ImageOps.fit(temp_img, mask.size, centering=(0.5, 0.5))
                         img.paste(output, (83, base), mask)
                         d.text((222, base+32), "{}".format(usernames[index]), font=font2, fill=white)
@@ -171,8 +171,8 @@ class Rank(commands.Cog,name="Rank Commands"):
 
 
                 large_img = img.resize((img.size[0]*4, img.size[1]*4))
-                large_img.save('images/image.png')
-                await ctx.send(file=discord.File('images/image.png'))
+                large_img.save('images/leaderboard_output.png')
+                await ctx.send(file=discord.File('images/leaderboard_output.png'))
             
 
 def setup(bot):
