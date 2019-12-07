@@ -28,7 +28,7 @@ class Room(commands.Cog):
 
             # Getting infos from the API.
             async with aiohttp.ClientSession() as session:
-                async with session.get("https://tryhackme.com/api/newrooms") as new_data:
+                async with session.get("http://tryhackme.com/api/newrooms") as new_data:
 
                     text = await new_data.read()
                     json_data = json.loads(text)
@@ -47,10 +47,10 @@ class Room(commands.Cog):
                         titleStoredData = stored_data[0]["title"]
 
 
-                    # check for new data.
+                    # Check for new data.
                     if titleJsonData != titleStoredData:
                        
-                        # set up embed.
+                        # Set up embed.
                         img = json_data[0]["image"]
                         title = json_data[0]["title"]
                         code = "http://tryhackme.com/room/" + json_data[0]["code"]
@@ -58,7 +58,7 @@ class Room(commands.Cog):
 
                         embed = discord.Embed(title=title, description=description, url=code)
                         embed.set_image(url=img)
-                        embed.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
+                        embed.set_author(name="TryHackMe",icon_url="http://tryhackme.com/img/THMlogo.png")
                         embed.set_footer(text="From the TryHackMe Official API!")
 
                         # Send messages.
