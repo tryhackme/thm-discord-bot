@@ -49,7 +49,7 @@ class Fun(commands.Cog, name="Fun Commands"):
     
     @commands.command()
     async def boop(self, ctx, member: discord.Member=None):
-        if ctx.message.channel.name == "bot-commands":
+        if ctx.message.channel.name == "bot-commands" and member is not None:
                 if member.id == 572908911749890053: #Yume - Asphodel#8097 572908911749890053
                     desc = "<@{}>, you can't boop <@{}>!".format(ctx.author.id, member.id)
                     response = discord.Embed(title="!boop", description=desc, color=0xFFFFFF)
