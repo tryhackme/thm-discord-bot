@@ -38,6 +38,27 @@ def isSpecialQuote():
     isSpecial = random.randint(0,100)
     return isSpecial <= 10
 
+# DMs the instructions on how to verify to a member.
+async def send_verify(member):
+    # Embed making.
+    response = discord.Embed(title="How to get verified?", color=0xffff00)
+    response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
+    response.set_thumbnail(url="https://tryhackme.com/img/THMlogo.png")
+    
+    # Loading text from JSON.
+    stepsF = json.loads(open("config/verify_steps.json", "r").read())
+    steps = stepsF["steps"]
+    i = 0
+    for step in steps:
+        response.add_field(name=("Step "+str(i+1)), value=step)
+        i = i + 1
+
+    response.set_footer(text="From the TryHackMe Official API!")
+    
+    # Sending the created embed in DM to the user.
+    channel = await member.create_dm()
+    await channel.send(embed=response)
+
 # DMs the rules to a member passed in arg.
 async def send_rules(member):
     # Embed making.
@@ -97,6 +118,7 @@ async def on_member_join(member: discord.Member):
     # Check if user exists. (avoids join-leavers etc.)
     if member is not None:
         await send_rules(member)
+        await send_verify(member)
         await channel.send(embed=response)
 
 
