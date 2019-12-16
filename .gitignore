@@ -1,6 +1,7 @@
 #Bot Controller Items
 token.txt
 twitter_creds.txt
+jira_creds.txt
 *.data
 
 #Local storage
