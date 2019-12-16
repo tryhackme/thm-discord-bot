@@ -14,14 +14,14 @@ devLeadID = rolesF["devLead"]
 devID = rolesF["dev"]
 
 
-# Role managment
+# Role managment functions.
 def hasRole(member, id):
         for role in member.roles:
                 if id == role.id:
                         return True
         return False
 
-# Actual command
+# Actual COG and command.
 class DevRole(commands.Cog,name="BOT Dev"):
         def __init__(self,bot):
                 self.bot = bot
