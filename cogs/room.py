@@ -1,5 +1,4 @@
 from discord.ext import commands
-from shutil import copyfile
 import discord, random, time, asyncio, aiohttp, json
 import ast
 
@@ -16,15 +15,8 @@ class Room(commands.Cog):
         while True:
           
             # Reading the json and loading it.
-            # Try-except to avoid wrongly parsed files. (making the bot more stable thx to this)
-            try:
-                roomJson = open("config/storage.json", "r").read()
-                stored_data = json.loads(roomJson)
-            except:
-                copyfile("config/storage_default.json", "config/storage.json")
-
-                roomJson = open("config/storage.json", "r").read()
-                stored_data = json.loads(roomJson)
+            roomJson = open("config/storage.json", "r").read()
+            stored_data = json.loads(roomJson)
 
             # Getting infos from the API.
             async with aiohttp.ClientSession() as session:
