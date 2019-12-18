@@ -55,8 +55,13 @@ def getPoints(page, style):
     num = pages[page]-5
     r_num = num+1
     points = []
+    pointsType = 0
+    if style == "topUsersMonthly":
+        pointsType = "monthlyPoints"
+    else:
+        pointsType = "points"
     for e,i in enumerate(data[num:pages[page]]):
-        points.append(i["points"])
+        points.append(i[pointsType])
     return points
 
 '''
