@@ -56,6 +56,7 @@ def getRank(username):
     data = json.loads(data)
     return data['userRank']
 
+
 def getSubStatus(username):
     url = "https://tryhackme.com/p/{}".format(username)
     check = "No!"
