@@ -41,6 +41,10 @@ class Room(commands.Cog):
     @commands.command()
     async def room(self, ctx):
         if not hasRole(ctx.author, adminID):
+            botMsg = await ctx.send("You do not have the permission to do that.")
+            time.sleep(5)
+            await botMsg.delete()
+            await ctx.message.delete()
             return
         
         # Setup the channel to send the announcements into.
