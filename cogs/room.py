@@ -2,6 +2,11 @@ from discord.ext import commands
 import discord, random, time, asyncio, aiohttp, json
 import ast
 
+
+# Channel ID.
+channelJson = open("config/channels.json", "r").read()
+channelID = json.loads(channelJson)["announcements"]
+
 # Role IDs.
 rolesF = json.loads(open("config/roles.json", "r").read())
 adminID = rolesF["admin"]
@@ -47,11 +52,9 @@ class Room(commands.Cog):
             await ctx.message.delete()
             return
         
-        # Setup the channel to send the announcements into.
-        channelJson = open("config/channels.json", "r").read()
-        channelID = json.loads(channelJson)["announcements"]
+        # Gets channel.
         channel = self.bot.get_channel(channelID)
-        
+
         # Getting the API's JSON.
         async with aiohttp.ClientSession() as session:
             async with session.get("http://tryhackme.com/api/newrooms") as new_data:
