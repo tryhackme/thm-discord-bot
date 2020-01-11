@@ -14,7 +14,7 @@ bot = commands.Bot(command_prefix=prefix)
 start_time = time.time()
 
 # Setting up extentions. (cogs)
-extensions = ["cogs.room", "cogs.social", "cogs.rank","cogs.userrank","cogs.rolesync","cogs.rules","cogs.wiki", "cogs.fun", "cogs.devrole", "cogs.jira", "cogs.gtfobins"]
+extensions = ["cogs.room", "cogs.social", "cogs.rank","cogs.userrank","cogs.rolesync","cogs.rules","cogs.wiki", "cogs.fun", "cogs.devrole", "cogs.jira", "cogs.gtfobins", "cogs.vote"]
 
 # Quotes for the welcoming messages.
 quotesF = json.loads(open("config/quotes.json", "r").read())
