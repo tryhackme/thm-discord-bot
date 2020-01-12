@@ -2,9 +2,66 @@ from discord.ext import commands
 import discord, random, time, asyncio, aiohttp, json
 import ast
 
+
+# Channel ID.
+channelJson = open("config/channels.json", "r").read()
+channelID = json.loads(channelJson)["announcements"]
+
+# Role IDs.
+rolesF = json.loads(open("config/roles.json", "r").read())
+adminID = rolesF["admin"]
+
+# Role managment function.
+def hasRole(member, id):
+        for role in member.roles:
+                if id == role.id:
+                        return True
+        return False
+
+# Sending announcement function.
+async def send(channel, json_data):
+    # Set up embed.
+    img = json_data[0]["image"]
+    title = json_data[0]["title"]
+    code = "http://tryhackme.com/room/" + json_data[0]["code"]
+    description = json_data[0]["description"]
+
+    embed = discord.Embed(title=title, description=description, url=code)
+    embed.set_image(url=img)
+    embed.set_author(name="TryHackMe",icon_url="http://tryhackme.com/img/THMlogo.png")
+    embed.set_footer(text="From the TryHackMe Official API!")
+
+    # Send messages.
+    await channel.send("A new room is available!  |  Check it out: "+code)
+    await channel.send(embed=embed)
+
+    # Updates local file.
+    with open("config/room.json", "w") as file:
+        json.dump(json_data, file)
+
 class Room(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+
+    @commands.command()
+    async def room(self, ctx):
+        if not hasRole(ctx.author, adminID):
+            botMsg = await ctx.send("You do not have the permission to do that.")
+            time.sleep(5)
+            await botMsg.delete()
+            await ctx.message.delete()
+            return
+        
+        # Gets channel.
+        channel = self.bot.get_channel(channelID)
+
+        # Getting the API's JSON.
+        async with aiohttp.ClientSession() as session:
+            async with session.get("http://tryhackme.com/api/newrooms") as new_data:
+                text = await new_data.read()
+                json_data = json.loads(text) 
+        
+        await send(channel, json_data)
 
     async def new_room(self):
         # Setup the channel to send the announcements into.
@@ -15,7 +72,7 @@ class Room(commands.Cog):
         while True:
           
             # Reading the json and loading it.
-            roomJson = open("config/storage.json", "r").read()
+            roomJson = open("config/room.json", "r").read()
             stored_data = json.loads(roomJson)
 
             # Getting infos from the API.
@@ -31,9 +88,9 @@ class Room(commands.Cog):
                         titleJsonData = json_data[0]["title"]
                         titleStoredData = stored_data[0]["title"]
                     except:
-                        copyfile("config/storage_default.json", "config/storage.json")
+                        copyfile("config/room_default.json", "config/room.json")
                         
-                        roomJson = open("config/storage.json", "r").read()
+                        roomJson = open("config/room.json", "r").read()
 
                         titleJsonData = json_data[0]["title"]
                         titleStoredData = stored_data[0]["title"]
@@ -41,25 +98,7 @@ class Room(commands.Cog):
 
                     # Check for new data.
                     if titleJsonData != titleStoredData:
-                       
-                        # Set up embed.
-                        img = json_data[0]["image"]
-                        title = json_data[0]["title"]
-                        code = "http://tryhackme.com/room/" + json_data[0]["code"]
-                        description = json_data[0]["description"]
-
-                        embed = discord.Embed(title=title, description=description, url=code)
-                        embed.set_image(url=img)
-                        embed.set_author(name="TryHackMe",icon_url="http://tryhackme.com/img/THMlogo.png")
-                        embed.set_footer(text="From the TryHackMe Official API!")
-
-                        # Send messages.
-                        await channel.send("A new room is available!  |  Check it out: "+code)
-                        await channel.send(embed=embed)
-
-                        # Updates local file.
-                        with open("config/storage.json", "w") as file:
-                            json.dump(json_data, file)
+                        await send(channel, json_data)
                             
             await asyncio.sleep(60)
 
