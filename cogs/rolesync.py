@@ -14,6 +14,7 @@ rolesF = json.loads(open("config/roles.json", "r").read())
 guildID = guildF["server"]
 rolesID = rolesF["ranks"]
 subID = rolesF["sub"]
+contribID = rolesF["contrib"]
 
 
 ## Message managment.
@@ -90,9 +91,15 @@ class RoleSync(commands.Cog,name="Verifying/Role Assigning Commands"):
                                                 level = json.loads(data)["level"] - 1
                                                 sub = json.loads(data)["subscribed"]
 
-                                                # Checks for the users' rank.
-                                                if hasRole(member, rolesID[level]):
+                                                # Special case: Contributors.
+                                                if level == 998:
+                                                        await removeLevelRoles(member)
+                                                        await addRole(member, )
+                                                        cmdResult += "Your rank has been updated!\n"
+                                                # If user already has rank.
+                                                elif hasRole(member, rolesID[level]):
                                                         cmdResult += "Your rank is already up-to-date!\n"
+                                                # Updates the rank.
                                                 else:
                                                         await removeLevelRoles(member)
                                                         await addRole(member, rolesID[level])
