@@ -1,4 +1,3 @@
-
 import discord
 import aiohttp
 import asyncio
@@ -96,15 +95,16 @@ class RoleSync(commands.Cog,name="Verifying/Role Assigning Commands"):
                                                 sub = json.loads(data)["subscribed"]
 
                                                 # Special case: Contributors.
-                                                if level == 997 and not hasRole(member, contribID):
-                                                        await removeLevelRoles(member)
-                                                        await addRole(member, contribID)
-                                                        cmdResult += "You are now a contributor, thanks!\n"
-                                                elif level != 997 and hasRole(member, contribID):
+                                                if level == 997:
+                                                        if not hasRole(member, contribID):
+                                                                await removeLevelRoles(member)
+                                                                await addRole(member, contribID)
+                                                                cmdResult += "You are now a contributor, thanks!\n"
+                                                        else:
+                                                                cmdResult += "Your level is already up-to-date.\n"
+                                                if level != 997 and hasRole(member, contribID):
                                                         await removeContribRole(member)
                                                         cmdResult += "You are no longer a contributor.\n"
-                                                else:
-                                                        cmdResult += "Your level is already up-to-date.\n"
 
                                                 # Normal ranks.
                                                 if level < len(rolesID):
@@ -113,7 +113,7 @@ class RoleSync(commands.Cog,name="Verifying/Role Assigning Commands"):
                                                                 await addRole(member, rolesID[level])
                                                                 cmdResult += "Your level has been updated!\n"
                                                         else:
-                                                                cmdResult += "You level is already up-to-date.\n"
+                                                                cmdResult += "Your level is already up-to-date.\n"
 
 						# Checks for the users' sub status.
                                                 if sub == 0:
