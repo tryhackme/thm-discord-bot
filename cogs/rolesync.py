@@ -103,15 +103,17 @@ class RoleSync(commands.Cog,name="Verifying/Role Assigning Commands"):
                                                 elif level != 997 and hasRole(member, contribID):
                                                         await removeContribRole(member)
                                                         cmdResult += "You are no longer a contributor.\n"
-                                                
+                                                else:
+                                                        cmdResult += "Your level is already up-to-date.\n"
+
                                                 # Normal ranks.
                                                 if level < len(rolesID):
                                                         if not hasRole(member, rolesID[level]):
                                                                 await removeLevelRoles(member)
                                                                 await addRole(member, rolesID[level])
-                                                                cmdResult += "Your rank has been updated!\n"
+                                                                cmdResult += "Your level has been updated!\n"
                                                         else:
-                                                                cmdResult += "You rank is already up-to-date.\n"
+                                                                cmdResult += "You level is already up-to-date.\n"
 
 						# Checks for the users' sub status.
                                                 if sub == 0:
