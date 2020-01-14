@@ -1,3 +1,4 @@
+
 import discord
 import aiohttp
 import asyncio
@@ -37,6 +38,9 @@ async def removeLevelRoles(member):
 
 async def removeSubRole(member):
         await member.remove_roles(get(member.guild.roles, id=subID))
+
+async def removeContribRole(member):
+        await member.remove_roles(get(member.guild.roles, id=contribID))
 
 async def addRole(member, id):
         await member.add_roles(get(member.guild.roles, id=id))
@@ -92,20 +96,24 @@ class RoleSync(commands.Cog,name="Verifying/Role Assigning Commands"):
                                                 sub = json.loads(data)["subscribed"]
 
                                                 # Special case: Contributors.
-                                                if level == 998:
+                                                if level == 997 and not hasRole(member, contribID):
                                                         await removeLevelRoles(member)
-                                                        await addRole(member, )
-                                                        cmdResult += "Your rank has been updated!\n"
-                                                # If user already has rank.
-                                                elif hasRole(member, rolesID[level]):
-                                                        cmdResult += "Your rank is already up-to-date!\n"
-                                                # Updates the rank.
-                                                else:
-                                                        await removeLevelRoles(member)
-                                                        await addRole(member, rolesID[level])
-                                                        cmdResult += "Your rank has been updated!\n"
+                                                        await addRole(member, contribID)
+                                                        cmdResult += "You are now a contributor, thanks!\n"
+                                                elif level != 997 and hasRole(member, contribID):
+                                                        await removeContribRole(member)
+                                                        cmdResult += "You are no longer a contributor.\n"
+                                                
+                                                # Normal ranks.
+                                                if level < len(rolesID):
+                                                        if not hasRole(member, rolesID[level]):
+                                                                await removeLevelRoles(member)
+                                                                await addRole(member, rolesID[level])
+                                                                cmdResult += "Your rank has been updated!\n"
+                                                        else:
+                                                                cmdResult += "You rank is already up-to-date.\n"
 
-                                                # Checks for the users' sub status.
+						# Checks for the users' sub status.
                                                 if sub == 0:
                                                         if hasRole(member, subID):
                                                                 await removeSubRole(member)
