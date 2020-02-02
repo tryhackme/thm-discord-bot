@@ -46,6 +46,8 @@ class Vote(commands.Cog):
 
         def checkDone(m):
             return (m.author == ctx.author and m.content.lower() == "done")
+        
+        botMsgCancel = await ctx.send("Enter CANCEL at anytime to cancel the vote.")
 
         # Retrieve the vote's description.
         botMsg = await ctx.send("Please provide a description for the vote:")
@@ -55,6 +57,12 @@ class Vote(commands.Cog):
         await botMsg.delete()
         await vDescMsg.delete()
 
+        if vDescMsg.content.lower() == "cancel":
+            await botMsgCancel.delete()
+            confirmDelMsg = await ctx.send("Vote canceled.")
+            time.sleep(5)
+            await confirmDelMsg.delete()
+            return
 
         # Retrieve the vote's options and reactions.
         botMsg = await ctx.send("Now please send a message for each options; send DONE (not case sensitive) when you are done.")
@@ -67,6 +75,17 @@ class Vote(commands.Cog):
             msg = await self.bot.wait_for('message', check=checkAuth)
             if msg.content.lower() == "done":
                 isDone = True
+            elif msg.content.lower() == "cancel":
+                await botMsgCancel.delete()
+                await botMsg.delete()
+                await msg.delete()
+                for m in optMsg:
+                    await m.delete()
+
+                confirmDelMsg = await ctx.send("Vote canceled.")
+                time.sleep(5)
+                await confirmDelMsg.delete()
+                return
             else:
                 vOpt.append(msg.content)
             optMsg.append(msg)
@@ -86,6 +105,15 @@ class Vote(commands.Cog):
         isDone = False
         while not isDone:
             msg = await self.bot.wait_for('message', check=checkAuth)
+            
+            if msg.content.lower() == "cancel":
+                await botMsgCancel.delete()
+                await botMsg.delete()
+                await msg.delete()
+                confirmDelMsg = await ctx.send("Vote canceled.")
+                time.sleep(5)
+                await confirmDelMsg.delete()
+                return
 
             # Checks if the amount of emojis matches the amount of options.
             cacheBotMsg = await ctx.channel.fetch_message(botMsg.id)
@@ -104,12 +132,23 @@ class Vote(commands.Cog):
 
         # Clears msg.
         await botMsg.delete()
+        await msg.delete()
 
         # Gets the time the vote should last.
         isDone = False
         while(not isDone):
             timeAsk = await ctx.send("Time the vote should last in hours:")
             msg = await self.bot.wait_for('message', check=checkAuth)
+
+            if msg.content.lower() == "cancel":
+                await botMsgCancel.delete()
+                await msg.delete()
+                await timeAsk.delete()
+                confirmDelMsg = await ctx.send("Vote canceled.")
+                time.sleep(5)
+                await confirmDelMsg.delete()
+                return
+            
             try:
                 vTimeHour = int(msg.content)
                 isDone = True
@@ -120,7 +159,8 @@ class Vote(commands.Cog):
                 isDone = False
             finally:
                 await timeAsk.delete()
-
+        await msg.delete()
+        
         # Confirmation embed.
         embed = discord.Embed(title="This is the vote you are about to create:", description="Lasting for "+str(vTimeHour)+" hour(s).")
         embed.set_author(name="TryHackMe",icon_url="http://tryhackme.com/img/THMlogo.png")
@@ -140,11 +180,14 @@ class Vote(commands.Cog):
             cancelMsg = await ctx.send("You canceled the vote.")
             
             # Removes useless msg.
+            await botMsgCancel.delete()
+            await botEmbed.delete()
             await botMsg.delete()
             await voteValid.delete()
             await cancelMsg.delete()
         else:
-            # Removes useless msg.
+            # Removes useless msg. 
+            await botMsgCancel.delete()
             await botMsg.delete()
             await voteValid.delete()
 
@@ -163,6 +206,7 @@ class Vote(commands.Cog):
                 await vEmbed.add_reaction(vReac[i])
 
             # Waits...
+            #time.sleep(60)
             time.sleep(vTimeHour*60*60)
 
             # Sends results.
