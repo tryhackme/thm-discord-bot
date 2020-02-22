@@ -41,26 +41,27 @@ class Social(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(description="Get the bot's Github link.")
     async def github(self, ctx):
         response = getEmbedSocial(gitTitle, gitURL, gitPic, gitColor)
         await ctx.send(embed=response)
-    @commands.command()
+
+    @commands.command(description="Get the Twitter link.")
     async def twitter(self, ctx):
         response = getEmbedSocial(twitterTitle, twitterURL, twitterPic, twitterColor)
         await ctx.send(embed=response)
 
-    @commands.command()
+    @commands.command(description="Get the Reddit link.")
     async def reddit(self, ctx):
         response = getEmbedSocial(redditTitle, redditURL, redditPic, redditColor)
         await ctx.send(embed=response)
 
-    @commands.command()
+    @commands.command(description="Get the Website link.")
     async def website(self, ctx):
         response = getEmbedSocial(websiteTitle, websiteURL, websitePic, websiteColor)
         await ctx.send(embed=response)
 
-    @commands.command()
+    @commands.command(description="Get links to all our socials.")
     async def social(self, ctx):
         response = getEmbedSocial(twitterTitle, twitterURL, twitterPic, twitterColor)
         await ctx.send(embed=response)
@@ -71,7 +72,7 @@ class Social(commands.Cog):
         response = getEmbedSocial(websiteTitle, websiteURL, websitePic, websiteColor)
         await ctx.send(embed=response)
     
-    @commands.command()
+    @commands.command(description="Get THM's last tweet.")
     async def tweet(self,ctx):
         # Secret twitter API key.
         creds = [cred.replace("\n","") for cred in open(credsFile,"r")]

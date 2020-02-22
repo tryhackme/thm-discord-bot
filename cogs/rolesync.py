@@ -51,7 +51,7 @@ class RoleSync(commands.Cog,name="Verifying/Role Assigning Commands"):
         def __init__(self,bot):
                 self.bot = bot
 
-        @commands.command()
+        @commands.command(description="Verify yourself to get your roles.", usage="{token}")
         async def verify(self, ctx, userToken=None):
 
                 # If not DM, clear the message so that the token isn't kept publicly.

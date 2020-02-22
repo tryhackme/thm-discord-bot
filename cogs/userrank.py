@@ -85,7 +85,8 @@ def sanitize_check(data):
 class Userrank(commands.Cog,name="Rank Commands"):
     def __init__(self,bot):
         self.bot = bot
-    @commands.command()
+
+    @commands.command(description="Get a THM member's rank.", usage="{username}")
     async def rank(self,ctx,*,user):
         if sanitize_check(user) == True:
             await ctx.send("Sorry, the characters you have entered are blacklisted, instead of trying anything here, try some rooms.")

@@ -38,7 +38,7 @@ class Jira(commands.Cog):
         self.bot = bot    
 
     # Command to make a new issue to JIRA.
-    @commands.command()
+    @commands.command(description="Makes a new JIRA issue.", hidden=True)
     async def issue(self,ctx):
 
         # Remove the command.

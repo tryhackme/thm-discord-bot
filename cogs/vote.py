@@ -22,7 +22,7 @@ class Vote(commands.Cog):
         self.bot = bot    
 
     # Command to make a new vote.
-    @commands.command()
+    @commands.command(description="Create a vote.", hidden=True)
     async def vote(self,ctx):
 
         vDesc = ""

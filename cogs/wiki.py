@@ -9,7 +9,7 @@ class Utility(commands.Cog):
         self.bot = bot
     
     # Getting the query from Wiki's oficial API.
-    @commands.command()
+    @commands.command(description="Search Wikipedia for a query.", usage="{query}")
     async def wiki(self,ctx,*,search):
         try:
             api_url = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles="+search
