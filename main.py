@@ -14,7 +14,7 @@ bot = commands.Bot(command_prefix=prefix)
 start_time = time.time()
 
 # Setting up extentions. (cogs)
-extensions = ["cogs.room", "cogs.social", "cogs.rank","cogs.userrank","cogs.rolesync","cogs.rules","cogs.wiki", "cogs.fun", "cogs.devrole", "cogs.jira", "cogs.gtfobins", "cogs.vote"]
+extensions = ["cogs.room", "cogs.help", "cogs.social", "cogs.rank","cogs.userrank","cogs.rolesync","cogs.rules","cogs.wiki", "cogs.fun", "cogs.devrole", "cogs.jira", "cogs.gtfobins", "cogs.vote"]
 
 # Quotes for the welcoming messages.
 quotesF = json.loads(open("config/quotes.json", "r").read())
@@ -82,6 +82,9 @@ async def send_rules(member):
 
 # Loading the cogs.
 if __name__ == "__main__":
+    # Removes default help command.
+    bot.remove_command("help")
+    
     print("Loading the COGS:")
     for extension in extensions:
         try:
@@ -93,7 +96,9 @@ if __name__ == "__main__":
 # Logging the starting of the bot into the console.
 @bot.event
 async def on_ready():
+    # Sets activity message.
     await bot.change_presence(activity=discord.Game("DM me with !verify"))
+    # Removes default help command.
     print("#- Logged in as {0.user}".format(bot)+"\n")
 
 

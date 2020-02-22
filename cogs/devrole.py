@@ -26,7 +26,7 @@ class DevRole(commands.Cog,name="BOT Dev"):
         def __init__(self,bot):
                 self.bot = bot
 
-        @commands.command()
+        @commands.command(description="Toggles bot-dev role to someone.", usage="", hidden=True)
         async def botdev(self, ctx, member: discord.Member):
 
                 devRole = ctx.guild.get_role(devID)

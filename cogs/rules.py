@@ -4,11 +4,11 @@ import asyncio
 import json
 from discord.ext import commands
 
-class Rules(commands.Cog,name="Rank Commands"):
+class Rules(commands.Cog,name="Rules Commands"):
         def __init__(self,bot):
                 self.bot = bot
 
-        @commands.command()
+        @commands.command(description="Sends the rules.")
         async def rules(self,ctx):
                 # Make embed.
                 response = discord.Embed(title="Rules", color=0xffff00)

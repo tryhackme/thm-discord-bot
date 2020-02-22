@@ -14,19 +14,19 @@ class Fun(commands.Cog, name="Fun Commands"):
     ### Skidy, Ashu, Dark's quotes. ###
     ###################################
 
-    @commands.command()
+    @commands.command(description="Sends Skidy's emote.")
     async def skidy(self, ctx):
         response = discord.Embed(title=":slight_smile:", description="", color=0x225999)
         response.set_author(name="Skidy",icon_url="https://i.imgur.com/fSMnXPt.png")
         await ctx.send(embed=response)
 
-    @commands.command()
+    @commands.command(description="Send Ashu's emote.")
     async def ashu(self, ctx):
         response = discord.Embed(title=":slight_smile:", description="", color=0x225999)
         response.set_author(name="Ashu",icon_url="https://i.imgur.com/ojiqdem.png")
         await ctx.send(embed=response)
 
-    @commands.command()
+    @commands.command(description="Send a random Dark's quote.")
     async def dark(self, ctx):
         darkF = json.loads(open("config/dark.json", "r").read())
         darkQuotes = darkF["quotes"]
@@ -40,14 +40,14 @@ class Fun(commands.Cog, name="Fun Commands"):
     ### HONK and BOOP ###
     #####################
 
-    @commands.command()
+    @commands.command(description="HOOONK!")
     async def honk(self, ctx):
         response = discord.Embed(title="!honk", description="***HONK HONK HONK***", color=0xff4500)
         response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
         response.set_image(url="https://cdn.discordapp.com/attachments/433685563674198016/630100135623524363/JPEG_20191003_021216.jpg")
         await ctx.send(embed=response)
     
-    @commands.command()
+    @commands.command(description="Boop someone!", usage="{@user}")
     async def boop(self, ctx, member: discord.Member=None):
         if ctx.message.channel.name == "bot-commands" and member is not None:
                 if member.id == 572908911749890053: #Yume - Asphodel#8097 572908911749890053
@@ -68,7 +68,7 @@ class Fun(commands.Cog, name="Fun Commands"):
     ### XKCD ###
     ############
 
-    @commands.command()
+    @commands.command(description="Send a random XKCD comic.")
     async def xkcd(self,ctx):
         comic_no = random.randint(1,1900)
         url = f"http://xkcd.com/{comic_no}/info.0.json"

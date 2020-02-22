@@ -8,7 +8,7 @@ class Gtfobins(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
-    @commands.command()
+    @commands.command(description="Search GTFObins for a term.", usage="{query}")
     async def gtfobins(self, ctx, search_term=""):
         gtfobins_file = json.loads(open("config/gtfobins.json", "r").read())
         print(search_term)

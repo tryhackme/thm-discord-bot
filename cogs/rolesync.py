@@ -2,6 +2,7 @@ import discord
 import aiohttp
 import asyncio
 import json
+import time
 from discord.utils import get
 from discord.ext import commands
 from discord import guild
@@ -50,13 +51,15 @@ class RoleSync(commands.Cog,name="Verifying/Role Assigning Commands"):
         def __init__(self,bot):
                 self.bot = bot
 
-        @commands.command()
+        @commands.command(description="Verify yourself to get your roles.", usage="{token}")
         async def verify(self, ctx, userToken=None):
 
                 # If not DM, clear the message so that the token isn't kept publicly.
                 if not isinstance(ctx.channel, DMChannel):
                         await ctx.message.delete()
-                        await ctx.send("Please send that command to the bot in a DM. This is to stop other people from using using your token :slight_smile:")
+                        msg = await ctx.send("Please send that command to the bot in a DM. This is to stop other people from using using your token :slight_smile:")
+                        time.sleep(15)
+                        await msg.delete()
                         return
 
                 # If no token sends message...

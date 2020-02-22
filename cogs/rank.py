@@ -108,7 +108,7 @@ class Rank(commands.Cog,name="Rank Commands"):
         def __init__(self,bot):
                 self.bot = bot
 
-        @commands.command()
+        @commands.command(description="Prints the leaderboard.")
         async def leaderboard(self,ctx,*,page: int=1):
                 #image_gen(page)
                 print("Generating leaderboard...\n")
@@ -173,7 +173,7 @@ class Rank(commands.Cog,name="Rank Commands"):
                 await ctx.send(file=discord.File('images/leaderboard_output.png'))
             
 
-        @commands.command()
+        @commands.command(description="Prints this month's leaderboard.")
         async def monthly(self,ctx,*,page: int=1):
                 #image_gen(page)
                 print("Generating leaderboard...\n")
