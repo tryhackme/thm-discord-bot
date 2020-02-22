@@ -44,6 +44,14 @@ class Room(commands.Cog):
         self.bot = bot
 
     @commands.command()
+    async def vpn(self, ctx):
+        response = discord.Embed(color=0x000000)
+        response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
+        response.set_thumbnail(url="https://tryhackme.com/room/openvpn")
+        response.add_field(name="Learn how to use OpenVPN to connect to our network!", value="https://tryhackme.com/room/openvpn")
+        await ctx.send(embed=response)
+
+    @commands.command()
     async def room(self, ctx):
         if not hasRole(ctx.author, adminID):
             botMsg = await ctx.send("You do not have the permission to do that.")
