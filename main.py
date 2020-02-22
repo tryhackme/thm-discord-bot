@@ -86,9 +86,9 @@ if __name__ == "__main__":
     for extension in extensions:
         try:
             bot.load_extension(extension)
-            print(f"\t{extension} loaded successfully.\n")
+            print(f"[Success]\t{extension} loaded successfully.\n")
         except Exception as e:
-            print(f"\tError occurred while loading {extension}")
+            print(f"[ERROR]\t\terror occurred while loading {extension}\n")
 
 # Logging the starting of the bot into the console.
 @bot.event
