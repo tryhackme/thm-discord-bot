@@ -17,8 +17,8 @@ def get_msg(bot, isStaff):
         commands = bot.get_cog(cog_name).get_commands()
         for command in commands:
 
-            # If the command isn't hidden.
-            if not command.hidden or isStaff:
+            # User and command isn't hidden, or staff and command is hidden.
+            if (not command.hidden and not isStaff) or (command.hidden and isStaff):
                 i = i+1
                 cog+=command.name
 

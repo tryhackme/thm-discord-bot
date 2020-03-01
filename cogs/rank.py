@@ -104,7 +104,7 @@ def image_gen(page):
         large_img = img.resize((img.size[0]*4, img.size[1]*4))
         large_img.save('images/image.png')
 '''
-class Rank(commands.Cog,name="Rank Commands"):
+class Rank(commands.Cog,name="Leaderboard Commands"):
         def __init__(self,bot):
                 self.bot = bot
 
