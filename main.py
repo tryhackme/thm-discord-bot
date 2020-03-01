@@ -1,6 +1,8 @@
 import discord, time, datetime, json, random
 from discord.ext import commands
 
+from libs.embedmaker import officialEmbed
+
 
 inputFile = "token.txt"
 workingFile = open(inputFile)
@@ -110,13 +112,12 @@ async def on_member_join(member: discord.Member):
     # Roles the dice for a (non) special quote, then sends it.
     if isSpecialQuote():
         quip = getSpecialQuote()
-        response = discord.Embed(title="Welcome!", description=quip, color=0xf5b400)
+        response = officialEmbed("Welcome!", quip, color=0xf5b400, footer="")
     else:
         quip = getRegularQuote()
-        response = discord.Embed(title="Welcome!", description=quip, color=0xa20606)
+        response = officialEmbed("Welcome!", quip, color=0xa20606, footer="")
 
     # Embed creation.
-    response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
     response.set_thumbnail(url="https://cdn.discordapp.com/icons/521382216299839518/c0c7e9f1e258dd6d030fde8823bf8657.webp")
     response.add_field(name="Hey there!", value=member.mention + ", Welcome to the server!\nIf you need help with a room, ask in #rooms-help.\n\n You can also sync your THM rank on the discord, check your DMs!")
     
@@ -137,9 +138,8 @@ async def uptime(ctx):
     text = str(datetime.timedelta(seconds=difference))
     
     # Embed.
-    embed = discord.Embed(colour=0x3289a8)
+    embed = officialEmbed(color=0x3289a8)
     embed.add_field(name="Uptime", value=text)
-    embed.set_footer(text="TryHackMe")
 
     # Sends.
     await ctx.channel.send(embed=embed)

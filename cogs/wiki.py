@@ -4,6 +4,8 @@ import aiohttp
 import json
 from discord.ext import commands
 
+from libs.embedmaker import officialEmbed
+
 class Utility(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -26,10 +28,8 @@ class Utility(commands.Cog):
                     content = data['extract'].split(".")
                     
                     # Embed.
-                    response = discord.Embed(color=0xffffff)
+                    response = officialEmbed(color=0xffffff, footer="From the Wikipedia Official API!")
                     response.add_field(name=title,value=''.join(content[:2]))
-                    response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
-                    response.set_footer(text="From the Wikipedia Official API!")
             
             await ctx.send(embed=response)
         except:

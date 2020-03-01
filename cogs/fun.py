@@ -4,6 +4,8 @@ import json
 import random
 import aiohttp
 
+from libs.embedmaker import officialEmbed
+
 
 class Fun(commands.Cog, name="Fun Commands"):
     def __init__(self, bot):
@@ -16,23 +18,21 @@ class Fun(commands.Cog, name="Fun Commands"):
 
     @commands.command(description="Sends Skidy's emote.")
     async def skidy(self, ctx):
-        response = discord.Embed(title=":slight_smile:", description="", color=0x225999)
-        response.set_author(name="Skidy",icon_url="https://i.imgur.com/fSMnXPt.png")
+        response = officialEmbed(title=":slight_smile:", color=0x225999, author="Skidy", author_img="https://i.imgur.com/fSMnXPt.png", footer="")
         await ctx.send(embed=response)
 
     @commands.command(description="Send Ashu's emote.")
     async def ashu(self, ctx):
-        response = discord.Embed(title=":slight_smile:", description="", color=0x225999)
-        response.set_author(name="Ashu",icon_url="https://i.imgur.com/ojiqdem.png")
+        response = officialEmbed(title=":slight_smile:", color=0x225999, author="Ashu", author_img="https://i.imgur.com/ojiqdem.png", footer="")
         await ctx.send(embed=response)
 
     @commands.command(description="Send a random Dark's quote.")
     async def dark(self, ctx):
         darkF = json.loads(open("config/dark.json", "r").read())
         darkQuotes = darkF["quotes"]
+        quote = darkQuotes[random.randint(0, len(darkQuotes)-1)]
 
-        response = discord.Embed(title=darkQuotes[random.randint(0, len(darkQuotes)-1)], description="", color=0xff4500)
-        response.set_author(name="DarkStar7471",icon_url="https://i.imgur.com/jZ908d1.png")
+        response = officialEmbed(title=quote, color=0xff4500, author="DarkStar7471", author_img="https://i.imgur.com/jZ908d1.png", footer="")
         await ctx.send(embed=response)
 
 
@@ -42,8 +42,7 @@ class Fun(commands.Cog, name="Fun Commands"):
 
     @commands.command(description="HOOONK!")
     async def honk(self, ctx):
-        response = discord.Embed(title="!honk", description="***HONK HONK HONK***", color=0xff4500)
-        response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
+        response = officialEmbed("!honk", "***HONK HONK HONK***", 0xff4500)
         response.set_image(url="https://cdn.discordapp.com/attachments/433685563674198016/630100135623524363/JPEG_20191003_021216.jpg")
         await ctx.send(embed=response)
     
@@ -52,12 +51,10 @@ class Fun(commands.Cog, name="Fun Commands"):
         if ctx.message.channel.name == "bot-commands" and member is not None:
                 if member.id == 572908911749890053: #Yume - Asphodel#8097 572908911749890053
                     desc = "<@{}>, you can't boop <@{}>!".format(ctx.author.id, member.id)
-                    response = discord.Embed(title="!boop", description=desc, color=0xFFFFFF)
-                    response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
+                    response = officialEmbed("!boop", desc, color=0xFFFFFF)
                 else:
                     desc = "<@{}> was booped by <@{}>!".format(member.id, ctx.author.id)
-                    response = discord.Embed(title="!boop", description=desc, color=0xFFFFFF)
-                    response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
+                    response = officialEmbed("!boop", desc, color=0xFFFFFF)
                     response.set_image(url="http://giphygifs.s3.amazonaws.com/media/99LhY1qc6jG8w/giphy.gif")
                 await ctx.send(embed=response)
         else:
@@ -79,11 +76,10 @@ class Fun(commands.Cog, name="Fun Commands"):
                 img = json_data.get("img")
                 title = json_data.get("title")
                 alt = json_data.get("alt")
-                response = discord.Embed(color=0xffb6b9)
+
+                response = officialEmbed(color=0xffb6b9, footer="From the XKCD Official API!")
                 response.add_field(name=title,value=alt)
                 response.set_image(url=img)
-                response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
-                response.set_footer(text="From the XKCD Official API!")
         await ctx.send(embed=response)
             
 

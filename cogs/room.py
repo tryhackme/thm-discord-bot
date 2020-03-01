@@ -2,6 +2,7 @@ from discord.ext import commands
 import discord, random, time, asyncio, aiohttp, json
 import ast
 
+from libs.embedmaker import officialEmbed
 
 # Channel ID.
 channelJson = open("config/channels.json", "r").read()
@@ -26,14 +27,11 @@ async def send(channel, json_data):
     code = "http://tryhackme.com/room/" + json_data[0]["code"]
     description = json_data[0]["description"]
 
-    embed = discord.Embed(title=title, description=description, url=code)
+    embed = officialEmbed(title, description)
     embed.set_image(url=img)
-    embed.set_author(name="TryHackMe",icon_url="http://tryhackme.com/img/THMlogo.png")
-    embed.set_footer(text="From the TryHackMe Official API!")
 
     # Send messages.
-    await channel.send("A new room is available!  |  Check it out: "+code)
-    await channel.send(embed=embed)
+    await channel.send("A new room is available!  |  Check it out: "+code, embed=embed)
 
     # Updates local file.
     with open("config/room.json", "w") as file:
@@ -45,8 +43,7 @@ class Room(commands.Cog):
 
     @commands.command(description="Learn how to use OpenVPN to connect to the network.")
     async def vpn(self, ctx):
-        response = discord.Embed(color=0x000000)
-        response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
+        response = officialEmbed()
         response.set_thumbnail(url="https://tryhackme.com/room/openvpn")
         response.add_field(name="Learn how to use OpenVPN to connect to our network!", value="https://tryhackme.com/room/openvpn")
         await ctx.send(embed=response)
@@ -55,7 +52,9 @@ class Room(commands.Cog):
     async def room(self, ctx):
         if not hasRole(ctx.author, adminID):
             botMsg = await ctx.send("You do not have the permission to do that.")
+            
             time.sleep(5)
+
             await botMsg.delete()
             await ctx.message.delete()
             return

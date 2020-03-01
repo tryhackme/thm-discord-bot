@@ -1,5 +1,6 @@
 from discord.ext import commands
 import discord, random, time, asyncio, requests, json,tweepy
+from libs.embedmaker import officialEmbed
     
 # Twitter API key.
 credsFile = "twitter_creds.txt"
@@ -31,10 +32,8 @@ gitColor = 0x0463C4
 
 # Make embeds.
 def getEmbedSocial(n, v, t, c):
-    response = discord.Embed(color=c)
-    response.set_author(name="TryHackMe",icon_url=websitePic)
+    response = officialEmbed(n,v, color=c)
     response.set_thumbnail(url=t)
-    response.add_field(name=n, value=v)
     return response
 
 class Social(commands.Cog):
