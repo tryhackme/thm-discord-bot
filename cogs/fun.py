@@ -26,7 +26,7 @@ class Fun(commands.Cog, name="Fun Commands"):
         response.set_author(name="Ashu",icon_url="https://i.imgur.com/ojiqdem.png")
         await ctx.send(embed=response)
 
-    @commands.command(description="Send a random Dark's quote.")
+    @commands.command(description="Send a random Darkstar quote.")
     async def dark(self, ctx):
         darkF = json.loads(open("config/dark.json", "r").read())
         darkQuotes = darkF["quotes"]
