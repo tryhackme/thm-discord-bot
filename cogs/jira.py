@@ -5,6 +5,8 @@ import requests
 import json
 import time
 
+from libs.embedmaker import officialEmbed
+
 # Role IDs.
 rolesF = json.loads(open("config/roles.json", "r").read())
 adminID = rolesF["admin"]
@@ -74,11 +76,10 @@ class Jira(commands.Cog):
         await issueDescMsg.delete()
 
         # Confirmation embed.
-        embed = discord.Embed(title="New issue", description="This is the input you are about to create:")
-        embed.set_author(name="TryHackMe",icon_url="http://tryhackme.com/img/THMlogo.png")
+        embed = officialEmbed("New issue", "This is the input you are about to create:")
+        
         embed.add_field(name="Name", value=issueName)
         embed.add_field(name="Description", value=issueDesc)
-        embed.set_footer(text="From the TryHackMe Official API!")
 
         # Sends embed.
         botEmbed = await ctx.send(embed=embed)

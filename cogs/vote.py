@@ -3,6 +3,8 @@ import discord
 import json
 import time
 
+from libs.embedmaker import officialEmbed
+
 # Channel ID.
 channelJson = open("config/channels.json", "r").read()
 channelID = json.loads(channelJson)["announcements"]
@@ -162,11 +164,9 @@ class Vote(commands.Cog):
         await msg.delete()
         
         # Confirmation embed.
-        embed = discord.Embed(title="This is the vote you are about to create:", description="Lasting for "+str(vTimeHour)+" hour(s).")
-        embed.set_author(name="TryHackMe",icon_url="http://tryhackme.com/img/THMlogo.png")
+        embed = officialEmbed("This is the vote you are about to create:", "Lasting for "+str(vTimeHour)+" hour(s).")
         for i in range(0, len(vOpt)):
             embed.add_field(name=vReac[i], value=vOpt[i])
-        embed.set_footer(text="From the TryHackMe Official API!")
 
         # Sends embed.
         botEmbed = await ctx.send(embed=embed)
@@ -192,11 +192,9 @@ class Vote(commands.Cog):
             await voteValid.delete()
 
             # Makes embed.
-            embed = discord.Embed(title="Vote", description=vDesc)
-            embed.set_author(name="TryHackMe",icon_url="http://tryhackme.com/img/THMlogo.png")
+            embed = officialEmbed("Vote", vDesc)
             for i in range(0, len(vOpt)):
                 embed.add_field(name=vReac[i], value=vOpt[i])
-            embed.set_footer(text="From the TryHackMe Official API!")
 
             # Sends the vote.
             announcementChann = self.bot.get_channel(channelID)
@@ -206,18 +204,17 @@ class Vote(commands.Cog):
                 await vEmbed.add_reaction(vReac[i])
 
             # Waits...
-            #time.sleep(60)
+            #time.sleep(15)
             time.sleep(vTimeHour*60*60)
 
             # Sends results.
             try:
                 vResult = (await announcementChann.fetch_message(vEmbed.id)).reactions
 
-                embed = discord.Embed(title="Vote results", description="Topic: "+vDesc)
-                embed.set_author(name="TryHackMe",icon_url="http://tryhackme.com/img/THMlogo.png")
+                embed = officialEmbed("Vote results", "Topic: "+vDesc)
                 for i in range(0, len(vOpt)):
                     embed.add_field(name=vOpt[i], value=str(vResult[i].count-1))
-                embed.set_footer(text="From the TryHackMe Official API!")
+
                 await announcementChann.send(embed=embed)
             except:
                 print("Vote has been deleted.")

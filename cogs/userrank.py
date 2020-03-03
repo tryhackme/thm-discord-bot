@@ -7,6 +7,8 @@ import requests
 from requests.exceptions import HTTPError
 import random
 
+from libs.embedmaker import officialEmbed
+
 quotes = [
     "C4n y0u pwn th4 m4chin3?",
     "Hacker man 0x1 0x0 0x1",
@@ -95,29 +97,32 @@ class Userrank(commands.Cog,name="Rank Commands"):
                 if getRank(user) != 0:
                     quip = getMoto()
                     quip = "*{}*".format(quip)
-                    response = discord.Embed(title="!rank", description=quip, color=0x148f77)
-                    response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
+                    
                     userImg = getAvatars(user)
                     Points = getPoints(user)
                     rank = getRank(user)
+
+                    response = officialEmbed("!rank", quip, 0x148f77)
+                    
                     response.set_thumbnail(url=userImg)
                     response.add_field(name="Username:", value=user, inline=True)
                     response.add_field(name="Rank:", value= rank, inline=True)
                     response.add_field(name="Points:", value=Points, inline=True)
+                    
                     sub = getSubStatus(user)
+                    
                     response.add_field(name="Subscribed?", value=sub, inline=True)
-                    response.set_footer(text="From the TryHackMe Official API!")
                 else:
                     quip = getMoto()
                     quip = "*{}*".format(quip)
-                    response = discord.Embed(title="!rank", description=quip, color=0xdc143c)
-                    response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
+
+                    response = officialEmbed("!rank", quip, 0xdc143c)
+
                     userImg = "https://tryhackme.com/img/favicon.png"
+                    
                     response.set_thumbnail(url=userImg)
                     response.add_field(name="Username:", value=user, inline=True)
                     response.add_field(name="Rank:", value="**Error: Username Not Found!**", inline=True)
-                    response.set_footer(text="From the TryHackMe Official API!")
-
                             
                 await ctx.send(embed=response)
             except:

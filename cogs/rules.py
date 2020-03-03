@@ -4,6 +4,8 @@ import asyncio
 import json
 from discord.ext import commands
 
+from libs.embedmaker import officialEmbed
+
 class Rules(commands.Cog,name="Rules Commands"):
         def __init__(self,bot):
                 self.bot = bot
@@ -11,8 +13,7 @@ class Rules(commands.Cog,name="Rules Commands"):
         @commands.command(description="Sends the rules.")
         async def rules(self,ctx):
                 # Make embed.
-                response = discord.Embed(title="Rules", color=0xffff00)
-                response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
+                response = officialEmbed("Rules", color=0xffff00)
                 response.set_thumbnail(url="https://tryhackme.com/img/THMlogo.png")
                 
                 # Load the rules from config.
@@ -24,8 +25,6 @@ class Rules(commands.Cog,name="Rules Commands"):
                 for rule in rules:
                         response.add_field(name=(str(i+1)+"."), value=rule)
                         i = i + 1
-
-                response.set_footer(text="From the TryHackMe Official API!")
                 
                 # Send.
                 await ctx.send(embed=response)
