@@ -9,7 +9,7 @@ from libs.embedmaker import officialEmbed
 
 # Role IDs.
 rolesF = json.loads(open("config/roles.json", "r").read())
-adminID = rolesF["admin"]
+adminID = rolesF["admin","Mod"]
 
 # Issue's data.
 creds = [cred.replace("\n","") for cred in open("jira_creds.txt","r")]
