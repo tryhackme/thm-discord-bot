@@ -4,7 +4,7 @@ from discord.ext import commands
 websitePic = "https://tryhackme.com/img/THMlogo.png"
 
 def get_msg(bot, isStaff):
-    msg = "```markdown\n#####\tHELP\t#####\n{requiered args} | [optional args]\n"
+    msg = "```markdown\n#####\tHELP\t#####\n{required args} | [optional args]\n"
 
     # Loops through cogs.
     for cog_name in bot.cogs:
