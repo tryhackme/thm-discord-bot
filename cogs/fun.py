@@ -61,6 +61,23 @@ class Fun(commands.Cog, name="Fun Commands"):
             return
 
 
+    ########################
+    ### Shiba And Spaniel###
+    ########################                  
+    @commands.command(description="Sends shibe!")
+    async def shibe(self,ctx):
+        response = officialEmbed("!shibe","Shiba Inu",0xff4500)
+        response.set_image(url="https://justsomething.co/wp-content/uploads/2017/12/ryujii-handsome-ridiculously-cute-shiba-japan-758x397.jpg")
+        await ctx.send(embed=response)
+    @commands.command(description="SPANIEL")
+    async def spaniel(self,ctx):
+        response = officialEmbed("!spaniel","Spaniel",0xff4500)
+        response.set_image(url="https://www.about-cocker-spaniels.com/images/cute-puppy-names-boys-1.jpg")
+        await ctx.send(embed=response)
+    """
+   todo:  Make it so it picks a random shiba pic from a directory on the server
+    """
+
     ############
     ### XKCD ###
     ############
