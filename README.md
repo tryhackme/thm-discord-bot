@@ -23,31 +23,35 @@ TryHackMe Python Discord Bot
 
 ***Commands:***
 
-- Blog commands:
-  - blog        
-  - github      
-- Fun Commands:
-  - boop        
-  - honk        
-- Partner Commands:
-  - partner     
-- Rank Commands:
-  - leaderboard 
-  - rank        
-  - rules       
+- Room:
+  - vpn | Learn how to use OpenVPN to connect to the network.
+- Help:
+  - staff [command] | Displays all staff commands.
+  - help [command] | Displays all commands.
 - Social:
-  - reddit      
-  - social      
-  - tweet       
-  - twitter     
-  - website     
-- Utility:
-  - wiki        
-- Verifying/Role Assigning Commands:
-  - verify      
-- xkcdCog:
-  - xkcd        
-- No Category:
-  - help
-  - ping	      
-  - uptime
+  - github | Get the bot's Github link.
+  - twitter | Get the Twitter link.
+  - reddit | Get the Reddit link.
+  - website | Get the Website link.
+  - social | Get links to all our socials.
+  - tweet | Get THM's last tweet.
+- Leaderboard Commands:
+  - leaderboard | Prints the leaderboard.
+  - monthly | Prints this month's leaderboard.
+- Rank Commands
+  - rank {username} | Get a THM member's rank.
+- Verifying/Role Assigning Commands
+  - verify {token} | Verify yourself to get your roles.
+- Rules Commands
+  - rules | Sends the rules.
+- Utility
+  - wiki {query} | Search Wikipedia for a query.
+- Fun Commands
+  - skidy | Sends Skidy's emote.
+  - ashu | Send Ashu's emote.
+  - dark | Send a random Darkstar quote.
+  - honk | HOOONK!
+  - boop {@user} | Boop someone!
+  - xkcd | Send a random XKCD comic.
+- Gtfobins
+  - gtfobins {query} | Search GTFObins for a term.
