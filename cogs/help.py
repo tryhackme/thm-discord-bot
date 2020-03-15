@@ -41,11 +41,11 @@ class Help(commands.Cog):
     def __init__(self,bot):
         self.bot = bot
 
-    @commands.command(name="staff", usage="[command]", description="Displays all staff commands.")
+    @commands.command(name="staff", description="Displays all staff commands.")
     async def help_staff(self, ctx):
         await ctx.send(get_msg(self.bot, True))
 
-    @commands.command(name="help", usage="[command]", description="Displays all commands.")
+    @commands.command(name="help", description="Displays all commands.")
     async def help_user(self, ctx):
         await ctx.send(get_msg(self.bot, False))
 
