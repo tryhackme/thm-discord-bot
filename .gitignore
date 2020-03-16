@@ -13,5 +13,8 @@ images/temp*
 images/image.png
 images/mask.png
 
+#Python files
+libs/__pycache__
+
 #Debugging Items
 *.7z
