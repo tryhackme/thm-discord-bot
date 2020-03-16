@@ -34,11 +34,11 @@ class Giveaway(commands.Cog):
         await ctx.message.delete()
 
         # Check for the user to be admin.
-        # if not hasRole(ctx.author, adminID):
-        #     botMsg = await ctx.send("You do not have the permission to do that.")
-        #     time.sleep(5)
-        #     await botMsg.delete()
-        #     return
+        if not hasRole(ctx.author, adminID):
+            botMsg = await ctx.send("You do not have the permission to do that.")
+            time.sleep(5)
+            await botMsg.delete()
+            return
 
         # Check for the author.
         def checkAuth(m):

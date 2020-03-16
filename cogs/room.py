@@ -104,14 +104,14 @@ class Room(commands.Cog):
 
     @commands.command(description="Manually announce the last room.", hidden=True)
     async def room(self, ctx):
-        # if not hasRole(ctx.author, adminID):
-        #     botMsg = await ctx.send("You do not have the permission to do that.")
+        if not hasRole(ctx.author, adminID):
+            botMsg = await ctx.send("You do not have the permission to do that.")
             
-        #     time.sleep(5)
+            time.sleep(5)
 
-        #     await botMsg.delete()
-        #     await ctx.message.delete()
-        #     return
+            await botMsg.delete()
+            await ctx.message.delete()
+            return
         
         # Gets channel.
         channel = self.bot.get_channel(channelID)
@@ -126,6 +126,15 @@ class Room(commands.Cog):
 
     @commands.command(name="newroom", description="Manually announce a new room.", usage="{room_code}", hidden=True)
     async def new_room(self, ctx, room):
+        if not hasRole(ctx.author, adminID):
+            botMsg = await ctx.send("You do not have the permission to do that.")
+            
+            time.sleep(5)
+
+            await botMsg.delete()
+            await ctx.message.delete()
+            return
+
         async with aiohttp.ClientSession() as session:
             async with session.get(api_url+"room/"+room) as new_data:
                 text = await new_data.read()
