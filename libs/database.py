@@ -18,7 +18,7 @@ def connect_to_db():
         connection = mysql.connector.connect(host=host, user=user, passwd=passwd, database=database)
     except:
         print("\n[ERROR]\t Could not connect to database.")
-        # exit()
+        exit()
     
     return connection
 
