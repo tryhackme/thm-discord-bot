@@ -220,7 +220,7 @@
         "verified_added":"You are now verified, you cannot unlink or relink any of your accounts for security reasons. Please contact the TryHackMe Admins or Mods if you need to change one of your accounts."
     },
     "verify_delete":{
-        "help_desc":"Delete a user's token by mentionning them.",
+        "help_desc":"Delete a user's token by mentioning them.",
         "done":"Done, no more entry with UID \"{}\"."
     },
     "vote":{
