@@ -1,0 +1,19 @@
+# Data and config
+config/*
+data/*
+
+# Generated Images and data
+images/leaderboard_output.png
+images/temp*
+images/image.png
+images/mask.png
+
+# Python files
+__pycache__
+*/__pycache__
+
+# IDE files
+.vscode
+
+# Github stuff
+.github/
