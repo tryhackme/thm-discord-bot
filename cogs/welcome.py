@@ -17,7 +17,7 @@ quotes = config.get_string("quotes")
 channels = config.get_config("channels")
 
 # Strings.
-s_welcome_msg = config.get_string("welcome")
+s_welcome_msg = config.get_string("welcome")["welcome_message"]
 s_specials_quotes = quotes["special_quotes"]
 s_regulars_quotes = quotes["regular_quotes"]
 
