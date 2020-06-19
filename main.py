@@ -1,156 +1,80 @@
-import discord, time, datetime, json, random
+import json
+import random
+
+import discord
 from discord.ext import commands
+from discord.ext.commands import CommandNotFound, MissingRequiredArgument
 
-from libs.embedmaker import officialEmbed
+import libs.config as config
+from cogs.rules import send_rules
+
+####################
+# Config variables #
+####################
+
+c_token_file = config.get_config("token_file")
+c_prefix = config.get_config("prefix")
+
+c_extensions = config.get_config("cogs")
+c_disabled_extensions = config.get_config("disabled_cogs")
 
 
-inputFile = "token.txt"
-workingFile = open(inputFile)
-token = workingFile.readline()
+####################
+# String variables #
+####################
 
-# Setting up the bot and prefix.
-prefix = "!"
-bot = commands.Bot(command_prefix=prefix)
+# Loads the bot's activity status
+s_status = config.get_string("status")
 
-# Saving the starting time.
-start_time = time.time()
+# Token and prefix.
 
-# Setting up extentions. (cogs)
-# Disabled: "cogs.wiki" "cogs.fun" "cogs.gtfobins"
-extensions = ["cogs.room", "cogs.help", "cogs.social", "cogs.rank", "cogs.userrank", "cogs.rolesync", "cogs.rules", "cogs.devrole", "cogs.jira", "cogs.vote", "cogs.giveaway"]
+token = open(c_token_file).readline()
+bot = commands.Bot(command_prefix=c_prefix)
 
-# Quotes for the welcoming messages.
-quotesF = json.loads(open("config/quotes.json", "r").read())
-channelsF = json.loads(open("config/channels.json", "r").read())
-
-specialQuotes = quotesF["specialQuotes"]
-regularQuotes = quotesF["regularQuotes"]
-welcomeChanID = channelsF["welcome"]
-
-# Getting a random quote from the non-rare pool.
-def getRegularQuote():
-    return regularQuotes[random.randint(0, len(regularQuotes) - 1)]
-
-# Getting a random quote from the rare pool.
-def getSpecialQuote():
-    return specialQuotes[random.randint(0, len(specialQuotes)-1)]
-
-# Rolling dices to know if we get a special quote.
-def isSpecialQuote():
-    #About 10% chance to have a special quote.
-    isSpecial = random.randint(0,100)
-    return isSpecial <= 10
-
-# DMs the instructions on how to verify to a member.
-async def send_verify(member):
-    # Embed making.
-    response = discord.Embed(title="How to get verified?", color=0xffff00)
-    response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
-    response.set_thumbnail(url="https://tryhackme.com/img/THMlogo.png")
-    
-    # Loading text from JSON.
-    stepsF = json.loads(open("config/verify_steps.json", "r").read())
-    steps = stepsF["steps"]
-    i = 0
-    for step in steps:
-        response.add_field(name=("Step "+str(i+1)), value=step)
-        i = i + 1
-
-    response.set_footer(text="From the TryHackMe Official API!")
-    
-    # Sending the created embed in DM to the user.
-    channel = await member.create_dm()
-    await channel.send(embed=response)
-
-# DMs the rules to a member passed in arg.
-async def send_rules(member):
-    # Embed making.
-    response = discord.Embed(title="Rules", color=0xffff00)
-    response.set_author(name="TryHackMe",icon_url="https://tryhackme.com/img/THMlogo.png")
-    response.set_thumbnail(url="https://tryhackme.com/img/THMlogo.png")
-    
-    # Loading rules from JSON.
-    rulesF = json.loads(open("config/rules.json", "r").read())
-    rules = rulesF["rules"]
-    i = 0
-    for rule in rules:
-        response.add_field(name=(str(i+1) + "."), value=rule)
-        i = i + 1
-
-    response.set_footer(text="From the TryHackMe Official API!")
-    
-    # Sending the created embed in DM to the user.
-    channel = await member.create_dm()
-    await channel.send(embed=response)
 
 # Loading the cogs.
 if __name__ == "__main__":
     # Removes default help command.
     bot.remove_command("help")
-    
-    print("Loading the COGS:")
-    for extension in extensions:
-        try:
-            bot.load_extension(extension)
-            print(f"[Success]\t{extension} loaded successfully.\n")
-        except Exception as e:
-            print(f"[ERROR]\t\terror occurred while loading {extension}\n")
+
+    # Logging the unlodead cogs.
+    if len(c_disabled_extensions) != 0:
+        print("\nFollowing cogs are disabled:")
+        for extension in c_disabled_extensions:
+            print(f"[Disabled]\t{extension} has been disabled.")
+
+    # Logging the loaded cogs.
+    if len(c_extensions) != 0:
+        print("\nLoading the COGS:")
+        for extension in c_extensions:
+            try:
+                bot.load_extension(extension)
+                print(f"[Success]\t{extension} loaded successfully.")
+            except Exception as e:
+                print(f"[ERROR]\tAn error occurred while loading {extension}\n" + str(e) + "\n")
+
 
 # Logging the starting of the bot into the console.
 @bot.event
 async def on_ready():
     # Sets activity message.
-    await bot.change_presence(activity=discord.Game("DM me with !verify"))
+    if s_status != "":
+        await bot.change_presence(activity=discord.Game(s_status))
+
     # Removes default help command.
-    print("#- Logged in as {0.user}".format(bot)+"\n")
+    print("\n#- Logged in as {0.user}".format(bot)+"\n")
 
 
-# Welcoming messages to new users.
+# Removes the "command not found" error from the console.
 @bot.event
-async def on_member_join(member: discord.Member):
-    channel = bot.get_channel(welcomeChanID)
+async def on_command_error(ctx, error):
+    error_to_skip = [CommandNotFound, MissingRequiredArgument]
 
-    # Roles the dice for a (non) special quote, then sends it.
-    if isSpecialQuote():
-        quip = getSpecialQuote()
-        response = officialEmbed("Welcome!", quip, color=0xf5b400, footer="")
-    else:
-        quip = getRegularQuote()
-        response = officialEmbed("Welcome!", quip, color=0xa20606, footer="")
+    for error_type in error_to_skip:
+        if isinstance(error, error_type):
+            return
 
-    # Embed creation.
-    response.set_thumbnail(url="https://cdn.discordapp.com/icons/521382216299839518/c0c7e9f1e258dd6d030fde8823bf8657.webp")
-    response.add_field(name="Hey there!", value=member.mention + ", Welcome to the server!\nIf you need help with a room, ask in #rooms-help.\n\n You can also sync your THM rank on the discord, check your DMs!")
-    
-    # Check if user exists. (avoids join-leavers etc.)
-    if member is not None:
-        await send_rules(member)
-        await send_verify(member)
-        await channel.send(embed=response)
-
-
-## Other commands.
-# Uptime command.
-@bot.command()
-async def uptime(ctx):
-    # Gets the time and substracts it to the current time.
-    current_time = time.time()
-    difference = int(round(current_time - start_time))
-    text = str(datetime.timedelta(seconds=difference))
-    
-    # Embed.
-    embed = officialEmbed(color=0x3289a8)
-    embed.add_field(name="Uptime", value=text)
-
-    # Sends.
-    await ctx.channel.send(embed=embed)
-
-# Ping command.
-@bot.command()
-async def ping(ctx):
-    await ctx.send("Pong!")
-    ping = await ctx.send("**__Calculating Elapsed Time__**")
-    await ping.edit(content="**Calculated:\nPing rate:** {}ms".format(round(bot.latency, 3)))
+    raise error
 
 # Starting the bot.
 bot.run(token)

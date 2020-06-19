@@ -1,0 +1,247 @@
+{
+    "status":"DM me with !verify",
+    "no_perm":"You do not have the permission to do that.",
+    "not_sanitized":"Sorry, the characters you have entered are blacklisted, instead of trying anything here, try some rooms.",
+    "announcementrole":{
+        "help_desc":"Toggle the role to get notified on announcements.",
+        "on":"Ok {}, you will now be notified of future announcements.",
+        "off":"Do not worry, you won't be notified of announcements anymore {}."
+    },
+    "devrole":{
+        "help_desc":"Toggles bot-dev role to someone.",
+        "welcome":"Welcome on the BOT Dev team, {} !",
+        "leave":"{} left the BOT Dev team!"
+    },
+    "faq":{
+        "verify":[
+            "Go on https://tryhackme.com/profile and find your **Discord Token**.",
+            "DM me using the command !verify <token> using the token you just retrieved.",
+            "You should now be verified on the TryHackMe Discord server!"
+        ],
+        "vpn":[
+            "Learn how to use OpenVPN to connect to our network!",
+            "https://tryhackme.com/room/openvpn"
+        ],
+        "vpnmulti":[
+            "Learn how to look for duplicate instance of your OpenVPN connection.",
+            "https://tryhackme.com/room/openvpn",
+            "Type ps aux | grep openvpn into your terminal and press enter",
+            "If there's more than one line (and the second doesn't have \"grep\" in it), do the following steps",
+            "Type killall openvpn into your terminal and press enter",
+            "Start the VPN with sudo openvpn <path-to-config>"
+        ]
+    },
+    "giveaway":{
+        "help_desc":"Create a giveaway.",
+        "help_desc_canceled":"Cancel the current giveaway.",
+        "confirm_word":"done",
+        "cancel_word":"cancel",
+        "cancel":"Enter CANCEL at anytime to cancel the giveaway.",
+        "canceled":"Giveaway canceled.",
+        "desc":"Please provide a description for the giveaway:",
+        "reaction":"Now please react to this message with the reaction users should use to enter giveaway. Then send DONE.",
+        "reaction_limit":"Only one reaction allowed, please fix it and send DONE.",
+        "time":"Time the giveaway should last in hours:",
+        "time_int_only":"Numbers only, please retry.",
+        "confirm_title":"This is the giveaway you are about to create:",
+        "confirm_text":"To confirm enter ***yes*** or anything else to cancel. (not case sensitive)",
+        "confirm_footer":"Lasting for {} hour(s).",
+        "confirm_reaction":"Enter giveaway reaction",
+        "announce_reaction":"Enter giveaway reaction:",
+        "announce_field_title":"The winner is",
+        "announce_field_value":"{}, congratulations!",
+        "nothing_to_cancel":"There is no giveaway to cancel."
+    },
+    "gtfobins":{
+        "help_desc":"Search GTFObins for a term.",
+        "logo":"https://gtfobins.github.io/assets/logo.png",
+        "result_title":"Gtfobins' {} results:-",
+        "search_terms":"Search_term: ",
+        "vulnerability":"Vulnerabilities: ",
+        "url":"URL: ",
+        "not_found":"{} not found in gtfobins.",
+        "binaries":"Gtfobins binaries:-\n",
+        "binaries_list":"List of binaries:\n",
+        "howto":"Search vulnerability of specific binary by using !gtfobins <name>",
+        "sending_list":"Sending the whole list....",
+        "error":"Something went wrong!"
+    },
+    "help":{
+        "staff_help":"Displays all staff commands.",
+        "user_help":"Displays all commands."
+    },
+    "jira":{
+        "help_desc":"Makes a new JIRA issue.",
+        "issue_name":"Please provide a name for the new issue:",
+        "issue_desc":"Now please provide a description:",
+        "confirm_title":"This is the input you are about to create:",
+        "confirm":"To confirm enter ***yes*** or anything else to cancel. (not case sensitive)",
+        "confirmation":"Issue has been **created** by {}!",
+        "canceled":"You have **cancelled** the issue!"
+    },
+    "ping":{
+        "calculating":"**__Calculating Elapsed Time__**",
+        "calculated":"**Calculated:\nPing rate:** {}ms"
+    },
+    "ranks":{
+        "userrank":{
+            "help_desc":"Get a THM member's rank.",
+            "user_not_found":"**Error: User not found!**",
+            "error":"**An error has occured.**"
+        },
+        "leaderboard":{
+            "help_desc":"Prints the leaderboard.",
+            "generating":"Generating global leaderboard...",
+            "footer":"Made with love by the TryHackMe Discord Bot"
+        },
+        "monthly":{
+            "help_desc":"Prints this month's leaderboard.",
+            "generating":"Generating monthly leaderboard...",
+            "announcement":"Here is last month's leaderboard.\n Congratulations!",
+            "footer":"Made with love by the TryHackMe Discord Bot"
+        }
+    },
+    "room":{
+        "room_help_desc":"Manually announce the last room.",
+        "newroom":"A new room is available!  |  Check it out: {}",
+        "newroom_help_desc":"Manually announce a new room.",
+        "writeup_help_desc":"Get the writeups for a room.",
+        "writeup_not_found":"Sorry, there is no writeup for this room.",
+        "code_not_found":"Sorry, but the room code ``{}`` could not be found."
+    },
+    "rules":[
+		"No unsolicited direct messages (DMs) to other members of the discord. This includes staff. Verify that the member you are messaging is ok with you sending them DMs. The only exception to this rule is if a situation warrants the involvement of a moderator in order to handle something such as harassment or a situation where another member of the discord has made you feel uncomfortable.",
+		"No personal drama or drama from any other discord community is allowed to be brought into this discord. This is a space for infosec discussions and learning, keep it that way.",
+		"No excessive self promotion. Linking to another discord server is strictly prohibited, just don't turn it into advertising.",
+		"Keep it civil. If action is necessary in a dispute or any other sort of disruption on this discord punishment will be doled out evenly both to the individual(s) who started the issue and to those who reacted inappropriately in their response.",
+		"No cheating is allowed whatsoever within this discord. Any cheating (other than specifically within a developmental environment where it has been preapproved by staff) will result in an immediate and permanent ban.",
+		"Racism is not tolerated and will result in a permanent ban.",
+		"Administrators reserve the right to modify the rules at any time and extend them accordingly to cover infractions which may not be currently included in these rules.",
+		"Keep conversations SFW (Safe for work). This is an educational and professional environment, be sure that your words do not offend or make other members uncomfortable.",
+		"No discussion of illegal topics or actions.",
+		"Do not post viruses or malicious files without explicit permission from the administrative staff. We understand that this is a discord for learning, however, there are plenty of places online to get malware for forensic examination and reverse engineering.",
+        "No distribution of illegally obtained materials within the discord. Do not pirate books in #bookclub",
+        "If you use a Nitro boost on the server you get a pick a new server emote. If you do this twice you get two emotes. Emotes must be server appropriate.",
+        "When asking for help/tech support please perform research to your fullest ability. Mods and Community Mentors have the right to refuse helping those who have not done troubleshooting/research on their own first. Clearly phrase your questions as we (fortunately for all parties involved) cannot read your mind. Please include the room, task, and question number in your question if possible.",
+        "You're welcome to post livestreams, writeups, and videos of THM content, just please post them in #streams-and-videos."
+    ],
+    "socials":{
+        "help_desc":"Get links to all our socials.",
+        "github":{
+            "help_desc":"Get the bot's Github link.",
+            "url":"https://github.com/DarkStar7471/THM-Bot",
+            "title":"Bot's Github Repository Link",
+            "pic":"https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+        },
+        "twitter":{
+            "help_desc":"Get the Twitter link.",
+            "url":"https://twitter.com/realtryhackme",
+            "title":"TryHackMe's Twitter Account:",
+            "pic":"https://i.imgur.com/rImenvh.png"
+        },
+        "reddit":{
+            "help_desc":"Get the Reddit link.",
+            "url":"https://www.reddit.com/r/tryhackme/",
+            "title":"TryHackMe's Subreddit:",
+            "pic":"https://i.imgur.com/ws2kAA0.png"
+        },
+        "website":{
+            "help_desc":"Get the Website link.",
+            "url":"https://tryhackme.com/",
+            "title":"TryHackMe:",
+            "pic":"https://tryhackme.com/img/THMlogo.png"
+        },
+        "tweet":{
+            "help_desc":"Get THM's last tweet."
+        }
+    },
+    "stats":{
+        "title":"New Milestone reached!",
+        "desc":"Wow! We have reached {} users, welcome everyone :)"
+    },
+    "quotes":{
+        "dark":[
+            "*ahem* Can help you?",
+            "*sigh* What do you want.",
+            "Peace, dudes.",
+            "Very carefully, next question.",
+            "I plead the fifth.",
+            "Coming in voice chat was a mistake.",
+            "***dab***",
+            "Try HARDER.",
+            "Blue Room is not broken.",
+            "Sir, this is a Denny's. Imma have to ask you stop.",
+            "Because I said so."
+        ],      
+        "regular_quotes":[
+            "C4n y0u pwn th4 m4chin3?",
+            "Hacker man 0x1 0x0 0x1",
+            "The quieter you become the more you are able to hear",
+            "\\*Morpheus\\*: Red or Blue pill?",
+            "Access security... Access security grid... YOU DIDN'T SAY THE MAGIC WORD!",
+            "Just hack the mainframe.",
+            "Z2VsdW5weHpyLnBieg==",
+            "The Matrix is real",
+            "No place like 127.0.0.1",
+            "Hack the planet",
+            "Just obfuscate it...",
+            "Armitage + Hail Mary",
+            "WEP, WPA, WAH?",
+            "admin:password",
+            "rockyou.txt",
+            "tmux > screens",
+            "tabs or spaces?",
+            "Leeerrrroy Jeekinnnns...",
+            "Enumeration is key",
+            "Try harder..",
+            "Satoshi Nakamoto",
+            "Mining Bitcoin...",
+            "Configuring neural network"
+        ],
+        "special_quotes":[
+            "special_quote",
+            "bLuE iS nOt BrOkEn. -DarkStar, probably.",
+            "kali lincox, the louder u r the less u hear"
+        ]
+    },
+    "verify":{
+        "help_desc":"Verify yourself to get your roles.",
+        "error_not_dm":"Please send that command to the bot in a DM. This is to stop other people from using using your token :slight_smile:",
+        "usage":"Usage: !verify <token>\nGet your token from https://tryhackme.com/profile.",
+        "token_not_found":"I'm sorry but I couldn't find the specified token!",
+        "error":"An unexpected error has occured. Please contact THM's BOT maintainers.",
+        "not_a_member":"You are not a member of the Discord server!",
+        "contrib_add":"You are now a contributor, thanks!",
+        "contrib_remove":"You are no longer a contributor.",
+        "level_up-to-date":"Your level is already up-to-date.",
+        "level_updated":"Your level has been updated!",
+        "sub_remove":"You are not longer a subscriber!",
+        "sub_added":"You are now a subscriber, thanks!",
+        "verified_added":"You are now verified, you cannot unlink or relink any of your accounts for security reasons. Please contact the TryHackMe Admins or Mods if you need to change one of your accounts."
+    },
+    "verify_delete":{
+        "help_desc":"Delete a user's token by mentionning them.",
+        "done":"Done, no more entry with UID \"{}\"."
+    },
+    "vote":{
+        "help_desc":"Create a vote.",
+        "help_desc_canceled":"Cancels the ongoing vote.",
+        "cancel_message":"Enter CANCEL at anytime to cancel the vote.",
+        "vote_desc":"Please provide a description for the vote:",
+        "vote_options":"Now please send a message for each options; send DONE (not case sensitive) when you are done.",
+        "vote_reactions":"Now please react to this message with the respective emote of each option; then send DONE:",
+        "reactions_amount_wrong":"Wrong amount of reactions, please fix it and send DONE.",
+        "vote_time":"Time the vote should last in hours:",
+        "time_int_only":"Numbers only, please retry.",
+        "recap":"Are you sure?",
+        "recap_time":"Vote will last {} hours",
+        "confirm_title":"This is the vote you are about to create:",
+        "confirm_time":"Lasting for {} hour(s).",
+        "confirm":"To confirm enter ***yes*** or anything else to cancel. (not case sensitive)",
+        "canceled":"Vote canceled.",
+        "nothing_to_cancel":"There is no vote to cancel."
+    },
+    "welcome":{
+        "welcome_message":", welcome to the server!\nIf you need help with a room, ask in #community-help.\n\n You can also sync your THM rank on the discord, check your DMs!"
+    }
+}
