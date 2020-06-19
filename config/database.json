@@ -1,0 +1,9 @@
+{
+    "host":"localhost",
+    "db":"DATABSE",
+    "user":"USERNAME",
+    "pass":"PASSWORD",
+    "user_table":"USER_TABLE",
+    "discord_uid":"DISCORD_UID",
+    "thm_discord_token":"THM_DISCORD_TOKEN"
+}

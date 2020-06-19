@@ -1,20 +1,19 @@
-#Bot Controller Items
-token.txt
-twitter_creds.txt
-jira_creds.txt
-*.data
+# Data and config
+config/*
+data/*
 
-#Local room storage
-config/room.json
-
-#Generated Images
+# Generated Images and data
 images/leaderboard_output.png
 images/temp*
 images/image.png
 images/mask.png
 
-#Python files
-libs/__pycache__
+# Python files
+__pycache__
+*/__pycache__
 
-#Debugging Items
-*.7z
+# IDE files
+.vscode
+
+# Github stuff
+.github/

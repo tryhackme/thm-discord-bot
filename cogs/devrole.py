@@ -1,46 +1,54 @@
 import discord
-import aiohttp
-import asyncio
-import json
-from discord.utils import get
-from discord.ext import commands
 from discord import guild
 from discord.channel import DMChannel
+from discord.ext import commands
+from discord.utils import get
+
+import libs.config as config
+from libs.utils import has_role as has_role
+
+####################
+# Config variables #
+####################
+
+# Role IDs.
+id_devLead = config.get_config("roles")["devLead"]
+id_dev = config.get_config("roles")["dev"]
 
 
-rolesF = json.loads(open("config/roles.json", "r").read())
+####################
+# String variables #
+####################
 
-devLeadID = rolesF["devLead"]
-devID = rolesF["dev"]
+s_no_perm = config.get_string("no_perm")
+s_devrole = config.get_string("devrole")
 
 
-# Role managment functions.
-def hasRole(member, id):
-        for role in member.roles:
-                if id == role.id:
-                        return True
-        return False
+############
+# COG Body #
+############
 
-# Actual COG and command.
-class DevRole(commands.Cog,name="BOT Dev"):
-        def __init__(self,bot):
-                self.bot = bot
+class DevRole(commands.Cog, name="BOT Dev"):
+    def __init__(self, bot):
+        self.bot = bot
 
-        @commands.command(description="Toggles bot-dev role to someone.", usage="", hidden=True)
-        async def botdev(self, ctx, member: discord.Member):
+    @commands.command(name="botdev", description=s_devrole["help_desc"] + " (Bot-dev Lead)", usage="{@member}", hidden=True)
+    async def role_botdev(self, ctx, member: discord.Member):
+        devRole = ctx.guild.get_role(id_dev)
 
-                devRole = ctx.guild.get_role(devID)
-                
-                # Check if the user has the requiered role to issue the command. (DEV LEAD)
-                if (hasRole(ctx.author, devLeadID) and not (hasRole(member, devID))):
-                        await member.add_roles(devRole)
-                        await ctx.send("Welcome on the BOT Dev team, " + member.mention + "!")
-                elif (hasRole(ctx.author, devLeadID) and (hasRole(member, devID))):
-                        await member.remove_roles(devRole)
-                        await ctx.send(member.mention + " left the BOT Dev team!")
-                else:
-                        await ctx.send("Sorry, " + ctx.author.mention + " but you do not have the permission to do that.")
+        # Check if the user has the requiered role to issue the command. (DEV LEAD)
+        if has_role(ctx.author, id_devLead):
             
+            # Then toggles the role for the target user.
+            if not has_role(member, id_dev):
+                await member.add_roles(devRole)
+                await ctx.send(s_devrole["welcome"].format(member.mention))
+            else:
+                await member.remove_roles(devRole)
+                await ctx.send(s_devrole["leave"].format(member.mention))
+        else:
+            await ctx.send(s_no_perm)
+
 
 def setup(bot):
-        bot.add_cog(DevRole(bot))
+    bot.add_cog(DevRole(bot))
