@@ -193,7 +193,7 @@ class RoleSync(commands.Cog, name="Verifying/Role Assigning Commands"):
                 # If the token is already used
                 token_accounts = database.get_user_by_thm_token(db, input_token)
 
-                if len(token_accounts) > 0 and not token_accounts[0][0] == ctx.author.id:
+                if len(token_accounts) > 0 and not token_accounts[0][0] == str(ctx.author.id):
                     cmdResult = s_verify["token_in_use"]
 
                     await ctx.send(cmdResult)
