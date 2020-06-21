@@ -24,7 +24,7 @@
         ],
         "vpnmulti":[
             "Learn how to look for duplicate instance of your OpenVPN connection.",
-            "https://tryhackme.com/room/openvpn",
+            "Make sure you have setup your VPN connection correctly https://tryhackme.com/room/openvpn",
             "Type ps aux | grep openvpn into your terminal and press enter",
             "If there's more than one line (and the second doesn't have \"grep\" in it), do the following steps",
             "Type killall openvpn into your terminal and press enter",

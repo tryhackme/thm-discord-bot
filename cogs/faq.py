@@ -37,12 +37,12 @@ class FAQ(commands.Cog):
 
     @commands.command(name="multivpn", description=s_faq["vpnmulti"][0])
     async def vpn_multi(self, ctx):
-        response = officialEmbed()
+        response = officialEmbed(title=s_faq["vpnmulti"][0])
 
         response.set_thumbnail(url=(img_openvpn))
         
-        for i in range(len(s_faq["vpnmulti"])):
-            response.add_field(name="• Step "+str(i+1), value=s_faq["vpnmulti"][i])
+        for i in range(1, len(s_faq["vpnmulti"])):
+            response.add_field(name="• Step "+str(i), value=s_faq["vpnmulti"][i])
 
         await ctx.send(embed=response)
 
