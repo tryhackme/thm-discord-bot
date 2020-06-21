@@ -102,8 +102,6 @@ async def update(member, dm, data, skipUpdatedMessage = False):
             await remove_rank_roles(member)
             await add_role(member, id_contrib)
             cmdResult += s_verify["contrib_add"] + "\n"
-        else:
-            cmdResult += s_verify["level_up-to-date"] + "\n"
 
     if level != 997 and has_role(member, id_contrib):
         await remove_contrib_role(member)
