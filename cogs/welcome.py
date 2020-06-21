@@ -38,7 +38,7 @@ async def send_verify(channel):
     response.set_thumbnail(url=config.get_config("info")["logo"])
 
     # Loading text from JSON.
-    steps = config.get_string("verify")
+    steps = config.get_string("faq")["verify"]
     i = 0
 
     # Add each step to the embed.
