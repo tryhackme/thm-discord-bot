@@ -208,6 +208,7 @@
         "help_desc":"Verify yourself to get your roles.",
         "error_not_dm":"Please send that command to the bot in a DM. This is to stop other people from using using your token :slight_smile:",
         "usage":"Usage: !verify <token>\nGet your token from https://tryhackme.com/profile.",
+        "already_verified":"Sorry, you already have a token on this account.",
         "token_not_found":"I'm sorry but I couldn't find the specified token!",
         "error":"An unexpected error has occured. Please contact THM's BOT maintainers.",
         "not_a_member":"You are not a member of the Discord server!",
