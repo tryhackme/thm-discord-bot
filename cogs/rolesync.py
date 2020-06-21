@@ -135,7 +135,10 @@ async def update(member, dm, data, skipUpdatedMessage = False):
         cmdResult += s_verify["verified_added"] + "\n"
 
     if cmdResult != "":
-        await dm.send(cmdResult)
+        try:
+            await dm.send(cmdResult)
+        except:
+            print("\t{} has blocked DMs.".format(member))
 
 
 ############
