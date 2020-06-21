@@ -171,6 +171,15 @@ class RoleSync(commands.Cog, name="Verifying/Role Assigning Commands"):
         else:
             cmdResult = ""
 
+            # If user already has got a token (the provided token and one found are different)
+            user_tokens = database.get_user_by_discord_uid(db, ctx.author.id)
+
+            if len(user_tokens) > 0 and not user_tokens[0][1] == user_token:
+                cmdResult = s_verify["already_verified"]
+
+                await ctx.send(cmdResult)
+                return            
+
             data = await api_fetch(c_api_token, user_token)
             success = data["success"]
 
@@ -181,23 +190,21 @@ class RoleSync(commands.Cog, name="Verifying/Role Assigning Commands"):
             else:
                 ### Retrieves needed variables and updates DB if needed. ###
 
-                server = self.bot.get_guild(id_guild)
-
                 # If server ID is wrong.
+                server = self.bot.get_guild(id_guild)
+                
                 if server == None:
                     await ctx.send(s_verify["error"] + "ERROR: Server not found.")
                     return
                 
-
+                # If user isn't a member.
                 user = ctx.message.author
                 member = server.get_member(user.id)
 
-                # If user isn't a member.
                 if member == None:
                     database.remove_user_by_discord_uid(ctx.author.id)
                     await ctx.send(s_verify["not_a_member"])
                     return
-
 
                 dm_channel = await member.create_dm()
 
