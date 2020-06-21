@@ -215,7 +215,7 @@
         "contrib_remove":"You are no longer a contributor.",
         "level_up-to-date":"Your level is already up-to-date.",
         "level_updated":"Your level has been updated!",
-        "sub_remove":"You are not longer a subscriber!",
+        "sub_remove":"You are no longer a subscriber!",
         "sub_added":"You are now a subscriber, thanks!",
         "verified_added":"You are now verified, you cannot unlink or relink any of your accounts for security reasons. Please contact the TryHackMe Admins or Mods if you need to change one of your accounts."
     },
