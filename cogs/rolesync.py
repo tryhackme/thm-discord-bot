@@ -150,7 +150,7 @@ class RoleSync(commands.Cog, name="Verifying/Role Assigning Commands"):
         self.bot = bot
 
     @commands.command(description=s_verify["help_desc"], usage="{token}")
-    async def verify(self, ctx, user_token=None):
+    async def verify(self, ctx, input_token=None):
 
         # If not DM, clear the message so that the token isn't kept publicly.
         if not isinstance(ctx.channel, DMChannel):
@@ -163,24 +163,15 @@ class RoleSync(commands.Cog, name="Verifying/Role Assigning Commands"):
             return
 
         # If no token sends message...
-        if user_token == None:
+        if input_token == None:
             await ctx.send(s_verify["usage"])
             return
         
         # Otherwise, keeps going:
         else:
-            cmdResult = ""
+            cmdResult = ""  
 
-            # If user already has got a token (the provided token and one found are different)
-            user_tokens = database.get_user_by_discord_uid(db, ctx.author.id)
-
-            if len(user_tokens) > 0 and not user_tokens[0][1] == user_token:
-                cmdResult = s_verify["already_verified"]
-
-                await ctx.send(cmdResult)
-                return            
-
-            data = await api_fetch(c_api_token, user_token)
+            data = await api_fetch(c_api_token, input_token)
             success = data["success"]
 
             # If the token isn't valid.
@@ -188,6 +179,27 @@ class RoleSync(commands.Cog, name="Verifying/Role Assigning Commands"):
                 cmdResult = s_verify["token_not_found"]
                 await ctx.send(cmdResult)
             else:
+                ### Verifies that the token is being use only once and that the discord account doesn't have multiple tokens. ###
+                
+                # If user already has got a token (the provided token and one found are different)
+                user_tokens = database.get_user_by_discord_uid(db, ctx.author.id)
+
+                if len(user_tokens) > 0 and not user_tokens[0][1] == input_token:
+                    cmdResult = s_verify["already_verified"]
+
+                    await ctx.send(cmdResult)
+                    return    
+
+                # If the token is already used
+                token_accounts = database.get_user_by_thm_token(db, input_token)
+
+                if len(token_accounts) > 0 and not token_accounts[0][0] == ctx.author.id:
+                    cmdResult = s_verify["token_in_use"]
+
+                    await ctx.send(cmdResult)
+                    return    
+
+
                 ### Retrieves needed variables and updates DB if needed. ###
 
                 # If server ID is wrong.
@@ -208,11 +220,11 @@ class RoleSync(commands.Cog, name="Verifying/Role Assigning Commands"):
 
                 dm_channel = await member.create_dm()
 
-                result = database.get_user_by_thm_token(db, user_token)
+                result = database.get_user_by_thm_token(db, input_token)
 
                 # If user is not in DB; add him.
                 if len(result) == 0:
-                    database.add_user(db, member.id, user_token)
+                    database.add_user(db, member.id, input_token)
 
                 ### Updates roles for the user. ###
                 await update(member, dm_channel, data)
