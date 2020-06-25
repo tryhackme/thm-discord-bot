@@ -224,7 +224,7 @@ class Rank(commands.Cog, name="Leaderboard Commands"):
 
         await self.monthly_leaderboard(ctx.channel, page)
 
-    # Starts the montly leaderboard announcement.
+    # Starts the monthly leaderboard announcement.
     @commands.Cog.listener()
     async def on_ready(self):
         self.chan_announcement = self.bot.get_channel(id_announcement)
