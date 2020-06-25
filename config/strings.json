@@ -26,8 +26,8 @@
             "Learn how to look for duplicate instance of your OpenVPN connection.",
             "Make sure you have setup your VPN connection correctly https://tryhackme.com/room/openvpn",
             "Type ps aux | grep openvpn into your terminal and press enter",
-            "If there's more than one line (and the second doesn't have \"grep\" in it), do the following steps",
-            "Type killall openvpn into your terminal and press enter",
+            "If there's more than one line (that don't start with \"grep\" or sudo), do the following steps",
+            "Type sudo killall openvpn into your terminal and press enter",
             "Start the VPN with sudo openvpn <path-to-config>"
         ]
     },
