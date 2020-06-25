@@ -10,6 +10,7 @@ import libs.config as config
 
 c_api_rank = config.get_config("url")["api"]["user"]
 c_api_token = config.get_config("url")["api"]["token"]
+c_api_leaderboard = config.get_config("url")["api"]["leaderboard"]
 c_url_userprofile = config.get_config("url")["user_profile"]
 
 #############
@@ -43,3 +44,17 @@ def get_sub_status(username):
         else:
             check = "No!"
     return check
+
+
+pages = {1: 5, 2: 10, 3: 15, 4: 20, 5: 25, 6: 30, 7: 35, 8: 40, 9: 45, 10: 50}
+
+
+def get_leaderboard_data(page, monthly: bool = False):
+    leaderboard_type = "topUsersMonthly" if monthly else "topUsers"
+
+    response = requests.get(c_api_leaderboard)
+    data = response.text
+    data = json.loads(data)[leaderboard_type]
+    num = pages[page] - 5
+
+    return data[num:pages[page]]

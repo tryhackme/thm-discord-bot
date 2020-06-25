@@ -11,13 +11,13 @@ from discord.ext import commands
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 import libs.config as config
+from libs.thm_api import get_leaderboard_data
 
 
 ####################
 # Config variables #
 ####################
 
-c_api_leaderboard = config.get_config("url")["api"]["leaderboard"]
 c_monthly_data = config.get_config("data_files")["monthly_leaderboard"]
 c_channels = config.get_config("channels")
 
@@ -45,51 +45,6 @@ red = (162, 6, 6)
 gray = (52, 60, 66)
 green = (136, 204, 20)
 white = (255, 255, 255)
-
-pages = {1: 5, 2: 10, 3: 15, 4: 20, 5: 25, 6: 30, 7: 35, 8: 40, 9: 45, 10: 50}
-
-
-#############
-# Functions #
-#############
-
-def getUsernames(page, style):
-    response = requests.get(c_api_leaderboard)
-    data = response.text
-    data = json.loads(data)[style]
-    num = pages[page]-5
-    r_num = num+1
-    usernames = []
-    for e, i in enumerate(data[num:pages[page]]):
-        usernames.append(i["username"])
-    return usernames
-
-def getAvatars(page, style):
-    response = requests.get(c_api_leaderboard)
-    data = response.text
-    data = json.loads(data)[style]
-    num = pages[page]-5
-    r_num = num+1
-    avatars = []
-    for e, i in enumerate(data[num:pages[page]]):
-        avatars.append(i["avatar"])
-    return avatars
-
-def getPoints(page, style):
-    response = requests.get(c_api_leaderboard)
-    data = response.text
-    data = json.loads(data)[style]
-    num = pages[page]-5
-    r_num = num+1
-    points = []
-    pointsType = 0
-    if style == "topUsersMonthly":
-        pointsType = "monthlyPoints"
-    else:
-        pointsType = "points"
-    for e, i in enumerate(data[num:pages[page]]):
-        points.append(i[pointsType])
-    return points
 
 
 ############
@@ -128,10 +83,8 @@ class Rank(commands.Cog, name="Leaderboard Commands"):
         mask_draw = ImageDraw.Draw(mask)
         mask_draw.ellipse((0, 0) + size, fill=255)
 
-        # Retrieving the users, points and avatar.
-        avatars = getAvatars(page, "topUsers")
-        usernames = getUsernames(page, "topUsers")
-        points = getPoints(page, "topUsers")
+        # Retrieving the global leaderboard data.
+        leaderboard_data = get_leaderboard_data(page)
 
         base = 150
         index = 0
@@ -139,8 +92,8 @@ class Rank(commands.Cog, name="Leaderboard Commands"):
         edge = 975
 
         # Adding each user.
-        for x in usernames:
-            response = requests.get(avatars[index])
+        for user in leaderboard_data:
+            response = requests.get(user['avatar'])
 
             # Saving temp image, then adding it to the rest.
             temp_img = Image.open(BytesIO(response.content))
@@ -150,12 +103,12 @@ class Rank(commands.Cog, name="Leaderboard Commands"):
 
             # Adding the texts.
             d.text((222, base+32),
-                   "{}".format(usernames[index]), font=font2, fill=white)
+                   "{}".format(user['username']), font=font2, fill=white)
             d.text((8, base+32), "{}.".format(index+1 +
                                               (page-1)*5), font=font2, fill=white)
 
-            d.text((970-(len(str(points[index]))*25), base+32),
-                   str(points[index]), font=font2, fill=green)
+            d.text((970-(len(str(user['points']))*25), base+32),
+                   str(user['points']), font=font2, fill=green)
             base += 160
             pos = (8, base)
             index += 1
@@ -193,10 +146,8 @@ class Rank(commands.Cog, name="Leaderboard Commands"):
         mask_draw = ImageDraw.Draw(mask)
         mask_draw.ellipse((0, 0) + size, fill=255)
 
-        # Retrieving the users, points and avatar.
-        avatars = getAvatars(page, "topUsersMonthly")
-        usernames = getUsernames(page, "topUsersMonthly")
-        points = getPoints(page, "topUsersMonthly")
+        # Retrieving the monthly leaderboard data.
+        leaderboard_data = get_leaderboard_data(page, monthly=True)
 
         base = 150
         index = 0
@@ -204,8 +155,8 @@ class Rank(commands.Cog, name="Leaderboard Commands"):
         edge = 975
 
         # Adding each user.
-        for x in usernames:
-            response = requests.get(avatars[index])
+        for user in leaderboard_data:
+            response = requests.get(user['avatar'])
 
             # Saving temp image, then adding it to the rest.
             temp_img = Image.open(BytesIO(response.content))
@@ -215,12 +166,12 @@ class Rank(commands.Cog, name="Leaderboard Commands"):
 
             # Adding the texts.
             d.text((222, base+32),
-                   "{}".format(usernames[index]), font=font2, fill=white)
+                   "{}".format(user['username']), font=font2, fill=white)
             d.text((8, base+32), "{}.".format(index+1 +
                                               (page-1)*5), font=font2, fill=white)
 
-            d.text((970-(len(str(points[index]))*25), base+32),
-                   str(points[index]), font=font2, fill=green)
+            d.text((970-(len(str(user['monthlyPoints']))*25), base+32),
+                   str(user['monthlyPoints']), font=font2, fill=green)
             base += 160
             pos = (8, base)
             index += 1
@@ -257,7 +208,7 @@ class Rank(commands.Cog, name="Leaderboard Commands"):
 
         await asyncio.sleep(config.get_config("sleep_time")["monthly_leaderboard"])
 
-    @commands.command(description=s_leader["help_desc"])
+    @commands.command(description=s_leader["help_desc"], usage="[page]")
     async def leaderboard(self, ctx, *, page: int = 1):
         # Adds a white flag reaction to the user's command.
         emoji = "\N{Waving White Flag}"
@@ -265,7 +216,7 @@ class Rank(commands.Cog, name="Leaderboard Commands"):
 
         await self.global_leaderboard(ctx.channel, page)
 
-    @commands.command(description=s_monthly["help_desc"])
+    @commands.command(description=s_monthly["help_desc"], usage="[page]")
     async def monthly(self, ctx, *, page: int = 1):
         # Adds a white flag reaction to the user's command.
         emoji = "\N{Waving White Flag}"
