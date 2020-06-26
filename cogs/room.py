@@ -56,9 +56,9 @@ async def announce_room(channel, json_data, code=None):
     img = json_data["image"]
     title = json_data["title"]
     if code == None:
-        url = c_url_room["room"] + str(json_data["code"])
+        url = c_url_room + str(json_data["code"])
     else:
-        url = c_url_room["room"] + code
+        url = c_url_room + code
     description = json_data["description"]
 
     embed = officialEmbed(title, description)
