@@ -24,7 +24,8 @@
         "cogs.social",
         "cogs.devrole",
         "cogs.fun",
-        "cogs.help"
+        "cogs.help",
+        "cogs.feedback"
     ],
     "disabled_cogs":[
     ],
