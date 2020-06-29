@@ -104,7 +104,7 @@ class Room(commands.Cog):
         # Set up embed.
         img = data["image"]
         title = data["title"]
-        link = c_join_room + room_code
+        link = c_url_room + room_code
 
         embed = officialEmbed(title, link)
         embed.set_image(url=img)
