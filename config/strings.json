@@ -160,6 +160,12 @@
         },
         "tweet":{
             "help_desc":"Get THM's last tweet."
+        },
+        "discord":{
+            "help_desc":"Get the Discord invite.",
+            "url":"https://discord.gg/F7ERYzz",
+            "title":"TryHackMe's Discord:",
+            "pic":"https://tryhackme.com/img/THMlogo.png"
         }
     },
     "stats":{
