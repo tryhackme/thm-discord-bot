@@ -76,10 +76,11 @@
     "url":{
         "invite":"https://discord.gg/GzVZtGX",
         "room":"http://tryhackme.com/room/",
+        "join":"https://tryhackme.com/jr/",
         "user_profile":"https://tryhackme.com/p/{}",
         "api":{
-            "room":"https://tryhackme.com/api/room/",
-            "newrooms":"http://tryhackme.com/api/newrooms/",
+            "room":"https://tryhackme.com/api/room/{}",
+            "newrooms":"http://tryhackme.com/api/new-rooms/",
             "token":"https://tryhackme.com/tokens/discord/",
             "leaderboard":"https://tryhackme.com/api/leaderboards",
             "user":"https://tryhackme.com/api/user/{}",
