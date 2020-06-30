@@ -22,7 +22,7 @@ c_room_default_data = config.get_config("data_files")["room_default"]
 c_sleep_time = config.get_config("sleep_time")["room_listener"]
 c_api_url = config.get_config("url")["api"]
 c_url_room = config.get_config("url")["room"]
-c_join_room = config.get_config("url")["join_room"]
+c_join_room = config.get_config("url")["room_join"]
 
 #####################
 # Strings variables #
