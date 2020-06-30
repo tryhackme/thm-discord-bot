@@ -76,7 +76,7 @@
     "url":{
         "invite":"https://discord.gg/GzVZtGX",
         "room":"http://tryhackme.com/room/",
-        "join":"https://tryhackme.com/jr/",
+        "join_room":"https://tryhackme.com/jr/",
         "user_profile":"https://tryhackme.com/p/{}",
         "api":{
             "room":"https://tryhackme.com/api/room/{}",
