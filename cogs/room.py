@@ -22,7 +22,7 @@ c_room_default_data = config.get_config("data_files")["room_default"]
 c_sleep_time = config.get_config("sleep_time")["room_listener"]
 c_api_url = config.get_config("url")["api"]
 c_url_room = config.get_config("url")["room"]
-
+c_join_room = config.get_config("url")["room_join"]
 
 #####################
 # Strings variables #
@@ -30,6 +30,7 @@ c_url_room = config.get_config("url")["room"]
 
 s_no_perm = config.get_string("no_perm")
 s_room = config.get_string("room")
+
 
 
 ###################
@@ -56,9 +57,9 @@ async def announce_room(channel, json_data, code=None):
     img = json_data["image"]
     title = json_data["title"]
     if code == None:
-        url = c_url_room + str(json_data["code"])
+        url = c_join_room + str(json_data["code"])
     else:
-        url = c_url_room + code
+        url = c_join_room + code
     description = json_data["description"]
 
     embed = officialEmbed(title, description)
@@ -83,7 +84,7 @@ class Room(commands.Cog):
     @commands.command(description=s_room["writeup_help_desc"], usage="{room_code}")
     async def writeup(self, ctx, room_code):
         # Request to the API.
-        data = await api_fetch(c_api_url["room"], "/", room_code)
+        data = await api_fetch(c_api_url["room"].format(room_code))
 
         # If the specified code is wrong.
         if data["success"] == False:
@@ -135,7 +136,7 @@ class Room(commands.Cog):
         await announce_room(channel, data[0])
 
     @commands.command(name="newroom", description=s_room["newroom_help_desc"] + " (Admin)", usage="{room_code}", hidden=True)
-    async def new_room(self, ctx, room):
+    async def new_room(self, ctx, room=""):
         if not has_role(ctx.author, adminID):
             botMsg = await ctx.send(s_no_perm)
 
@@ -144,16 +145,20 @@ class Room(commands.Cog):
             await botMsg.delete()
             await ctx.message.delete()
             return
+        
+        if room == "":
+            await ctx.send(s_room["no_code"])
+        
+        else:
+            data = await api_fetch(c_api_url["room"].format(room))
 
-        data = await api_fetch(c_api_url["room"], "/", room)
+            if data["success"] == False:
+                await ctx.send(s_room["code_not_found"].format(room))
+                return
 
-        if data["success"] == False:
-            await ctx.send(s_room["code_not_found"].format(room))
-            return
+            channel = self.bot.get_channel(channelID)
 
-        channel = self.bot.get_channel(channelID)
-
-        await announce_room(channel, data, room)
+            await announce_room(channel, data, room)
 
     async def new_room_listener(self):
         """Function responsible to loop and listen for a new room release."""

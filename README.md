@@ -28,6 +28,8 @@ TryHackMe Python Discord Bot
   - Leaderboard generation, tweet command
 - Horshark
   - Room cog, role sync, stats, rank, rules, help/staff, vote, giveaway, faq, jira, overall rewrite and improvement, minor features and fixes
+- CMNatic
+  - Housekeeping, feedback.
 
 
 ***Commands:***
@@ -65,6 +67,7 @@ github | Get the bot's Github link.
 twitter | Get the Twitter link.
 reddit | Get the Reddit link.
 website | Get the Website link.
+discord | Get the Discord invite.
 social | Get links to all our socials.
 tweet | Get THM's last tweet.
 
@@ -82,3 +85,6 @@ xkcd | Send a random XKCD comic.
 > Help
 staff | Displays all staff commands.
 help | Displays all commands.
+
+> Provide Feedback
+feedback | Let us know what you think of TryHackMe!

@@ -13,7 +13,7 @@ __pycache__
 */__pycache__
 
 # IDE files
-.vscode
+.vscode/
 
 # Github stuff
 .github/
