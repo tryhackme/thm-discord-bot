@@ -109,7 +109,7 @@
     },
     "room":{
         "room_help_desc":"Manually announce the last room.",
-        "newroom":"A new room is available!  |  Check it out: {}",
+        "newroom":"A new room is available!  |  Check it out: {}\n{}",
         "newroom_help_desc":"Manually announce a new room.",
         "writeup_help_desc":"Get the writeups for a room.",
         "writeup_not_found":"Sorry, there is no writeup for this room.",

@@ -38,11 +38,12 @@ s_room = config.get_string("room")
 ###################
 
 # Channel ID.
-channelsID = config.get_config("channels")
-channelID = channelsID["announcements"]
+id_channels = config.get_config("channels")
+id_channel = id_channels["announcements"]
 
 # Role IDs.
-adminID = config.get_config("roles")["admin"]
+id_admin = config.get_config("roles")["admin"]
+id_announcerole = config.get_config("roles")["announcementrole"]
 
 
 #############
@@ -65,9 +66,12 @@ async def announce_room(channel, json_data, code=None):
     embed = officialEmbed(title, description)
     embed.set_image(url=img)
 
-    # Send messages.
-    await channel.send(s_room["newroom"].format(url), embed=embed)
+    # Get the announcement role.
+    announceRole = channel.guild.get_role(id_announcerole)
 
+    # Send messages.
+    await channel.send(s_room["newroom"].format(url, announceRole.mention), embed=embed)
+ 
     # Updates local file.
     with open(c_room_data, "w") as file:
         json.dump(json_data, file)
@@ -118,7 +122,7 @@ class Room(commands.Cog):
 
     @commands.command(description=s_room["room_help_desc"] + " (Admin)", hidden=True)
     async def room(self, ctx):
-        if not has_role(ctx.author, adminID):
+        if not has_role(ctx.author, id_admin):
             botMsg = await ctx.send(s_no_perm)
 
             await asyncio.sleep(5)
@@ -128,7 +132,7 @@ class Room(commands.Cog):
             return
 
         # Gets channel.
-        channel = self.bot.get_channel(channelID)
+        channel = self.bot.get_channel(id_channel)
 
         # Getting the API's JSON.
         data = await api_fetch(c_api_url["newrooms"])
@@ -137,7 +141,7 @@ class Room(commands.Cog):
 
     @commands.command(name="newroom", description=s_room["newroom_help_desc"] + " (Admin)", usage="{room_code}", hidden=True)
     async def new_room(self, ctx, room=""):
-        if not has_role(ctx.author, adminID):
+        if not has_role(ctx.author, id_admin):
             botMsg = await ctx.send(s_no_perm)
 
             await asyncio.sleep(5)
@@ -156,7 +160,7 @@ class Room(commands.Cog):
                 await ctx.send(s_room["code_not_found"].format(room))
                 return
 
-            channel = self.bot.get_channel(channelID)
+            channel = self.bot.get_channel(id_channel)
 
             await announce_room(channel, data, room)
 
@@ -164,7 +168,7 @@ class Room(commands.Cog):
         """Function responsible to loop and listen for a new room release."""
 
         # Setup the channel to send the announcements into.
-        channel = self.bot.get_channel(channelID)
+        channel = self.bot.get_channel(id_channel)
 
         while True:
             # Reading the json and loading it.
