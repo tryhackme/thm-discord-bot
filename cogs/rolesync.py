@@ -267,19 +267,24 @@ class RoleSync(commands.Cog, name="Verifying/Role Assigning Commands"):
                 user_dUID = user[0]
                 user_thm = user[1]
 
-                # We fetch the user.
-                user_member = await server.fetch_member(user_dUID)
+                # We try to fetch the user.
+                try:
+                    user_member = await server.fetch_member(user_dUID)
 
-                # Logging.
-                user_thm_censored = user_thm[:3] + '*'*18 + user_thm[-3:]
-                print("\t" + user_member.name + " | " + user_dUID + ", " + user_thm_censored)
+                    # Logging.
+                    user_thm_censored = user_thm[:3] + '*'*18 + user_thm[-3:]
+                    print("\t" + user_member.name + " | " + user_dUID + ", " + user_thm_censored)
 
-                # Getting his data.
-                data = await api_fetch(c_api_token, user_thm)
+                    # Getting his data.
+                    data = await api_fetch(c_api_token, user_thm)
 
-                # Getting the DM channel and calling update function.
-                dm_channel = await user_member.create_dm()
-                await update(user_member, dm_channel, data, True)
+                    # Getting the DM channel and calling update function.
+                    dm_channel = await user_member.create_dm()
+                    await update(user_member, dm_channel, data, True)
+
+                except:
+                    print("\tUser " + user_dUID + " has left the server.")
+
                 
             print("-- Role updating finished.\n")
 
