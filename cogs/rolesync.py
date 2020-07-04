@@ -270,7 +270,7 @@ class RoleSync(commands.Cog, name="Verifying/Role Assigning Commands"):
                 # We try to fetch the user.
                 try:
                     user_member = await server.fetch_member(user_dUID)
-                    
+
                     # Logging.
                     user_thm_censored = user_thm[:3] + '*'*18 + user_thm[-3:]
                     print("\t" + user_member.name + " | " + user_dUID + ", " + user_thm_censored)
@@ -283,7 +283,7 @@ class RoleSync(commands.Cog, name="Verifying/Role Assigning Commands"):
                     await update(user_member, dm_channel, data, True)
 
                 except:
-                    print("User " + user_dUID + " has left the server.")
+                    print("\tUser " + user_dUID + " has left the server.")
 
                 
             print("-- Role updating finished.\n")
