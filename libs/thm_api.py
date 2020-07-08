@@ -54,11 +54,11 @@ def get_sub_status(username):
 
 def get_leaderboard_data(page, monthly: bool = False):
     """Fetches leaderboard data (all-time/monthly)"""
-    leaderboard_type = "topUsersMonthly" if monthly else "topUsers"
+    query = '?type=monthly' if monthly else ''
 
-    response = requests.get(c_api_leaderboard)
+    response = requests.get(c_api_leaderboard + query)
     data = response.text
-    data = json.loads(data)[leaderboard_type]
+    data = json.loads(data)['ranks']
     num = pages[page] - 5
 
     return data[num:pages[page]]
