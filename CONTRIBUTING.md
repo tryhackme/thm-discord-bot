@@ -42,6 +42,7 @@ To contribute to the bot development, you need to be on the official TryHackMe D
 - Every command must have a description.
 - If the command is staff only, it needs to have the hidden value set to true.
 - If there are arguments, the command will have a usage field.
+- You must use the "command" system from the internal libs to handle sanitizing, roles permissions and context restriction.
 
 ### Documenting and comments
 - You need to document every function that is not a command using ''' blocs.
