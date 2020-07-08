@@ -20,7 +20,7 @@ async def add_role(member, id):
     await member.add_roles(get(member.guild.roles, id=id))
 
 def has_role(member, id):
-    """Check if the member has the roles."""
+    """Check if the member has the roles. DO NOT USE, USE THE COMMAND MANAGER INSTEAD."""
 
     for role in member.roles:
         if id == role.id:

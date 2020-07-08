@@ -27,7 +27,7 @@ TryHackMe Python Discord Bot
 - Dan @SherlockSec
   - Leaderboard generation, tweet command
 - Horshark
-  - Room cog, role sync, stats, rank, rules, help/staff, vote, giveaway, faq, jira, overall rewrite and improvement, minor features and fixes
+  - Room cog, role sync, stats, rank, rules, help/staff, vote, giveaway, faq, jira, overall rewrite and improvement, database; utils; commands libs, minor features and fixes
 - CMNatic
   - Housekeeping, feedback.
 

@@ -210,19 +210,17 @@ class Rank(commands.Cog, name="Leaderboard Commands"):
 
     @commands.command(description=s_leader["help_desc"], usage="[page]")
     async def leaderboard(self, ctx, *, page: int = 1):
-        # Adds a white flag reaction to the user's command.
-        emoji = "\N{Waving White Flag}"
-        await ctx.message.add_reaction(emoji)
 
-        await self.global_leaderboard(ctx.channel, page)
+        # The bot will appear as typing while executing the command.
+        async with ctx.channel.typing():
+            await self.global_leaderboard(ctx.channel, page)
 
     @commands.command(description=s_monthly["help_desc"], usage="[page]")
     async def monthly(self, ctx, *, page: int = 1):
-        # Adds a white flag reaction to the user's command.
-        emoji = "\N{Waving White Flag}"
-        await ctx.message.add_reaction(emoji)
 
-        await self.monthly_leaderboard(ctx.channel, page)
+        # The bot will appear as typing while executing the command.
+        async with ctx.channel.typing():
+            await self.monthly_leaderboard(ctx.channel, page)
 
     # Starts the monthly leaderboard announcement.
     @commands.Cog.listener()
