@@ -84,7 +84,8 @@
             "token":"https://tryhackme.com/tokens/discord/",
             "leaderboard":"https://tryhackme.com/api/leaderboards",
             "user":"https://tryhackme.com/api/user/{}",
-            "stats":"https://tryhackme.com/api/getstats"
+            "stats":"https://tryhackme.com/api/getstats",
+            "hacktivities": "https://tryhackme.com/api/hacktivities"
         }
     },
     "sleep_time":{
