@@ -28,7 +28,7 @@ c_join_room = config.get_config("url")["room_join"]
 # Strings variables #
 #####################
 
-s_no_perm = config.get_string("no_perm")
+s_no_perm = config.get_string("commands")["no_perm"]
 s_room = config.get_string("room")
 
 

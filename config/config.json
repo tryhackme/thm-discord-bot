@@ -1,112 +1,109 @@
 {
-    "token_file":"config/token.txt",
-    "db_file":"config/database.json",
-    "jira_creds":"config/jira_creds.txt",
-    "twitter_creds":"config/twitter_creds.txt",
-    "prefix":"!",
-    "cogs":[
-        "cogs.core",
-        "cogs.vote",
-        "cogs.giveaway",
-        "cogs.rolesync",
-        "cogs.room",
-
-        "cogs.welcome",
-        "cogs.announcementrole",
-        "cogs.stats",
-        
-        "cogs.leaderboard",
-        "cogs.userrank",
-        "cogs.faq",
-        "cogs.rules",
-        "cogs.jira",
-        "cogs.gtfobins",
-        "cogs.social",
-        "cogs.devrole",
-        "cogs.fun",
-        "cogs.help",
-        "cogs.feedback"
+  "token_file": "config/token.txt",
+  "db_file": "config/database.json",
+  "jira_creds": "config/jira_creds.txt",
+  "twitter_creds": "config/twitter_creds.txt",
+  "prefix": "!",
+  "cogs": [
+    "cogs.core",
+    "cogs.vote",
+    "cogs.giveaway",
+    "cogs.room",
+    "cogs.welcome",
+    "cogs.announcementrole",
+    "cogs.stats",
+    "cogs.leaderboard",
+    "cogs.userrank",
+    "cogs.faq",
+    "cogs.rules",
+    "cogs.jira",
+    "cogs.gtfobins",
+    "cogs.social",
+    "cogs.devrole",
+    "cogs.staff_vote",
+    "cogs.fun",
+    "cogs.help",
+    "cogs.feedback"
+  ],
+  "disabled_cogs": [],
+  "info": {
+    "name": "TryHackMe",
+    "footer": "From TryHackMe with \u2764!",
+    "logo": "https://tryhackme.com/img/THMlogo.png",
+    "icon": "https://tryhackme.com/img/favicon.png"
+  },
+  "colors": {
+    "site": 0
+  },
+  "server": 521382216299839518,
+  "roles": {
+    "ranks": [
+      638047504822173726,
+      638047659541790760,
+      638047662893039634,
+      638047665766137876,
+      638047668597162006,
+      638047670878863390,
+      638047673173409811,
+      638047675845181461,
+      638047678432804925,
+      638047682232975371,
+      638047685340954634,
+      638047689380069404,
+      638047691800313866
     ],
-    "disabled_cogs":[
-    ],
-    "info":{
-        "name":"TryHackMe",
-        "footer":"From TryHackMe with \u2764!",
-        "logo":"https://tryhackme.com/img/THMlogo.png",
-        "icon":"https://tryhackme.com/img/favicon.png"
-    },
-    "colors":{
-        "site":0
-    },
-    "server":521382216299839518,
-    "roles":{
-        "ranks":[
-            638047504822173726, 
-            638047659541790760, 
-            638047662893039634, 
-            638047665766137876, 
-            638047668597162006, 
-            638047670878863390, 
-            638047673173409811, 
-            638047675845181461, 
-            638047678432804925, 
-            638047682232975371, 
-            638047685340954634, 
-            638047689380069404, 
-            638047691800313866
-        ],
-        "verified":722562553414418513,
-        "sub":538509395605061653,
-        "contrib":625357314706374666,
-        
-        "admin":568611667902988288,
-        "mod":612305984752451594,
-
-        "announcementrole":723526134356115536,
-
-        "devLead":578349526574694421,
-        "dev":578056412790390785
-    },
-    "channels":{
-        "welcome":648878292551598080,
-        "announcements":546650767495397376,
-        "stats_users":723527533458620507,
-        "stats_rooms":723527788589482094
-    },
-    "url":{
-        "invite":"https://discord.gg/GzVZtGX",
-        "room":"http://tryhackme.com/room/",
-        "room_join":"https://tryhackme.com/jr/",
-        "user_profile":"https://tryhackme.com/p/{}",
-        "api":{
-            "room":"https://tryhackme.com/api/room/{}",
-            "newrooms":"http://tryhackme.com/api/new-rooms/",
-            "token":"https://tryhackme.com/tokens/discord/",
-            "leaderboard":"https://tryhackme.com/api/leaderboards",
-            "user":"https://tryhackme.com/api/user/{}",
-            "stats":"https://tryhackme.com/api/getstats"
-        }
-    },
-    "sleep_time":{
-        "room_listener":60,
-        "roles_update":86400,
-        "stats_listener": 60,
-        "monthly_leaderboard":43200
-    },
-    "milestone_offset":50000,
-    "persistence":{
-        "vote":"data/vote.json",
-        "giveaway":"data/giveaway.json"
-    },
-    "images":{
-        "openvpn":"https://tryhackme-images.s3.amazonaws.com/room-icons/21367ae689e69d81d71b4591474e62ad.png",
-        "milestone":"https://i.imgur.com/rntbP3y.png"
-    },
-    "data_files":{
-        "gtfobins":"data/gtfobins.json",
-        "room":"data/room.json",
-        "room_default":"data/room_default.json",
-        "monthly_leaderboard":"data/monthly.txt",
-        "stats":"data/stats.json"
+    "verified": 722562553414418513,
+    "sub": 538509395605061653,
+    "contrib": 625357314706374666,
+    "admin": 568611667902988288,
+    "modlead": 711606985925197844,
+    "mod": 612305984752451594,
+    "announcementrole": 723526134356115536,
+    "devLead": 578349526574694421,
+    "dev": 578056412790390785
+  },
+  "channels": {
+    "welcome": 648878292551598080,
+    "announcements": 546650767495397376,
+    "stats_thm_users": 723527533458620507,
+    "stats_rooms": 723527788589482094,
+    "stats_discord_users": 734487967019565189,
+    "staff_voting_cm": 733142795325538356
+  },
+  "url": {
+    "invite": "https://discord.gg/GzVZtGX",
+    "room": "http://tryhackme.com/room/",
+    "room_join": "https://tryhackme.com/jr/",
+    "user_profile": "https://tryhackme.com/p/{}",
+    "api": {
+      "room": "https://tryhackme.com/api/room/{}",
+      "newrooms": "http://tryhackme.com/api/new-rooms/",
+      "token": "https://tryhackme.com/tokens/discord/",
+      "leaderboard": "https://tryhackme.com/api/leaderboards",
+      "user": "https://tryhackme.com/api/user/{}",
+      "stats": "https://tryhackme.com/api/getstats"
     }
+  },
+  "sleep_time": {
+    "room_listener": 60,
+    "roles_update": 86400,
+    "stats_listener": 60,
+    "monthly_leaderboard": 43200
+  },
+  "milestone_offset": 50000,
+  "persistence": {
+    "vote": "data/vote.json",
+    "giveaway": "data/giveaway.json"
+  },
+  "images": {
+    "openvpn": "https://tryhackme-images.s3.amazonaws.com/room-icons/21367ae689e69d81d71b4591474e62ad.png",
+    "milestone": "https://i.imgur.com/rntbP3y.png"
+  },
+  "data_files": {
+    "gtfobins": "data/gtfobins.json",
+    "room": "data/room.json",
+    "room_default": "data/room_default.json",
+    "monthly_leaderboard": "data/monthly.txt",
+    "stats": "data/stats.json"
+  }
 }
