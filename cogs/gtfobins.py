@@ -18,7 +18,7 @@ c_file_gtfobins = config.get_config("data_files")["gtfobins"]
 # String variables #
 ####################
 
-s_not_sanitized = config.get_string("not_sanitized")
+s_not_sanitized = config.get_string("commands")["not_sanitized"]
 s_gfto = config.get_string("gtfobins")
 
 

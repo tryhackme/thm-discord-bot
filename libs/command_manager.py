@@ -21,6 +21,7 @@ class _Roles():
         self._roles_id = config.get_config("roles")
 
         self.ADMIN = self._roles_id["admin"]
+        self.MODLEAD = self._roles_id["modlead"]
         self.MOD = self._roles_id["mod"]
 
         self.DEVLEAD = self._roles_id["devLead"]
@@ -34,12 +35,23 @@ class _Roles():
 
         self.RANKS = self.__load_ranks()
 
-roles = _Roles()
+class _Channels():
+    def __init__(self):
+        self._roles_id = config.get_config("channels")
 
-s_sanitized = config.get_string("not_sanitized")
-s_no_perm = config.get_string("no_perm")
-s_context_dm = config.get_string("context_dm_only")
-s_context_public = config.get_string("context_public_only")
+        self.WELCOME = self._roles_id["welcome"]
+        self.ANNOUNCEMENTS = self._roles_id["announcements"]
+        self.STATS_THM_USERS = self._roles_id["stats_thm_users"]
+        self.STATS_DISCORD_USERS = self._roles_id["stats_discord_users"]
+        self.STATS_ROOMS = self._roles_id["stats_rooms"]
+        self.STAFF_VOTING_CM = self._roles_id["staff_voting_cm"]
+
+
+roles = _Roles()
+channels = _Channels()
+
+s_cmd = config.get_string("commands")
+
 
 def __has_role__(member, id):
     """Check if the member has the roles."""
@@ -53,9 +65,21 @@ def __check_context__(ctx, context):
     """Checks that the current context fits the desired one."""
 
     if context == Context.DM and (not isinstance(ctx.channel, DMChannel)):
-        raise Exception(s_context_dm)
+        raise Exception(s_cmd["context_dm_only"])
     elif context == Context.PUBLIC and isinstance(ctx.channel, DMChannel):
-        raise Exception(s_context_public)
+        raise Exception(s_cmd["context_public_only"])
+
+def __check_channel__(ctx, channels):
+    """Checks that the command is executed in one of the allowed channel."""
+
+    is_channel_allowed = False
+
+    for c in channels:
+        if c == ctx.channel.id:
+            __check_channel__ = True
+
+    if not __check_channel__:
+        raise Exception(s_cmd["channel_not_allowed"])
 
 def __check_sanitized__(args):
     """Checks that every arg in args is sanitized correctly."""
@@ -66,7 +90,7 @@ def __check_sanitized__(args):
             __check_sanitized__(arg)
         else:
             if not utils.sanitize_check(arg):
-                raise Exception(s_sanitized)
+                raise Exception(s_cmd["not_sanitized"])
 
 def __check_roles__(ctx, roles):
     """Checks that the user has all the required roles."""
@@ -80,10 +104,10 @@ def __check_roles__(ctx, roles):
             has_perm = True
 
     if not has_perm:
-        raise Exception(s_no_perm)
+        raise Exception(s_cmd["no_perm"])
 
 
-async def command(ctx, args=None, roles=None, context=Context.BOTH):
+async def command(ctx, args=None, roles=None, channels=None, context=Context.BOTH):
     """Roles is an array (of roles) of required roles to execute the command. Args is an array (of string, or tuple of str, or array of str) of the arguments of the command."""
 
     # Checking for the context.
@@ -92,6 +116,14 @@ async def command(ctx, args=None, roles=None, context=Context.BOTH):
     except Exception as e:
         await ctx.send(e)
         return False
+
+    # Checking for the channel in case of a public context.
+    if channels != None and context == Context.PUBLIC:
+        try:
+            __check_channel__(__check_channel__(ctx, channels))
+        except Exception as e:
+            await ctx.send(e)
+            return False
 
     # Checking if all the args are sanitized.
     if args != None:
