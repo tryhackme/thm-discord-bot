@@ -8,6 +8,7 @@
     "cogs.core",
     "cogs.vote",
     "cogs.giveaway",
+    "cogs.rolesync",
     "cogs.room",
     "cogs.welcome",
     "cogs.announcementrole",
