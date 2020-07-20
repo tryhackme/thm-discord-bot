@@ -24,7 +24,8 @@
     "cogs.staff_vote",
     "cogs.fun",
     "cogs.help",
-    "cogs.feedback"
+    "cogs.feedback",
+    "cogs.exploit-db"
   ],
   "disabled_cogs": [],
   "info": {
