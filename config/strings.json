@@ -119,7 +119,8 @@
         "writeup_help_desc":"Get the writeups for a room.",
         "writeup_not_found":"Sorry, there is no writeup for this room.",
         "code_not_found":"Sorry, but the room code ``{}`` could not be found.",
-        "no_code":"Please provide a room code to be announced"
+        "no_code":"Please provide a room code to be announced",
+        "randomroom_help_desc": "Select a random room."
     },
     "rules":[
 		"No unsolicited direct messages (DMs) to other members of the discord. This includes staff. Verify that the member you are messaging is ok with you sending them DMs. The only exception to this rule is if a situation warrants the involvement of a moderator in order to handle something such as harassment or a situation where another member of the discord has made you feel uncomfortable.",

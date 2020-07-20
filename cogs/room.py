@@ -2,6 +2,7 @@ import asyncio
 import json
 import time
 from shutil import copyfile
+from random import choice
 
 import aiohttp
 import discord
@@ -9,8 +10,8 @@ from discord.ext import commands
 
 import libs.config as config
 from libs.embedmaker import officialEmbed
-from libs.utils import api_fetch
-from libs.utils import has_role
+from libs.utils import api_fetch, has_role, bool_to_yesno
+from libs.thm_api import get_public_rooms
 
 
 ####################
@@ -30,7 +31,6 @@ c_join_room = config.get_config("url")["room_join"]
 
 s_no_perm = config.get_string("commands")["no_perm"]
 s_room = config.get_string("room")
-
 
 
 ###################
@@ -75,6 +75,12 @@ async def announce_room(channel, json_data, code=None):
     # Updates local file.
     with open(c_room_data, "w") as file:
         json.dump(json_data, file)
+
+
+def get_random_room():
+    rooms = get_public_rooms()
+
+    return choice(rooms)
 
 
 ############
@@ -163,6 +169,23 @@ class Room(commands.Cog):
             channel = self.bot.get_channel(id_channel)
 
             await announce_room(channel, data, room)
+
+    @commands.command(name="randomroom", description=s_room["randomroom_help_desc"])
+    async def random_room(self, ctx):
+        room = get_random_room()
+
+        response = officialEmbed(room['title'], room['description'])
+        response.set_thumbnail(url=room['image'])
+
+        response.add_field(name="Room type", value=room['type'].capitalize(), inline=True)
+        response.add_field(name="Difficulty", value=room['difficulty'].capitalize(), inline=True)
+        response.add_field(name="Upvotes", value=room['upVotes'], inline=True)
+        response.add_field(name="Sub required", value=bool_to_yesno(not room['freeToUse']), inline=True)
+        response.add_field(name="Room creator", value=room['creator'], inline=True)
+
+        response.url = f"{c_join_room}{room['code']}"
+
+        await ctx.send(embed=response)
 
     async def new_room_listener(self):
         """Function responsible to loop and listen for a new room release."""
