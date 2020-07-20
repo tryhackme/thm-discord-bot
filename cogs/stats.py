@@ -35,7 +35,9 @@ s_stats = config.get_string("stats")
 ###################
 
 # Channels ID.
-user_count_chann = c_channels["stats_users"]
+
+thm_user_count_chann = c_channels["stats_thm_users"]
+discord_user_count_chann = c_channels["stats_discord_users"]
 room_count_chann = c_channels["stats_rooms"]
 announcement_chann = c_channels["announcements"]
 
@@ -87,15 +89,17 @@ class Stats(commands.Cog):
     async def update_stat_channels(self, data):
         """Updates the numbers in the channels used to display stats."""
 
-        userChann = self.bot.get_channel(user_count_chann)
+        thmUserChann = self.bot.get_channel(thm_user_count_chann)
+        discordUserChann = self.bot.get_channel(discord_user_count_chann)
         roomChann = self.bot.get_channel(room_count_chann)
 
-        await userChann.edit(name="Users: "+str(data["totalUsers"]))
+        await thmUserChann.edit(name="Users: "+str(data["totalUsers"]))
+        await discordUserChann.edit(name="Discord users: "+str(thmUserChann.guild.member_count))
         await roomChann.edit(name="Rooms: "+str(data["publicRooms"]))
 
-    # Checks if a new user milestone has been reached and sends an announcement.
-    async def check_user_milestone(self, data):
-        """Checks if a new registered user milestone has been reached."""
+    # Checks if a new thm user milestone has been reached and sends an announcement.
+    async def check_thm_user_milestone(self, data):
+        """Checks if a new registered thm user milestone has been reached."""
 
         # If there is no file (or it's corrupted), make (a new) one.
         try:
@@ -117,23 +121,27 @@ class Stats(commands.Cog):
     async def listener(self):
         """Listener for the stats."""
 
-        # We retrieve data from the API.
-        data = await fetch_stats()
+        while True:
+            print("---- Updating stats:")
 
-        # Compares the localy saved data to the one just fetched for a milestone.
-        await self.check_user_milestone(data)
+            # We retrieve data from the API.
+            data = await fetch_stats()
 
-        # Updates the live stats.
-        await self.update_stat_channels(data)
+            # Compares the localy saved data to the one just fetched for a milestone.
+            await self.check_thm_user_milestone(data)
 
+            # Updates the live stats.
+            await self.update_stat_channels(data)
 
-        await asyncio.sleep(c_sleep_time)
-        await self.listener()
+            print("-- Stats up-to-date.")
 
+            # Waits before relooping.            
+            await asyncio.sleep(c_sleep_time)
 
     # Starts the listener.
     @commands.Cog.listener()
     async def on_ready(self):
+        # await asyncio.sleep()
         await self.listener()
 
 def setup(bot):

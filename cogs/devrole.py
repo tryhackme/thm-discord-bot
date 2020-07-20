@@ -20,7 +20,7 @@ id_dev = config.get_config("roles")["dev"]
 # String variables #
 ####################
 
-s_no_perm = config.get_string("no_perm")
+s_no_perm = config.get_string("commands")["no_perm"]
 s_devrole = config.get_string("devrole")
 
 

@@ -1,9 +1,12 @@
 {
     "status":"DM me with !verify",
-    "no_perm":"You do not have the permission to do that.",
-    "not_sanitized":"Sorry, the characters you have entered are blacklisted, instead of trying anything here, try some rooms.",
-    "context_dm_only":"Please send this command in DM.",
-    "context_public_only":"Please send this command in a public channel.",
+    "commands":{
+        "no_perm":"You do not have the permission to do that.",
+        "not_sanitized":"Sorry, the characters you have entered are blacklisted, instead of trying anything here, try some rooms.",
+        "context_dm_only":"Please send this command in DM.",
+        "context_public_only":"Please send this command in a public channel.",
+        "channel_not_allowed":"This command isn't allowed in this channel."
+    },
     "announcementrole":{
         "help_desc":"Toggle the role to get notified on announcements.",
         "on":"Ok {}, you will now be notified of future announcements.",
@@ -171,6 +174,10 @@
             "title":"TryHackMe's Discord:",
             "pic":"https://tryhackme.com/img/THMlogo.png"
         }
+    },
+    "staff_vote":{
+        "help_desc":"Clears the CM vote channel.",
+        "cleared":"Successfully cleared the channel."
     },
     "stats":{
         "title":"New Milestone reached!",
