@@ -23,7 +23,7 @@ id_admin = config.get_config("roles")["admin"]
 file_persistence = config.get_config("persistence")["giveaway"]
 
 # Strings.
-s_no_perm = config.get_string("no_perm")
+s_no_perm = config.get_string("commands")["no_perm"]
 s_giveaway = config.get_string("giveaway")
 
 

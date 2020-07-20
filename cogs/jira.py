@@ -20,7 +20,7 @@ id_admin = roles["admin"]
 id_mod = roles["mod"]
 
 # Strings.
-s_no_perm = config.get_string("no_perm")
+s_no_perm = config.get_string("commands")["no_perm"]
 s_jira = config.get_string("jira")
 
 # Config.
