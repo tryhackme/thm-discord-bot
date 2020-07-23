@@ -20,7 +20,15 @@ class Fun(commands.Cog, name="Fun Commands"):
 
     @commands.command(description="Sends Skidy's emote.")
     async def skidy(self, ctx):
-        response = officialEmbed(title=":slight_smile:", color=0x225999,
+
+        message = ":slight_smile:"
+
+        if random.randint(0,1) >= 0.5:
+            skidy_gif = self.bot.get_emoji(config.get_config("emotes")["skidygif"])
+            message = str(skidy_gif)            
+
+
+        response = officialEmbed(title=message, color=0x225999,
                                  author="Skidy", author_img="https://i.imgur.com/fSMnXPt.png", footer="")
         await ctx.send(embed=response)
 
@@ -34,6 +42,10 @@ class Fun(commands.Cog, name="Fun Commands"):
     async def dark(self, ctx):
         darkQuotes = config.get_string("quotes")["dark"]
         quote = darkQuotes[random.randint(0, len(darkQuotes)-1)]
+
+        if quote == "buttdance":
+            buttdance = self.bot.get_emoji(config.get_config("emotes")["buttdance"])
+            quote = str(buttdance)
 
         response = officialEmbed(title=quote, color=0xff4500, author="DarkStar7471",
                                  author_img="https://i.imgur.com/jZ908d1.png", footer="")

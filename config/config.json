@@ -72,6 +72,10 @@
     "stats_discord_users": 734487967019565189,
     "staff_voting_cm": 733142795325538356
   },
+  "emotes":{
+    "skidygif":733473514149118043,
+    "buttdance":729828126523261078
+  },
   "url": {
     "invite": "https://discord.gg/GzVZtGX",
     "room": "http://tryhackme.com/room/",
