@@ -12,6 +12,7 @@ c_api_rank = config.get_config("url")["api"]["user"]
 c_api_token = config.get_config("url")["api"]["token"]
 c_api_leaderboard = config.get_config("url")["api"]["leaderboard"]
 c_url_userprofile = config.get_config("url")["user_profile"]
+c_url_hacktivities = config.get_config("url")["api"]["hacktivities"]
 
 ###################
 # Other variables #
@@ -62,3 +63,15 @@ def get_leaderboard_data(page, monthly: bool = False):
     num = pages[page] - 5
 
     return data[num:pages[page]]
+
+
+def get_public_rooms(filter_type: str = None) -> list:
+    """Fetches all public rooms"""
+    if filter_type:
+        query = f'?type={filter_type}'
+    else:
+        query = ''
+
+    response = requests.get(c_url_hacktivities + query)
+
+    return json.loads(response.text)

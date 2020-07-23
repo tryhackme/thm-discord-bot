@@ -41,3 +41,7 @@ async def api_fetch(base_url, *args):
             json_data = json.loads(data)
 
             return json_data
+
+
+def bool_to_yesno(value: bool) -> str:
+    return 'Yes' if value else 'No'

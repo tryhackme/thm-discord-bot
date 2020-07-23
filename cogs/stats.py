@@ -93,9 +93,9 @@ class Stats(commands.Cog):
         discordUserChann = self.bot.get_channel(discord_user_count_chann)
         roomChann = self.bot.get_channel(room_count_chann)
 
-        await thmUserChann.edit(name="Users: "+str(data["totalUsers"]))
-        await discordUserChann.edit(name="Discord users: "+str(thmUserChann.guild.member_count))
+        await thmUserChann.edit(name="THM Users: "+str(data["totalUsers"]))
         await roomChann.edit(name="Rooms: "+str(data["publicRooms"]))
+        await discordUserChann.edit(name="Discord Users: "+str(thmUserChann.guild.member_count))
 
     # Checks if a new thm user milestone has been reached and sends an announcement.
     async def check_thm_user_milestone(self, data):
