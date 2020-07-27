@@ -34,6 +34,10 @@
             "If there's more than one line (that don't start with \"grep\" or sudo), do the following steps",
             "Type sudo killall openvpn into your terminal and press enter",
             "Start the VPN with sudo openvpn <path-to-config>"
+        ],
+        "vpnscript":[
+            "Use our VPN troubleshooting script to diagnose common issues!",
+            "https://github.com/tryhackme/openvpn-troubleshooting"
         ]
     },
     "feedback":{
@@ -137,7 +141,8 @@
         "If you use a Nitro boost on the server you get a pick a new server emote. If you do this twice you get two emotes. Emotes must be server appropriate.",
         "When asking for help/tech support please perform research to your fullest ability. Mods and Community Mentors have the right to refuse helping those who have not done troubleshooting/research on their own first. Clearly phrase your questions as we (fortunately for all parties involved) cannot read your mind. Please include the room, task, and question number in your question if possible.",
         "You're welcome to post livestreams, writeups, and videos of THM content, just please post them in #streams-and-videos.",
-        "Please leave any disciplinary measures to the discord staff (Trial Mods, Mods, and Admins). This is also known as no 'mini-modding'. If something is happening, please just let the staff know and we can take care of it <3"
+        "Please leave any disciplinary measures to the discord staff (Trial Mods, Mods, and Admins). This is also known as no 'mini-modding'. If something is happening, please just let the staff know and we can take care of it <3",
+        "No spamming, please. This includes excess repeating of the same messages (typically from five upwards, however, staff reserve the right to further judgement in these cases)."
     ],
     "socials":{
         "help_desc":"Get links to all our socials.",
