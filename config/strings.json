@@ -137,10 +137,10 @@
 		"Keep conversations SFW (Safe for work). This is an educational and professional environment, be sure that your words do not offend or make other members uncomfortable.",
 		"No discussion of illegal topics or actions.",
 		"Do not post viruses or malicious files without explicit permission from the administrative staff. We understand that this is a discord for learning, however, there are plenty of places online to get malware for forensic examination and reverse engineering.",
-        "No distribution of illegally obtained materials within the discord. Do not pirate books in #bookclub",
+        "No distribution of illegally obtained materials within the discord. Do not pirate books in <#679099130320125952>",
         "If you use a Nitro boost on the server you get a pick a new server emote. If you do this twice you get two emotes. Emotes must be server appropriate.",
         "When asking for help/tech support please perform research to your fullest ability. Mods and Community Mentors have the right to refuse helping those who have not done troubleshooting/research on their own first. Clearly phrase your questions as we (fortunately for all parties involved) cannot read your mind. Please include the room, task, and question number in your question if possible. \n\nWe politely ask you to respect the competitive nature of newly released challenges and to allow at least a week before asking for hints and/or help. This rule should be used as a guideline when providing help to others.",
-        "You're welcome to post livestreams, writeups, and videos of THM content, just please post them in #streams-and-videos.",
+        "You're welcome to post livestreams, writeups, and videos of THM content, just please post them in <#644263827742916628>.",
         "Please leave any disciplinary measures to the discord staff (Trial Mods, Mods, and Admins). This is also known as no 'mini-modding'. If something is happening, please just let the staff know and we can take care of it <3",
         "No spamming, please. This includes excess repeating of the same messages (typically from five upwards, however, staff reserve the right to further judgement in these cases).",
         " Do not intentionally mislead others with malicious intent, especially should this misleading end up in destruction of property or otherwise damaging. Things like rickrolling are still allowed, just don't lead someone to damaging their computer/system."
@@ -275,7 +275,7 @@
         "nothing_to_cancel":"There is no vote to cancel."
     },
     "welcome":{
-        "welcome_message":", welcome to the server!\nIf you need help with a room, ask in #community-help.\n\n You can also sync your THM rank on the discord, check your DMs!"
+        "welcome_message":", welcome to the server!\nIf you need help with a room, ask in <#522158539129618453> for direct help, or <#690557518837186560> for hints.\n\n You can also sync your THM rank on the discord, check your DMs!"
     },
     "exploit_db":{
         "help_title": "Help Page of exploit-db",
