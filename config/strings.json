@@ -139,12 +139,78 @@
 		"Do not post viruses or malicious files without explicit permission from the administrative staff. We understand that this is a discord for learning, however, there are plenty of places online to get malware for forensic examination and reverse engineering.",
         "No distribution of illegally obtained materials within the discord. Do not pirate books in <#679099130320125952>",
         "If you use a Nitro boost on the server you get a pick a new server emote. If you do this twice you get two emotes. Emotes must be server appropriate.",
-        "When asking for help/tech support please perform research to your fullest ability. Mods and Community Mentors have the right to refuse helping those who have not done troubleshooting/research on their own first. Clearly phrase your questions as we (fortunately for all parties involved) cannot read your mind. Please include the room, task, and question number in your question if possible. \n\nWe politely ask you to respect the competitive nature of newly released challenges and to allow at least a week before asking for hints and/or help. This rule should be used as a guideline when providing help to others.",
+        "When asking for help/tech support please perform research to your fullest ability. Mods and Community Mentors have the right to refuse helping those who have not done troubleshooting/research on their own first. Clearly phrase your questions as we (fortunately for all parties involved) cannot read your mind. Please include the room, task, and question number in your question if possible. \n\nAlthough we are a a learning platform, we politely ask that you respect the competitive nature of newly released challenges. As such, no hints for new challenge boxes should be given immediately after a release, unless specifically allowed by the content creator.",
         "You're welcome to post livestreams, writeups, and videos of THM content, just please post them in <#644263827742916628>.",
         "Please leave any disciplinary measures to the discord staff (Trial Mods, Mods, and Admins). This is also known as no 'mini-modding'. If something is happening, please just let the staff know and we can take care of it <3",
         "No spamming, please. This includes excess repeating of the same messages (typically from five upwards, however, staff reserve the right to further judgement in these cases).",
         " Do not intentionally mislead others with malicious intent, especially should this misleading end up in destruction of property or otherwise damaging. Things like rickrolling are still allowed, just don't lead someone to damaging their computer/system."
     ],
+    "docs":{
+        "help_desc":"List our documented topics.",
+        "error":"An unexpected error has occurred. Please contact THM's BOT maintainers.",
+        "topics":[
+            "",
+            "Visit the help site",
+            "Learn how to sync your THM profile to Discord",
+            "Learn about our student discount programme",
+            "View all the TryHackMe levels & point requirements",
+            "Get started with making TryHackMe room",
+            "Learn about the TryHackMe room review process",
+            "Read about the TryHackMe API",
+            "How to play TryHackMe's King of the Hill (KoTH)"
+        ],
+        "commands":[
+            "",
+            "!docs url",
+            "!docs verify",
+            "!docs student",
+            "!docs levels",
+            "!docs room-notes",
+            "!docs room-review",
+            "!docs api",
+            "!docs koth"
+        ],
+        "url":{
+            "help_desc":"Visit the help site",
+            "url":"https://help.tryhackme.com/",
+            "title":"Help Website"
+        },
+        "verify":{
+            "help_desc":"Learn how to verify your THM profile",
+            "url":"https://help.tryhackme.com/community/discord",
+            "title":"Verify your TryHackMe Profile!"
+        },
+        "student":{
+            "help_desc":"Learn about our student discount programme",
+            "url":"https://help.tryhackme.com/billing/student-discount",
+            "title":"Redeem your student discount!"
+        },
+        "levels":{
+            "help_desc":"View all the TryHackMe levels & their point requirements",
+            "url":"https://help.tryhackme.com/using-tryhackme/what-are-levels-on-tryhackme",
+            "title":"View all the TryHackMe levels & their point requirements"
+        },
+        "room_notes":{
+            "help_desc":"Get started with making TryHackMe rooms",
+            "url":"https://help.tryhackme.com/room-creation/room-creation-overview",
+            "title":"Get started with making TryHackMe rooms!"
+        },
+        "room_review":{
+            "help_desc":"Learn about the TryHackMe room review process",
+            "url":"https://help.tryhackme.com/room-creation/publishing-your-room",
+            "title":"Learn about the TryHackMe room review process!"
+        },
+        "api":{
+            "help_desc":"Read about the TryHackMe API",
+            "url":"https://thm-community.github.io/api-docs/",
+            "title":"Read about the TryHackMe API!"
+        },
+        "koth":{
+            "help_desc":"How to play TryHackMe's King of the Hill (KoTH)",
+            "url":"https://help.tryhackme.com/using-tryhackme/king-of-the-hill",
+            "title":"How to play TryHackMe's King of the Hill (KoTH)"
+        }
+    },
     "socials":{
         "help_desc":"Get links to all our socials.",
         "github":{

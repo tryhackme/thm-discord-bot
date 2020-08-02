@@ -25,7 +25,8 @@
     "cogs.fun",
     "cogs.help",
     "cogs.feedback",
-    "cogs.exploit-db"
+    "cogs.exploit-db",
+    "cogs.docs"
   ],
   "disabled_cogs": [],
   "info": {
