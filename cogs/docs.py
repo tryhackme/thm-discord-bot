@@ -97,7 +97,7 @@ class Docs(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name="docs", description=s_docs["help_desc"], usage="{topic}", pass_context=True)
+    @commands.command(name="docs", description=s_docs["help_desc"], usage="[topic]", pass_context=True)
     async def docs(self, ctx, *, topic=""):
         if not topic:
             response = officialEmbed(title="Here are all of the possible topics!")
