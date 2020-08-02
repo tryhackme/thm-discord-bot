@@ -42,13 +42,14 @@ verify {token} | Verify yourself to get your roles.
 
 > Room
 writeup {room_code} | Get the writeups for a room.
+randomroom | Select a random room.
 
 > Announcements
 notifyme | Toggle the role to get notified on announcements.
 
 > Leaderboard Commands
-leaderboard | Prints the leaderboard.
-monthly | Prints this month's leaderboard.
+leaderboard [page] | Prints the leaderboard.
+monthly [page] | Prints this month's leaderboard.
 
 > Rank Commands
 rank [@mention/username] | Get a THM member's rank.
@@ -56,6 +57,7 @@ rank [@mention/username] | Get a THM member's rank.
 > FAQ
 vpn | Learn how to use OpenVPN to connect to our network!
 multivpn | Learn how to look for duplicate instance of your OpenVPN connection.
+vpnscript | Use our VPN troubleshooting script to diagnose common issues!
 
 > Rules Commands
 rules | Sends the rules.
@@ -90,3 +92,9 @@ help | Displays all commands.
 
 > Provide Feedback
 feedback | Let us know what you think of TryHackMe!
+
+> Utility
+exploit [-Title][-CVE][-Type][-Platform][-Port][-Content][-Author][-Tag][-Help] {Query} | Searches exploit-db for exploits.
+
+> Docs
+docs [topic] | List our documented topics.
