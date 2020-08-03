@@ -107,13 +107,13 @@
         "leaderboard":{
             "help_desc":"Prints the leaderboard.",
             "generating":"Generating global leaderboard...",
-            "footer":"Made with love by the TryHackMe Discord Bot"
+            "footer":"Made with love by the TryHackMe Discord Bot",
+            "invalid_page": "This page doesn't exist. Available pages: {}"
         },
         "monthly":{
             "help_desc":"Prints this month's leaderboard.",
             "generating":"Generating monthly leaderboard...",
-            "announcement":"Here is last month's leaderboard.\n Congratulations!",
-            "footer":"Made with love by the TryHackMe Discord Bot"
+            "announcement":"Here is last month's leaderboard.\n Congratulations!"
         }
     },
     "room":{

@@ -53,16 +53,15 @@ def get_sub_status(username):
     return check
 
 
-def get_leaderboard_data(page, monthly: bool = False):
+def get_leaderboard_data(monthly: bool = False):
     """Fetches leaderboard data (all-time/monthly)"""
     query = '?type=monthly' if monthly else ''
 
     response = requests.get(c_api_leaderboard + query)
     data = response.text
     data = json.loads(data)['ranks']
-    num = pages[page] - 5
 
-    return data[num:pages[page]]
+    return data
 
 
 def get_public_rooms(filter_type: str = None) -> list:
