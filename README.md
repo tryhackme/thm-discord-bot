@@ -32,6 +32,8 @@ TryHackMe Python Discord Bot
   - Housekeeping / general maintenance, integrating thm help site, feedback, vpnscript
 - 5nake.exe
   - Exploitdb search
+- szymex73
+  - TryHackMe API call optimizations, leaderboard generation optimizations
 
 
 ***Commands:***
