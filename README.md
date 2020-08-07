@@ -34,6 +34,8 @@ TryHackMe Python Discord Bot
   - Exploitdb search
 - szymex73
   - TryHackMe API call optimizations, leaderboard generation optimizations
+- TuxTheXplorer
+  - Cooctus
 
 
 ***Commands:***
@@ -87,6 +89,7 @@ noot | NOOT NOOT!
 shibe | Sends a shibe picture.
 spaniel | Sends a spaniel picture.
 xkcd | Send a random XKCD comic.
+cooctus | Sends a cooctus clan member.
 
 > Help
 staff | Displays all staff commands.
