@@ -77,6 +77,18 @@ class Fun(commands.Cog, name="Fun Commands"):
 
         await ctx.send(embed=response)
 
+    ###############
+    ### COOCTUS ###
+    ###############
+
+    @commands.command(description="COOCTUS!")
+    async def cooctus(self,ctx):
+        response = officialEmbed("It's cooctus time!", color=0xffffff)
+        response.set_image(
+            url="https://cdn.discordapp.com/avatars/163657657935200256/8fd1daae6d245cb9f57b03893815c941.webp")
+
+        await ctx.send(embed=response)
+
     ########################
     ### Shiba And Spaniel###
     ########################
