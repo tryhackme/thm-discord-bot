@@ -1,3 +1,15 @@
+"""Leaderboard Cog
+Allows users to view the top and monthly leaderboards on the discord.
+
+User Usage:
+leaderboard [page]
+monthly [page]
+
+Other Functionality:
+- retrieves leaderboard data from THM and outputs into 
+  the announcements every month (disabled)
+"""
+
 import asyncio
 import datetime
 import io
@@ -52,7 +64,7 @@ white = (255, 255, 255)
 # COG Body #
 ############
 
-class Rank(commands.Cog, name="Leaderboard Commands"):
+class Leaderboard(commands.Cog, name="Leaderboard Commands"):
     def __init__(self, bot):
         self.bot = bot
 
@@ -185,4 +197,4 @@ class Rank(commands.Cog, name="Leaderboard Commands"):
 
 
 def setup(bot):
-    bot.add_cog(Rank(bot))
+    bot.add_cog(Leaderboard(bot))
