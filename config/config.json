@@ -18,7 +18,6 @@
     "cogs.faq",
     "cogs.rules",
     "cogs.jira",
-    "cogs.gtfobins",
     "cogs.social",
     "cogs.devrole",
     "cogs.staff_vote",
