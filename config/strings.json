@@ -131,7 +131,7 @@
 		"No personal drama or drama from any other discord community is allowed to be brought into this discord. This is a space for infosec discussions and learning, keep it that way.",
 		"No excessive self promotion. Linking to another discord server is strictly prohibited, just don't turn it into advertising.",
 		"Keep it civil. If action is necessary in a dispute or any other sort of disruption on this discord punishment will be doled out evenly both to the individual(s) who started the issue and to those who reacted inappropriately in their response.",
-		"No cheating is allowed whatsoever within this discord. Any cheating (other than specifically within a developmental environment where it has been preapproved by staff) will result in an immediate and permanent ban.",
+		"No cheating is allowed whatsoever within this discord. Any cheating (other than specifically within a developmental environment where it has been preapproved by staff) will result in an immediate and permanent ban. Point duplication or point cheating of any kind on TryHackMe.com will result in a permanent ban from the site and discord.",
 		"Discrimination of any kind is not tolerated and will be met with punishment accordingly. Racism will result in a permanent ban without question.",
 		"Administrators reserve the right to modify the rules at any time and extend them accordingly to cover infractions which may not be currently included in these rules.",
 		"Keep conversations SFW (Safe for work). This is an educational and professional environment, be sure that your words do not offend or make other members uncomfortable.",
@@ -143,7 +143,7 @@
         "You're welcome to post livestreams, writeups, and videos of THM content, just please post them in <#644263827742916628>.",
         "Please leave any disciplinary measures to the discord staff (Trial Mods, Mods, and Admins). This is also known as no 'mini-modding'. If something is happening, please just let the staff know and we can take care of it <3",
         "No spamming, please. This includes excess repeating of the same messages (typically from five upwards, however, staff reserve the right to further judgement in these cases).",
-        " Do not intentionally mislead others with malicious intent, especially should this misleading end up in destruction of property or otherwise damaging. Things like rickrolling are still allowed, just don't lead someone to damaging their computer/system."
+        "Do not intentionally mislead others with malicious intent, especially should this misleading end up in destruction of property or otherwise damaging. Things like rickrolling are still allowed, just don't lead someone to damaging their computer/system."
     ],
     "docs":{
         "help_desc":"List our documented topics.",
