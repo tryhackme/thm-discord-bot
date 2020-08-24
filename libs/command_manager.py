@@ -60,13 +60,7 @@ def check(roles="",
         CommandInvokeError: Command is not invoked in the whitelist of arg channels.
         MissingAnyRole: Context.author does not have a role in the whitelist of arg roles.
     """
-
-    # Turn a single string arg into a string array.
-    if roles and type(roles) is str:
-        roles = [roles]
-    if channels and type(channels) is str:
-        channels = [channels]
-
+    
     def perm_check(cmd):
         """Wrapper method to allow our own method to be executed before the original method"""
         @functools.wraps(cmd)
@@ -96,7 +90,10 @@ def check(roles="",
 
             # 2. Checking for if the message is in the list of channels provided. dm_flag = False for no DM
             if channels:
-                print(channels)
+                # Converts channels to a string list if not already a list.
+                if type(channels) is str:
+                    channels = [channels]
+                    
                 try:
                     dm_allowed = dm_flag is not False
                     check_channel(ctx, channels, dm_allowed)
@@ -108,6 +105,9 @@ def check(roles="",
 
             # 3. Checking if the message author has a role in the list of whitelisted roles.
             if roles:
+                # Converts roles to a string list if not already a list.
+                if type(roles) is str:
+                    roles = [roles]
                 try:
                     check_roles(ctx, roles)
                 # Error out if the user does not have any role in the whitelisted roles.
