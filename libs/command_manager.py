@@ -90,12 +90,8 @@ def check(roles="",
 
             # 2. Checking for if the message is in the list of channels provided. dm_flag = False for no DM
             if channels:
-                # Converts channels to a string list if not already a list.
-                if type(channels) is str:
-                    channels = [channels]
-                    
+                dm_allowed = dm_flag is not False
                 try:
-                    dm_allowed = dm_flag is not False
                     check_channel(ctx, channels, dm_allowed)
                 # Errors out if channel is not in the channels whitelist
                 except commands.CommandInvokeError as e:
@@ -105,9 +101,6 @@ def check(roles="",
 
             # 3. Checking if the message author has a role in the list of whitelisted roles.
             if roles:
-                # Converts roles to a string list if not already a list.
-                if type(roles) is str:
-                    roles = [roles]
                 try:
                     check_roles(ctx, roles)
                 # Error out if the user does not have any role in the whitelisted roles.
@@ -211,6 +204,8 @@ def check_context(ctx, dm_flag):
 
 def check_channel(ctx, channels, dm_allowed):
     """Checks the current channel is valid for the command with arg channels"""
+    if type(channels) is str:
+        channels = [channels]
     # Converts arg channels into corresponding channel IDs, and check if DM is ok
     valid_channels = [CHANNEL_IDS[channel] for channel in channels]
     dm_appropriate = type(ctx.channel) is DMChannel and dm_allowed
@@ -224,6 +219,8 @@ def check_channel(ctx, channels, dm_allowed):
 
 def check_roles(ctx, roles):
     """Checks that the user has all the required roles."""
+    if type(roles) is str:
+        roles = [roles]
     user = ctx.author
     # Get the list of IDs from user.roles, and list of IDs from arg roles
     user_roles = [role.id for role in user.roles]
