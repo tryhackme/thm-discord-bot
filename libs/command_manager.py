@@ -1,21 +1,26 @@
-"""Command Manager
-Manages checking conditions for commands that need certain roles to be executed.
+"""Command Manager module to handle permissions checking and other utilities.
 
-Use decorator function @check() to do proper permissions and input sanitation for your command.
+This module manages the permissions checking system in a standardized and consistent method.
+Main usage is a decorator method that is called after the bot listener's method, but before the
+command itself to properly perform permission checks prior to command execution.
+Module also includes a bot error message method and input sanitation check.
 i.e.
 
-@command_manager.check(roles=["admin",
-                              "mod",]
-                       channels=["staff_channel"])
-async fun_command(self, ctx):
-    ...
+Typical usage example:
+    import libs.command_manager as command_manager
+    from discord.ext import commands
 
-There is also .sanitize_check(ctx, msg) for input sanitation. Will return false if msg contains
-a forbidden character.
-
-Names of roles and channels are derived from libs.config.get_config() (which comes from config/config.json)
+    @commands.command(...)        # Required bot listener method
+    @command_manager.check(roles=["admin",
+                                  "mod",  ],
+                           channels=["staff_channel",],)
+    async fun_command(self, ctx, user_input=""): # Your command to be executed after the check
+        if command_manager.is_sanitized(user_input):
+            do_thing()
+        else:
+            command_manager.error_response(ctx, "not_sanitized")
+        ...
 """
-
 import libs.config as config
 from discord.channel import DMChannel
 from discord.ext import commands as error
@@ -30,41 +35,52 @@ CHANNEL_IDS = config.get_config("channels")
 DEFAULT_BANNED = ["/", ";", "-", ">", "<", ":", "`", "\"", "|"]
 
 
-def check(roles=None,
-          channels=None,
+def check(roles="",
+          channels="",
           dm_flag=None):
-    """Decorator for sanitizing arguments and checking permissions."""
-    # Call this decorator function before a command in order to check the specific perms passed into it.
-    # 'msg' is an array (of string, or nestable string array/tuples) of the arguments of the command.
-    # 'roles' is an array (of str) of required role names user must have to execute the command.
-    # 'channels' is an array (of str) of valid channel names that command can be executed in
-    # 'dm_flag' is a bool for three allowed context types
-    #   1.dm_flag is None  - Command can be executed in DMs and any channel
-    #   2.dm_flag is True  - Command can only be executed in DMs
-    #   3.dm_flag is False - Command can only be executed in a discord channel (no DM)
+    """Decorator to check role permissions and context for the user invoking a bot command.
 
-    # Turn arg roles into a list if it is a string for one-role commands.
+    Wrap around a bot command to check appropriate permission and channel context of the executed command from
+    the Context object provided by the bot's event listener method, and errors out if checks do not pass.
+    String names of roles and channels are derived from config/config.json keys.
+    All exceptions raised are inherited from Discord.ext.commands
+
+    Args:
+        roles: String array of whitelisted roles from config.json that the user must have .
+        channels: String array of whitelisted channels from config.json that the command can be executed in.
+        dm_flag: Boolean flag to set a DM-Only command if True, or public channels only command if False.
+
+    Returns:
+        Original method call that the method wraps around, and continues executing the command/method.
+        If any checks fail, then will stop execution of the method and returns False after raising an exception.
+
+    Raises:
+        PrivateMessageOnly: Command is invoked in a public channel while arg dm_flag is True.
+        NoPrivateMessage: Command is invoked in a DM while arg dm_flag is False.
+        CommandInvokeError: Command is not invoked in the whitelist of arg channels.
+        MissingAnyRole: Context.author does not have a role in the whitelist of arg roles.
+    """
+
+    # Turn a single string arg into a string array.
     if type(roles) is str:
         roles = [roles]
-    # Same as above but for channels.
     if type(channels) is str:
         channels = [channels]
 
-    # Decorator magic. wrapper() is where the perm checking happens
     def perm_check(cmd):
-        # Checking for the context.
+        """Wrapper method to allow our own method to be executed before the original method"""
         @functools.wraps(cmd)
         async def wrapper(*args, **kwargs):
             """Checks permissions of the message before executing command"""
-            # wrapper args is the original args passed to the command being checked
-            # second element of args will always be the discord message (Context object)
+            # wrapper() args is the original args passed to the command being checked
+            # Second element of args will always be the discord message (Context object)
             ctx = args[1]
 
             # 1. Checking if dm_flag is set and if message is in DMs
             if dm_flag is not None:
                 try:
                     check_context(ctx, dm_flag)
-                # Error if message does not fit in DM or public channels.
+                # Errors out if the message is not in the appropriate context
                 # TODO: log exceptions to debug
                 except error.PrivateMessageOnly as e:
                     await error_response(ctx, "context_dm_only",
@@ -75,28 +91,28 @@ def check(roles=None,
                                          delete_msg=False)
                     return False
 
-            # 2. Checking for if message is in the list of channels provided. dm_flag = False for no DM
+            # 2. Checking for if the message is in the list of channels provided. dm_flag = False for no DM
             if channels:
                 try:
                     dm_allowed = dm_flag is not False
                     check_channel(ctx, channels, dm_allowed)
-                # Error if channel is not in the listed channels
+                # Errors out if channel is not in the channels whitelist
                 except error.CommandInvokeError as e:
                     # TODO: log exception to debug
                     await error_response(ctx, "channel_not_allowed")
                     return False
 
-            # 3. Checking if the user has permission.
+            # 3. Checking if the message author has a role in the list of whitelisted roles.
             if roles:
                 try:
                     check_roles(ctx, roles)
-                # Error if user does not have any role in list of roles
+                # Error out if the user does not have any role in the whitelisted roles.
                 except error.MissingAnyRole as e:
                     # TODO: log exception to debug
                     await error_response(ctx, "no_perm")
                     return False
 
-            # 4. If all checks succeeded, then execute original command.
+            # 4. If all checks succeeded, then executes the original command.
             return await cmd(*args, **kwargs)
 
         return wrapper
@@ -104,14 +120,28 @@ def check(roles=None,
     return perm_check
 
 
-async def is_sanitized(ctx, msg, err_msg="not_sanitized", banned_chars=None):
-    """Checks user input for any forbidden characters.
-    Returns True if sanitary, otherwise throws the discord.ext.commands.BadArgument exception.
-    """
-    # Default banned characters are "/", ";", "-", ">", "<", ":", "`", "\"", "|"
-    # err_msg flag will cause bot to respond with generic error message to ctx.channel if True
+async def is_sanitized(msg,
+                       ctx=None,
+                       err_msg="not_sanitized",
+                       banned_chars=None):
+    """Recursively checks user input for any forbidden characters.
 
-    # Use banned_chars if assigned, otherwise just use the default ban list. (RECOMMENDED)
+    Checks if any character from a list of banned chars (None for default list) is present
+    in any of string text in arg msg.
+    Default banned characters are "/", ";", "-", ">", "<", ":", "`", "\"", "|"
+
+    Args:
+        msg: String or list of strings to be checked for sanitation.
+        ctx: Original Discord Context object to allow response from the bot for error messages.
+        err_msg: String of the key name in config.json["commands"], or error message string for bot to echo.
+        banned_chars: List of chars that the msg will be checked against.
+
+    Returns:
+        Returns True if all text does not contain any banned chars, otherwise will throw an exception.
+
+    Raises:
+        BadArgument: Text contains a forbidden character.
+    """
     if banned_chars:
         banned = banned_chars
     else:
@@ -127,7 +157,7 @@ async def is_sanitized(ctx, msg, err_msg="not_sanitized", banned_chars=None):
             has_banned_chars = [char for char in text if char in banned]
 
             if has_banned_chars:
-                if err_msg:
+                if ctx and err_msg:
                     await error_response(ctx, err_msg)
                 # TODO: log exception to debug/tracking channel
                 raise error.BadArgument(message=msg)
@@ -138,8 +168,15 @@ async def is_sanitized(ctx, msg, err_msg="not_sanitized", banned_chars=None):
 async def error_response(ctx, err_msg,
                          delete_msg=True,
                          delete_ctx=False):
-    """Sends a bot err_msg to the channel in context, then deletes the error message after 5 seconds.
-    delete flags will determine what gets deleted after 5 seconds.
+    """Makes the bot send a response back to the ctx.channel as err_msg, and deletes the message automatically
+
+    Args:
+        ctx: Original Discord Context object to allow response from the bot for error messages.
+        err_msg:
+            Desired response message from the box, is derived from config.json["commands"], otherwise will
+            use the err_msg string itself as the bot's error message.
+        delete_msg: Deletes the bot's error message after 5 seconds if True
+        delete_ctx: Deletes the ctx message (user's message) after 5 seconds if True
     """
     # Tries to retrieve ERROR_STRING[err_msg], but if not found, then defaults to err_msg
     error_output = ERROR_STRING.get(err_msg, err_msg)
@@ -170,13 +207,11 @@ def check_context(ctx, dm_flag):
 
 def check_channel(ctx, channels, dm_allowed):
     """Checks the current channel is valid for the command with arg channels"""
-
-    # Converts arg channels into corresponding channel IDs
+    # Converts arg channels into corresponding channel IDs, and check if DM is ok
     valid_channels = [CHANNEL_IDS[channel] for channel in channels]
-
     dm_appropriate = type(ctx.channel) is DMChannel and dm_allowed
 
-    # Check if channel is in the list of channels
+    # Check if channel is in the list of channels and/or if DM is ok
     if ctx.channel.id not in valid_channels and not dm_appropriate:
         raise error.CommandInvokeError(ctx)
 
@@ -186,14 +221,11 @@ def check_channel(ctx, channels, dm_allowed):
 def check_roles(ctx, roles):
     """Checks that the user has all the required roles."""
     user = ctx.author
-    # Get the list of IDs from user.roles
+    # Get the list of IDs from user.roles, and list of IDs from arg roles
     user_roles = [role.id for role in user.roles]
-
-    # Get the list of required role IDs from roles arg
     req_roles = [ROLE_IDS[req_role] for req_role in roles]
 
-    # Magic python sentence that checks if there's any roles in user_roles that
-    # is also in the list of req_roles.
+    # Check intersection of roles in user_roles and req_roles.
     if not [role for role in user_roles if role in req_roles]:
         raise error.MissingAnyRole(roles)
 
