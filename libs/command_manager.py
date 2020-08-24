@@ -23,7 +23,7 @@ Typical usage example:
 """
 import libs.config as config
 from discord.channel import DMChannel
-from discord.ext import commands as error
+from discord.ext import commands
 import functools
 import asyncio
 
@@ -62,9 +62,9 @@ def check(roles="",
     """
 
     # Turn a single string arg into a string array.
-    if type(roles) is str:
+    if roles and type(roles) is str:
         roles = [roles]
-    if type(channels) is str:
+    if channels and type(channels) is str:
         channels = [channels]
 
     def perm_check(cmd):
@@ -75,6 +75,9 @@ def check(roles="",
             # wrapper() args is the original args passed to the command being checked
             # Second element of args will always be the discord message (Context object)
             ctx = args[1]
+            if type(ctx) is not commands.Context:
+                print("ERROR: Missing ctx variable in @check() call in", cmd.__name__, " command!")
+                raise commands.MissingRequiredArgument(ctx)
 
             # 1. Checking if dm_flag is set and if message is in DMs
             if dm_flag is not None:
@@ -82,22 +85,23 @@ def check(roles="",
                     check_context(ctx, dm_flag)
                 # Errors out if the message is not in the appropriate context
                 # TODO: log exceptions to debug
-                except error.PrivateMessageOnly as e:
+                except commands.PrivateMessageOnly as e:
                     await error_response(ctx, "context_dm_only",
                                          delete_ctx=True)
                     return False
-                except error.NoPrivateMessage as e:
+                except commands.NoPrivateMessage as e:
                     await error_response(ctx, "context_public_only",
                                          delete_msg=False)
                     return False
 
             # 2. Checking for if the message is in the list of channels provided. dm_flag = False for no DM
             if channels:
+                print(channels)
                 try:
                     dm_allowed = dm_flag is not False
                     check_channel(ctx, channels, dm_allowed)
                 # Errors out if channel is not in the channels whitelist
-                except error.CommandInvokeError as e:
+                except commands.CommandInvokeError as e:
                     # TODO: log exception to debug
                     await error_response(ctx, "channel_not_allowed")
                     return False
@@ -107,7 +111,7 @@ def check(roles="",
                 try:
                     check_roles(ctx, roles)
                 # Error out if the user does not have any role in the whitelisted roles.
-                except error.MissingAnyRole as e:
+                except commands.MissingAnyRole as e:
                     # TODO: log exception to debug
                     await error_response(ctx, "no_perm")
                     return False
@@ -160,7 +164,7 @@ async def is_sanitized(msg,
                 if ctx and err_msg:
                     await error_response(ctx, err_msg)
                 # TODO: log exception to debug/tracking channel
-                raise error.BadArgument(message=msg)
+                raise commands.BadArgument(message=msg)
     # If all text is sanitary, then return bool True
     return True
 
@@ -197,10 +201,10 @@ def check_context(ctx, dm_flag):
 
     # If message is not a DM and the command is DM only (dm_flag True)
     if not dm_message and dm_flag:
-        raise error.PrivateMessageOnly
+        raise commands.PrivateMessageOnly
     # If message is a DM but the command is not allowed in DMs (dm_flag False)
     elif dm_message and not dm_flag:
-        raise error.NoPrivateMessage
+        raise commands.NoPrivateMessage
 
     return dm_message
 
@@ -213,7 +217,7 @@ def check_channel(ctx, channels, dm_allowed):
 
     # Check if channel is in the list of channels and/or if DM is ok
     if ctx.channel.id not in valid_channels and not dm_appropriate:
-        raise error.CommandInvokeError(ctx)
+        raise commands.CommandInvokeError(ctx)
 
     return True
 
@@ -227,6 +231,6 @@ def check_roles(ctx, roles):
 
     # Check intersection of roles in user_roles and req_roles.
     if not [role for role in user_roles if role in req_roles]:
-        raise error.MissingAnyRole(roles)
+        raise commands.MissingAnyRole(roles)
 
     return True
