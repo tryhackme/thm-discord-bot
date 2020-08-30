@@ -255,6 +255,11 @@
         "title":"New Milestone reached!",
         "desc":"Wow! We have reached {} users, welcome everyone :)"
     },
+    "ping_mods":{
+        "help_desc": "Alert the moderators",
+        "success": "Moderators alerted",
+        "moderators": "@724691979216224346"
+    },
     "quotes":{
         "dark":[
             "*ahem* Can help you?",

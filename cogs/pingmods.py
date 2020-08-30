@@ -1,4 +1,6 @@
 import discord
+from discord import guild
+
 from datetime import datetime
 
 import libs.command_manager as command_manager
@@ -21,21 +23,21 @@ class PingMods(commands.Cog, name="Ping Mods"):
     def __init__(self, bot):
         self.bot = bot
     
-    @commands.command(name="pingmods", description=s_pingmods["help_desc"], usage="!pingmods <reason>", hidden=True)
+    @commands.command(name="pingmods", description=s_pingmods["help_desc"], usage="!pingmods 'reason', hidden=True)
     @check(roles="mentor",
         channels="staff_lounge",
         dm_flag=False)
     
 
     async def ping_mods(self, ctx, reason=""):
-        if command_manager.is_sanitized(ctx):
+        if command_manager.is_sanitized(reason):
 
             modRole = ctx.guild.get_role(id_mods)
 
             embed = officialEmbed("Pinging Mods")
 
             if reason == "":
-                await ctx.send("Please provide a reason as to why you are pinging the Moderator team.")
+                await ctx.send(s_pingmods["no_reason"]
 
             else:
                 timestamp = datetime.now()
