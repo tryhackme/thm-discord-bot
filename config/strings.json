@@ -316,7 +316,9 @@
         "level_updated":"Your level has been updated!",
         "sub_remove":"You are no longer a subscriber!",
         "sub_added":"You are now a subscriber, thanks!",
-        "verified_added":"You are now verified, you cannot unlink or relink any of your accounts for security reasons. Please contact the TryHackMe Admins or Mods if you need to change one of your accounts."
+        "verified_added":"You are now verified, you cannot unlink or relink any of your accounts for security reasons. Please contact the TryHackMe Admins or Mods if you need to change one of your accounts.",
+        "bughunter_add":"You are now a bug hunter, thanks!",
+        "bughunter_remove":"You are no longer a bug hunter!"
     },
     "verify_delete":{
         "help_desc":"Delete a user's token by mentioning them.",

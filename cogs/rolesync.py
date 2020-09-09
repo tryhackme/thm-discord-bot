@@ -54,6 +54,7 @@ id_ranks = roles["ranks"]
 id_sub = roles["sub"]
 id_contrib = roles["contrib"]
 id_verified = roles["verified"]
+id_bughunter = roles["bughunter"]
 
 # DB
 db = database.connect_to_db()
@@ -81,11 +82,16 @@ async def remove_contrib_role(member):
 
     await member.remove_roles(get(member.guild.roles, id=id_contrib))
 
+async def remove_bughunter_role(member):
+    """Remove the user's bughunter role."""
+
+    await member.remove_roles(get(member.guild.roles, id=id_bughunter))
+
+
 async def remove_verified_role(member):
     """Remove the user's verified role."""
 
     await member.remove_roles(get(member.guild.roles, id=id_verified))
-
 
 # Update a member's roles.
 async def update(member, dm, data, skipUpdatedMessage = False):
@@ -106,6 +112,17 @@ async def update(member, dm, data, skipUpdatedMessage = False):
     if level != 997 and has_role(member, id_contrib):
         await remove_contrib_role(member)
         cmdResult += s_verify["contrib_remove"] + "\n"
+
+    # Special case: Bug Hunter
+    if level == 999:
+        if not has_role(member, id_bughunter):
+            await remove_rank_roles(member)
+            await add_role(member, id_bughunter)
+            cmdResult += s_verify["bughunter_add"] + "\n"
+
+    if level != 999 and has_role(member, id_bughunter):
+        await remove_contrib_role(member)
+        cmdResult += s_verify["bughunter_remove"] + "\n"
 
     # Normal ranks.
     if level < len(id_ranks):
