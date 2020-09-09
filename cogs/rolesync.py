@@ -121,7 +121,7 @@ async def update(member, dm, data, skipUpdatedMessage = False):
             cmdResult += s_verify["bughunter_add"] + "\n"
 
     if level != 999 and has_role(member, id_bughunter):
-        await remove_contrib_role(member)
+        await remove_bughunter_role(member)
         cmdResult += s_verify["bughunter_remove"] + "\n"
 
     # Normal ranks.
