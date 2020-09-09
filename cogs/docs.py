@@ -127,11 +127,11 @@ class Docs(commands.Cog):
             await ctx.send(embed=response)
 
         elif topic == "room-notes":
-            response = getEmbedDocs(s_room_notes_title, s_levels_url, c_docs_picture, c_docs_color)
+            response = getEmbedDocs(s_room_notes_title, s_room_notes_url, c_docs_picture, c_docs_color)
             await ctx.send(embed=response)
 
         elif topic == "room-review":
-            response = getEmbedDocs(s_room_review_title, s_levels_url, c_docs_picture, c_docs_color)
+            response = getEmbedDocs(s_room_review_title, s_room_review_url, c_docs_picture, c_docs_color)
             await ctx.send(embed=response)
 
         elif topic == "api":
