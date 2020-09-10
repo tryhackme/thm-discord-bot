@@ -60,8 +60,8 @@ class PingMods(commands.Cog, name="Ping Mods"):
             # Send embed
             await ctx.send(embed=embed)
 
-            # Create essentially a ghost ping to Mod role and delete almost instantly.
-            await ctx.send(modRole.mention, delete_after=0.1)
+            # Ping Moderators
+            await ctx.send(modRole.mention)
 
 
 def setup(bot):
