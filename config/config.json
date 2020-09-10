@@ -25,7 +25,8 @@
     "cogs.help",
     "cogs.feedback",
     "cogs.exploit-db",
-    "cogs.docs"
+    "cogs.docs",
+    "cogs.pingmods"
   ],
   "disabled_cogs": [],
   "info": {
@@ -62,7 +63,8 @@
     "mod": 612305984752451594,
     "announcementrole": 723526134356115536,
     "devLead": 578349526574694421,
-    "dev": 578056412790390785
+    "dev": 578056412790390785,
+    "mentor": 651561956490346515
   },
   "channels": {
     "welcome": 648878292551598080,
@@ -70,7 +72,8 @@
     "stats_thm_users": 723527533458620507,
     "stats_rooms": 723527788589482094,
     "stats_discord_users": 734487967019565189,
-    "staff_voting_cm": 733142795325538356
+    "staff_voting_cm": 733142795325538356,
+    "staff_lounge": 742894185186590720
   },
   "emotes":{
     "skidygif":733473514149118043,
