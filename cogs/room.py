@@ -1,3 +1,16 @@
+"""Rooms Cog
+Cog to handle room lookup and details related to them.
+Also handles the automatic announcement of a new room from TryHackMe
+
+User Usage:
+writeup [room code]
+randomroom
+
+Admin Only:
+room - manually announce last announced room
+newroom [room code] - manually announce a new room via room code
+"""
+
 import asyncio
 import json
 import time
@@ -207,21 +220,21 @@ class Room(commands.Cog):
             # Getting infos from the API.
             data = await api_fetch(c_api_url["newrooms"])
 
-            # Getting the titles from both JSONs.
+            # Getting the room codes from both JSONs.
             # Try-except to avoid wrongly parsed stuff [...] (making the bot more stable thx to this)
             try:
-                titleJsonData = data[0]["title"]
-                titleStoredData = stored_data["title"]
+                new_room_code = data[0]["code"]
+                last_room_code = stored_data["code"]
             except:
                 copyfile(c_room_default_data, c_room_data)
 
                 roomJson = open(c_room_data, "r").read()
 
-                titleJsonData = data[0]["title"]
-                titleStoredData = stored_data[0]["title"]
+                new_room_code = data[0]["code"]
+                last_room_code = stored_data[0]["code"]
 
             # Check for new data.
-            if titleJsonData != titleStoredData:
+            if new_room_code != last_room_code:
                 await announce_room(channel, data[0])
 
             await asyncio.sleep(c_sleep_time)
@@ -234,3 +247,4 @@ class Room(commands.Cog):
 
 def setup(bot):
     bot.add_cog(Room(bot))
+	
