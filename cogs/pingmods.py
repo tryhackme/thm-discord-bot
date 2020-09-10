@@ -31,7 +31,7 @@ class PingMods(commands.Cog, name="Ping Mods"):
     # I.e. All conditions in the check must be true for command to work, however any command that is wrong the check will just return false
     # This means that the Command Manager will return the error_response it's been coded to return, where you cannot modify the behaviour of it outside of the CM
     # In this case I wanted the error messages given by the bot to persist in chat.
-    @commands.command(name="pingmods", description=s_pingmods["help_desc"], usage="!pingmods {reason}", hidden=True)
+    @commands.command(name="pingmods", description=s_pingmods["help_desc"], usage="{reason}", hidden=True)
     @check(roles="mentor",
         channels="staff_lounge",
         dm_flag=False)
