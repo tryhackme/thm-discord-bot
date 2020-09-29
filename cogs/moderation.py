@@ -35,11 +35,13 @@ class Moderation(commands.Cog, name="Moderation commands"):
     async def lookup(self, ctx, *arg):
         arg = ' '.join(arg)
 
+        # Token-based search check
         if token_regex.match(arg):
             match_type = 'token'
 
             db_result = database.get_user_by_thm_token(self.conn, arg)
         else:
+            # ID-based search checks
             if mention_regex.match(arg):
                 match_type = 'mention'
                 user_id = mention_regex.search(arg).group(1)
@@ -60,11 +62,9 @@ class Moderation(commands.Cog, name="Moderation commands"):
             except:
                 return await ctx.send(s_lookup["db_fetch_failed"])
 
+        # Loops over the results (also handles multiple-row results if they occur)
         for row in db_result:
             u_id, u_token = row
-
-            print(row)
-            print(u_token)
 
             try:
                 thm_user = get_user_by_token(u_token)
