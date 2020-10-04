@@ -1,5 +1,5 @@
-# DarkSec-Discord-Bot
-DarkSec Community Python Discord Bot
+# THM-Discord-Bot
+TryHackMe Python Discord Bot
 
 ![alt text](/images/computer.png?raw=true "Box Bot Logo")
 
@@ -8,20 +8,37 @@ DarkSec Community Python Discord Bot
 
 ***Description:***
 
-​A bot created for usage on the DarkSec discord chat server.
+​A bot created for usage on the TryHackMe discord chat server.
 
 
 ***Related Hosting Links***
 
-- DarkSec YouTube: https://youtube.com/c/DarkSec
-- DarkSec Site: https://www.darkstar7471.com
+- TryHackMe Site: https://tryhackme.com
 
 
 
 ***Contributors***
 
 - DarkStar7471
-  - Initial commit and creation
+  - Initial commit and creation, initial cogs and base features
+- Robin
+  - Early dev, room cog, social, gtfobins
+- Paradox
+  - Shibe, spaniel
+- Yume
+  - Boop and honk
+- Dan @SherlockSec
+  - Leaderboard generation, tweet command
+- Horshark
+  - Room cog, role sync, stats, rank, rules, help/staff, vote, giveaway, faq, jira, overall rewrite and improvement, database; utils; commands libs, minor features and fixes
+- CMNatic
+  - Housekeeping / general maintenance, integrating thm help site, feedback, vpnscript
+- 5nake.exe
+  - Exploitdb search
+- szymex73
+  - TryHackMe API call optimizations, leaderboard generation optimizations
+- TuxTheXplorer
+  - Cooctus
 
 
 ***Commands:***
