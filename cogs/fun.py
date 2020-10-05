@@ -1,4 +1,5 @@
 import json
+import requests
 import random
 
 import aiohttp
@@ -94,17 +95,21 @@ class Fun(commands.Cog, name="Fun Commands"):
     ########################
     @commands.command(description="Sends a shibe picture.")
     async def shibe(self, ctx):
-        response = officialEmbed("Shiba Inu", color=0xff4500)
-        response.set_image(
-            url="https://justsomething.co/wp-content/uploads/2017/12/ryujii-handsome-ridiculously-cute-shiba-japan-758x397.jpg")
+        response = officialEmbed("Shiba Inu", color=0xff4500, footer="Images from dog.ceo ❤")
+        response.set_image(url=self._get_dog_image("shiba"))
         await ctx.send(embed=response)
 
     @commands.command(description="Sends a spaniel picture.")
     async def spaniel(self, ctx):
-        response = officialEmbed("Spaniel", color=0xff4500)
-        response.set_image(
-            url="https://www.about-cocker-spaniels.com/images/cute-puppy-names-boys-1.jpg")
+        response = officialEmbed("Spaniel", color=0xff4500, footer="Images from dog.ceo ❤")
+        response.set_image(url=self._get_dog_image("spaniel"))
         await ctx.send(embed=response)
+
+
+    @staticmethod
+    def _get_dog_image(breed):
+        r = requests.get(f"https://dog.ceo/api/breed/{breed}/images/random") # spaniel, shiba
+        return json.loads(r.text)["message"]
 
     ############
     ### XKCD ###
