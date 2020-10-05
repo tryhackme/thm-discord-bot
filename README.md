@@ -3,7 +3,7 @@ TryHackMe Python Discord Bot
 
 ![alt text](/images/computer.png?raw=true "Box Bot Logo")
 
-**Source:** Created by DarkStar7471 aka J0n
+**Source:** Created by DarkStar7471 aka Jon
 
 
 ***Description:***
@@ -16,8 +16,11 @@ TryHackMe Python Discord Bot
 - TryHackMe Site: https://tryhackme.com
 
 
+
 ***Contributors***
 
+- DarkStar7471
+  - Initial commit and creation, initial cogs and base features
 - Robin
   - Early dev, room cog, social, gtfobins
 - Paradox
