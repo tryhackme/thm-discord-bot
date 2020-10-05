@@ -22,6 +22,7 @@ import discord
 from discord.ext import commands
 
 import libs.config as config
+from libs.command_manager import check
 from libs.embedmaker import officialEmbed
 from libs.utils import api_fetch, has_role, bool_to_yesno
 from libs.thm_api import get_public_rooms
@@ -139,17 +140,9 @@ class Room(commands.Cog):
         # Send messages.
         await ctx.send(embed=embed)
 
-    @commands.command(description=s_room["room_help_desc"] + " (Admin)", hidden=True)
+    @commands.command(description=s_room["room_help_desc"] + " (Admin, LeadMod)", hidden=True)
+    @check(roles=["leadmod", "admin"], dm_flag=False)
     async def room(self, ctx):
-        if not has_role(ctx.author, id_admin):
-            botMsg = await ctx.send(s_no_perm)
-
-            await asyncio.sleep(5)
-
-            await botMsg.delete()
-            await ctx.message.delete()
-            return
-
         # Gets channel.
         channel = self.bot.get_channel(id_channel)
 
@@ -158,17 +151,9 @@ class Room(commands.Cog):
 
         await announce_room(channel, data[0])
 
-    @commands.command(name="newroom", description=s_room["newroom_help_desc"] + " (Admin)", usage="{room_code}", hidden=True)
+    @commands.command(name="newroom", description=s_room["newroom_help_desc"] + " (Admin, LeadMod)", usage="{room_code}", hidden=True)
+    @check(roles=["leadmod", "admin"], dm_flag=False)
     async def new_room(self, ctx, room=""):
-        if not has_role(ctx.author, id_admin):
-            botMsg = await ctx.send(s_no_perm)
-
-            await asyncio.sleep(5)
-
-            await botMsg.delete()
-            await ctx.message.delete()
-            return
-        
         if room == "":
             await ctx.send(s_room["no_code"])
         
