@@ -10,6 +10,7 @@ from requests.exceptions import HTTPError
 
 import libs.config as config
 import libs.database as database
+from libs.command_manager import check
 from libs.embedmaker import officialEmbed
 from libs.utils import sanitize_check
 from libs.utils import api_fetch
@@ -107,6 +108,7 @@ class Userrank(commands.Cog, name="Rank Commands"):
             await self.send_rank(ctx, user)
 
     @commands.command(description=s_userrank["help_desc"], usage="[@mention/username]")
+    @check(channels="bot_commands")
     async def rank(self, ctx, user=None):
         is_id = False
 
