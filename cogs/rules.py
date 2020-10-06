@@ -46,12 +46,12 @@ class Rules(commands.Cog, name="Rules Commands"):
         self.bot = bot
 
     @commands.command(description="Sends the rules.")
-    @check(roles=["trialmod", "mod", "leadmod", "admin"], dm_flag=False)
+    @check(roles=["trialmod", "mod", "modlead", "admin"], dm_flag=False)
     async def rules(self, ctx):
         await send_rules(ctx.channel)
 
     @commands.command(description="Sends the requested rule.", usage="{rule}")
-    @check(roles=["trialmod", "mod", "leadmod", "admin"], dm_flag=False)
+    @check(roles=["trialmod", "mod", "modlead", "admin"], dm_flag=False)
     async def rule(self, ctx, ruleNb):
 
         if not sanitize_check(ruleNb):
