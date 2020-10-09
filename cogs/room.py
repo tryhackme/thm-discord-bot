@@ -141,7 +141,7 @@ class Room(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command(description=s_room["room_help_desc"] + " (Admin, LeadMod)", hidden=True)
-    @check(roles=["leadmod", "admin"], dm_flag=False)
+    @check(roles=["modlead", "admin"], dm_flag=False)
     async def room(self, ctx):
         # Gets channel.
         channel = self.bot.get_channel(id_channel)
@@ -152,7 +152,7 @@ class Room(commands.Cog):
         await announce_room(channel, data[0])
 
     @commands.command(name="newroom", description=s_room["newroom_help_desc"] + " (Admin, LeadMod)", usage="{room_code}", hidden=True)
-    @check(roles=["leadmod", "admin"], dm_flag=False)
+    @check(roles=["modlead", "admin"], dm_flag=False)
     async def new_room(self, ctx, room=""):
         if room == "":
             await ctx.send(s_room["no_code"])
