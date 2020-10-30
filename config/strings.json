@@ -215,7 +215,7 @@
         "help_desc":"Get links to all our socials.",
         "github":{
             "help_desc":"Get the bot's Github link.",
-            "url":"https://github.com/DarkStar7471/THM-Bot",
+            "url":"https://github.com/thm-community/THM-Bot",
             "title":"Bot's Github Repository Link",
             "pic":"https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
         },
