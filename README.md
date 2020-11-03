@@ -1,7 +1,6 @@
-# THM-Discord-Bot
+<p align="center"><img src="https://assets.tryhackme.com/img/THMlogo.png" width="350" title="TryHackMe Logo"></p>
+<p align="center">Discord Bot</p>
 TryHackMe Python Discord Bot
-
-![alt text](/images/computer.png?raw=true "Box Bot Logo")
 
 **Source:** Created by DarkStar7471 aka Jon
 
