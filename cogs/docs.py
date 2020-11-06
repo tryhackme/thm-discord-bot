@@ -80,6 +80,11 @@ s_koth_url = s_koth["url"]
 s_koth_title = s_koth["title"]
 s_koth_help_desc = s_koth["help_desc"]
 
+# Free Path blog post
+s_free_path = s_docs["free_path"]
+s_free_path_url = s_free_path["url"]
+s_free_path_title = s_free_path["title"]
+s_free_path_help_desc = s_free_path["help_desc"]
 
 #############
 # Functions #
@@ -140,6 +145,10 @@ class Docs(commands.Cog):
         
         elif topic == "koth":
             response = getEmbedDocs(s_koth_title, s_koth_url, c_docs_picture, c_docs_color)
+            await ctx.send(embed=response)
+
+        elif topic == "free-path":
+            response = getEmbedDocs(s_free_path_title, s_free_path_url, c_docs_picture, c_docs_color)
             await ctx.send(embed=response)
 
         # If anything other then the arguments are provided, say that the topic provided does not exist
