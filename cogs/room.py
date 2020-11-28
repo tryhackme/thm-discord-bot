@@ -111,7 +111,7 @@ class Room(commands.Cog):
         data = await api_fetch(c_api_url["room"].format(room_code))
 
         # If the specified code is wrong.
-        if data["success"] == False:
+        if data[room_code]["success"] == False:
             botMsg = await ctx.send(s_room["code_not_found"].format(room_code))
 
             await asyncio.sleep(5)
@@ -160,7 +160,7 @@ class Room(commands.Cog):
         else:
             data = await api_fetch(c_api_url["room"].format(room))
 
-            if data["success"] == False:
+            if data[room]["success"] == False:
                 await ctx.send(s_room["code_not_found"].format(room))
                 return
 
