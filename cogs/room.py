@@ -121,7 +121,7 @@ class Room(commands.Cog):
             return
 
         # If there is no writeup.
-        if len(data["writeups"]) == 0:
+        if len(data[room_code]["writeups"]) == 0:
             await ctx.send(s_room["writeup_not_found"])
             return
 
