@@ -29,6 +29,7 @@ c_api_token = config.get_config("url")["api"]["token"]
 
 s_userrank = config.get_string("ranks")["userrank"]
 s_quotes = config.get_string("quotes")["regular_quotes"]
+s_not_sanitized = config.get_string("commands")["not_sanitized"]
 
 #############
 # Functions #
@@ -129,7 +130,7 @@ class Userrank(commands.Cog, name="Rank Commands"):
 
         # THM Username.
         if sanitize_check(user) == False:
-            await ctx.send(config.get_string("not_sanitized"))
+            await ctx.send(s_not_sanitized)
             return
         if is_id:
             await self.rank_from_id(ctx, user)
