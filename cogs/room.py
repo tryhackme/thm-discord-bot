@@ -126,14 +126,14 @@ class Room(commands.Cog):
             return
 
         # Set up embed.
-        img = data["image"]
-        title = data["title"]
+        img = data[room_code]["image"]
+        title = data[room_code]["title"]
         link = c_url_room + room_code
 
         embed = officialEmbed(title, link)
         embed.set_image(url=img)
 
-        for item in data["writeups"]:
+        for item in data[room_code]["writeups"]:
             embed.add_field(
                 name="By: "+item["username"], value=item["link"])
 
