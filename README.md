@@ -95,6 +95,7 @@ spaniel | Sends a spaniel picture.
 xkcd | Send a random XKCD comic.
 cooctus | Sends a cooctus clan member.
 ollie | Sends a random Ollie picture.
+reno | Sends a random Mr. Pupperino picture.
 
 > Help
 staff | Displays all staff commands.

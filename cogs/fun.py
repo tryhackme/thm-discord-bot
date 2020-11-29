@@ -111,7 +111,14 @@ class Fun(commands.Cog, name="Fun Commands"):
         r = requests.get(f"https://dog.ceo/api/breed/{breed}/images/random") # spaniel, shiba
         return json.loads(r.text)["message"]
    
-    
+    ##########################
+    ### Muir Hosted Images ###
+    ##########################
+    @staticmethod
+    def _get_hosted_image_for(name):
+        r = requests.get(f"http://{name}.muirlandoracle.co.uk")
+        return json.loads(r.text)["message"]
+
     ########################
     ###     Ollie Bot    ###
     ########################
@@ -119,12 +126,8 @@ class Fun(commands.Cog, name="Fun Commands"):
     @commands.command(description="Sends a Ollie picture.")
     async def ollie(self, ctx):
         response = officialEmbed("Ollie", color=0xff4500, footer="Ollie Unix Montgomery")
-        response.set_image(url=self._get_ollie_image())
+        response.set_image(url=self._get_hosted_image_for('ollie'))
         await ctx.send(embed=response)
-    @staticmethod
-    def _get_ollie_image():
-        r = requests.get(f"http://ollie.muirlandoracle.co.uk") # ollie
-        return json.loads(r.text)["message"]
 
     ##############
     ###  Bash  ###
@@ -133,15 +136,19 @@ class Fun(commands.Cog, name="Fun Commands"):
     @commands.command(description="Sends a Bash pic.")
     async def bash(self, ctx):
         response = officialEmbed("Bash", color=0xff4500)
-        response.set_image(url=self._get_bash_image())
+        response.set_image(url=self._get_hosted_image_for('bash'))
         await ctx.send(embed=response)
 
-    @staticmethod
-    def _get_bash_image():
-        r = requests.get(f"http://bash.muirlandoracle.co.uk")
-        return json.loads(r.text)["message"]
-    
-    
+    ##############
+    ###  Reno  ###
+    ##############
+
+    @commands.command(description="Sends a Mr. Pupperino pic.")
+    async def reno(self, ctx):
+        response = officialEmbed("Reno", color=0xff4500, footer="Blobular Mr. Pupperino")
+        response.set_image(url=self._get_hosted_image_for('reno'))
+        await ctx.send(embed=response)
+
     ############
     ### XKCD ###
     ############
