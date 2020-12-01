@@ -38,6 +38,8 @@ TryHackMe Python Discord Bot
   - TryHackMe API call optimizations, leaderboard generation optimizations
 - TuxTheXplorer
   - Cooctus
+- 0day
+  - Added Ollie bot
 
 
 ***Commands:***
@@ -92,6 +94,7 @@ shibe | Sends a shibe picture.
 spaniel | Sends a spaniel picture.
 xkcd | Send a random XKCD comic.
 cooctus | Sends a cooctus clan member.
+ollie | Sends a random Ollie picture.
 
 > Help
 staff | Displays all staff commands.

@@ -111,7 +111,7 @@ class Room(commands.Cog):
         data = await api_fetch(c_api_url["room"].format(room_code))
 
         # If the specified code is wrong.
-        if data["success"] == False:
+        if data[room_code]["success"] == False:
             botMsg = await ctx.send(s_room["code_not_found"].format(room_code))
 
             await asyncio.sleep(5)
@@ -121,19 +121,19 @@ class Room(commands.Cog):
             return
 
         # If there is no writeup.
-        if len(data["writeups"]) == 0:
+        if len(data[room_code]["writeups"]) == 0:
             await ctx.send(s_room["writeup_not_found"])
             return
 
         # Set up embed.
-        img = data["image"]
-        title = data["title"]
+        img = data[room_code]["image"]
+        title = data[room_code]["title"]
         link = c_url_room + room_code
 
         embed = officialEmbed(title, link)
         embed.set_image(url=img)
 
-        for item in data["writeups"]:
+        for item in data[room_code]["writeups"]:
             embed.add_field(
                 name="By: "+item["username"], value=item["link"])
 
@@ -160,7 +160,7 @@ class Room(commands.Cog):
         else:
             data = await api_fetch(c_api_url["room"].format(room))
 
-            if data["success"] == False:
+            if data[room]["success"] == False:
                 await ctx.send(s_room["code_not_found"].format(room))
                 return
 

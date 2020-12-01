@@ -112,9 +112,9 @@ class Fun(commands.Cog, name="Fun Commands"):
         return json.loads(r.text)["message"]
    
     
-     ########################
-     ###     Ollie Bot    ###
-     #######################
+    ########################
+    ###     Ollie Bot    ###
+    ########################
     
     @commands.command(description="Sends a Ollie picture.")
     async def ollie(self, ctx):
@@ -124,6 +124,21 @@ class Fun(commands.Cog, name="Fun Commands"):
     @staticmethod
     def _get_ollie_image():
         r = requests.get(f"http://ollie.muirlandoracle.co.uk") # ollie
+        return json.loads(r.text)["message"]
+
+    ##############
+    ###  Bash  ###
+    ##############
+
+    @commands.command(description="Sends a Bash pic.")
+    async def bash(self, ctx):
+        response = officialEmbed("Bash", color=0xff4500)
+        response.set_image(url=self._get_bash_image())
+        await ctx.send(embed=response)
+
+    @staticmethod
+    def _get_bash_image():
+        r = requests.get(f"http://bash.muirlandoracle.co.uk")
         return json.loads(r.text)["message"]
     
     

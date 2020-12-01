@@ -143,7 +143,7 @@ async def update(member, dm, data, skipUpdatedMessage = False):
         if not has_role(member, id_sub):
             await add_role(member, id_sub)
             cmdResult += s_verify["sub_added"] + "\n"
-
+    
     # Checks if the users has the verified role.
     if not has_role(member, id_verified):
         await add_role(member, id_verified)
@@ -226,10 +226,10 @@ class RoleSync(commands.Cog, name="Verifying/Role Assigning Commands"):
                 
                 # If user isn't a member.
                 user = ctx.message.author
-                member = server.get_member(user.id)
+                member = await server.fetch_member(user.id)
 
                 if member == None:
-                    database.remove_user_by_discord_uid(ctx.author.id)
+                    database.remove_user_by_discord_uid(db, ctx.author.id)
                     await ctx.send(s_verify["not_a_member"])
                     return
 
