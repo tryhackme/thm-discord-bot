@@ -38,6 +38,10 @@
         "vpnscript":[
             "Use our VPN troubleshooting script to diagnose common issues!",
             "https://github.com/tryhackme/openvpn-troubleshooting"
+        ],
+        "aocfaq":[
+            "Read the FAQ for AoC 2020",
+            "https://www.reddit.com/r/tryhackme/collection/705c2bce-b424-40e5-8875-ea24539c483f"
         ]
     },
     "feedback":{

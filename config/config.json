@@ -110,7 +110,8 @@
   },
   "images": {
     "openvpn": "https://tryhackme-images.s3.amazonaws.com/room-icons/21367ae689e69d81d71b4591474e62ad.png",
-    "milestone": "https://i.imgur.com/rntbP3y.png"
+    "milestone": "https://i.imgur.com/rntbP3y.png",
+    "aocfaq": "https://styles.redditmedia.com/t5_ygv5g/styles/communityIcon_86434dp6fh061.png"
   },
   "data_files": {
     "gtfobins": "data/gtfobins.json",
