@@ -11,6 +11,7 @@ from libs.utils import sanitize_check
 #####################
 
 rules = config.get_string("rules")
+s_not_sanitized = config.get_string("commands")["not_sanitized"]
 
 
 #############
@@ -55,7 +56,7 @@ class Rules(commands.Cog, name="Rules Commands"):
     async def rule(self, ctx, ruleNb):
 
         if not sanitize_check(ruleNb):
-            await ctx.send(config.get_string("not_sanitized"))
+            await ctx.send(s_not_sanitized)
             return
 
         message = "Rule " + ruleNb + " does not exist."
