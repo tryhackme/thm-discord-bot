@@ -162,7 +162,8 @@
             "Learn about the TryHackMe room review process",
             "Read about the TryHackMe API",
             "How to play TryHackMe's King of the Hill (KoTH)",
-            "What rooms should you do? A free guide for beginners"
+            "What rooms should you do? A free guide for beginners",
+            "Learn about TryHackMe's Bug Bounty Programme!"
         ],
         "commands":[
             "",
@@ -174,7 +175,8 @@
             "!docs room-review",
             "!docs api",
             "!docs koth",
-            "!docs free-path"
+            "!docs free-path",
+            "!docs bug-bounty"
         ],
         "url":{
             "help_desc":"Visit the help site",
@@ -220,6 +222,11 @@
             "help_desc":"Don't know where to start? Read our blog post to learn about the free rooms to get you started!",
             "url":"https://blog.tryhackme.com/free_path",
             "title":"What rooms should you do? A free guide for beginners"
+        },
+        "bug_bounty":{
+            "help_desc":"Learn about TryHackMe's Bug Bounty Programme!",
+            "url":"https://help.tryhackme.com/miscellaneous/the-bug-bounty-programme",
+            "title":"Learn about TryHackMe's Bug Bounty Programme!"
         }
     },
     "socials":{
@@ -261,6 +268,18 @@
             "help_desc":"Get the TryHackMe Blog URL!",
             "url":"https://blog.tryhackme.com",
             "title":"TryHackMe's Official Blog:",
+            "pic":"https://tryhackme.com/img/THMlogo.png"
+        },
+        "shop":{
+            "help_desc":"Get the TryHackMee Store URL!",
+            "url":"https://store.tryhackme.com/",
+            "title":"TryHackMe's Official Store:",
+            "pic":"https://tryhackme.com/img/THMlogo.png"
+        },
+        "email":{
+            "help_desc":"Contact us for support, teaching enquires and more!",
+            "url":"hello@tryhackme.com",
+            "title":"Contact us for support, teaching enquires and more!",
             "pic":"https://tryhackme.com/img/THMlogo.png"
         }
     },
