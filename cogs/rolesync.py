@@ -114,13 +114,13 @@ async def update(member, dm, data, skipUpdatedMessage = False):
         cmdResult += s_verify["contrib_remove"] + "\n"
 
     # Special case: Bug Hunter
-    if level == 999:
+    if level == 998:
         if not has_role(member, id_bughunter):
             await remove_rank_roles(member)
             await add_role(member, id_bughunter)
             cmdResult += s_verify["bughunter_add"] + "\n"
 
-    if level != 999 and has_role(member, id_bughunter):
+    if level != 998 and has_role(member, id_bughunter):
         await remove_bughunter_role(member)
         cmdResult += s_verify["bughunter_remove"] + "\n"
 
