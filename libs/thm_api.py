@@ -74,3 +74,10 @@ def get_public_rooms(filter_type: str = None) -> list:
     response = requests.get(c_url_hacktivities + query)
 
     return json.loads(response.text)
+
+
+def get_user_by_token(token: str) -> dict:
+    """Fetches user by thm tokens"""
+    response = requests.get(c_api_token + token)
+    data = response.text
+    return json.loads(data)

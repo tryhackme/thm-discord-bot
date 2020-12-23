@@ -409,5 +409,14 @@
         "help_flags_author": "Submitter of your exploit",
         "help_flags_tag": "Tag of your exploit, use `-Help Tag` to see allowed values",
         "help_flags_other": "If you use a flag twice the second value is used.\nIf you don't use any flags, -Title will be used."
+    },
+    "moderation": {
+        "lookup": {
+            "help_desc": "Look-up users by discord ids or thm tokens",
+            "match_failed": "Failed to match a type to your input. (Available types: thm token, discord id, discord mention, discord name+discriminator)",
+            "db_fetch_failed": "Failed to fetch data from the database.",
+            "thm_fetch_failed": "Failed to fetch user data from tryhackme.",
+            "usage": "{thm_token/discord_id/discord_mention/discord_username#discriminator}"
+        }
     }
 }
