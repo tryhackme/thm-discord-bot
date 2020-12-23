@@ -31,7 +31,7 @@ class Moderation(commands.Cog, name="Moderation commands"):
         self.conn = database.connect_to_db()
 
     @commands.command(name="lookup", description=s_lookup["help_desc"], usage=s_lookup["usage"], hidden=True)
-    @check(roles=["modlead", "admin"], dm_flag=True)
+    @check(roles=["modlead", "admin"], dm_flag=False)
     async def lookup(self, ctx, *arg):
         arg = ' '.join(arg)
 
