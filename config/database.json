@@ -1,9 +1,9 @@
 {
     "host":"localhost",
-    "db":"DATABSE",
-    "user":"USERNAME",
-    "pass":"PASSWORD",
-    "user_table":"USER_TABLE",
-    "discord_uid":"DISCORD_UID",
-    "thm_discord_token":"THM_DISCORD_TOKEN"
+    "db":"thm_bot",
+    "user":"ubuntu",
+    "pass":"test",
+    "user_table":"account_link",
+    "discord_uid":"discord_uid",
+    "thm_discord_token":"thm_token"
 }

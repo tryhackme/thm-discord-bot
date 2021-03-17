@@ -26,6 +26,7 @@ from libs.command_manager import check
 from libs.embedmaker import officialEmbed
 from libs.utils import api_fetch, has_role, bool_to_yesno
 from libs.thm_api import get_public_rooms
+from libs.utils import sanitize_check
 
 
 ####################
@@ -68,6 +69,9 @@ id_announcerole = config.get_config("roles")["announcementrole"]
 async def announce_room(channel, json_data, code=None):
     """Announces a room using its data."""
 
+    print(json_data)
+    print(json_data['image'])
+
     # Set up embed.
     img = json_data["image"]
     title = json_data["title"]
@@ -107,6 +111,9 @@ class Room(commands.Cog):
 
     @commands.command(description=s_room["writeup_help_desc"], usage="{room_code}")
     async def writeup(self, ctx, room_code):
+        if not sanitize_check(room_code):
+            return
+
         # Request to the API.
         data = await api_fetch(c_api_url["room"].format(room_code))
 
@@ -152,7 +159,7 @@ class Room(commands.Cog):
         await announce_room(channel, data[0])
 
     @commands.command(name="newroom", description=s_room["newroom_help_desc"] + " (Admin, LeadMod)", usage="{room_code}", hidden=True)
-    @check(roles=["modlead", "admin"], dm_flag=False)
+    @check(roles=["modlead", "admin", "thmstaff"], dm_flag=False)
     async def new_room(self, ctx, room=""):
         if room == "":
             await ctx.send(s_room["no_code"])

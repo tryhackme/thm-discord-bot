@@ -131,7 +131,7 @@
         "randomroom_help_desc": "Select a random room."
     },
     "rules":[
-		"No unsolicited direct messages (DMs) to other members of the discord. This includes staff. Verify that the member you are messaging is ok with you sending them DMs. The only exception to this rule is if a situation warrants the involvement of a moderator in order to handle something such as harassment or a situation where another member of the discord has made you feel uncomfortable.",
+		"No unsolicited direct messages (DMs) or friend requests to other members of the discord without explicit permission. You may DM members of the moderation team without asking *if you have an issue with another member in the Discord*. The community manager (Dark) may be DM'd without restriction.",
 		"No personal drama or drama from any other discord community is allowed to be brought into this discord. This is a space for infosec discussions and learning, keep it that way.",
 		"No excessive self promotion. Linking to another discord server is strictly prohibited, unless you have the infosec-developer role and the server is being linked as a resource to provide help with a specific tool (e.g. linking the Ciphey official Discord server for help with Ciphey). Don't turn it into advertising.",
 		"Keep it civil. If action is necessary in a dispute or any other sort of disruption on this discord punishment will be doled out evenly both to the individual(s) who started the issue and to those who reacted inappropriately in their response.",
@@ -278,7 +278,7 @@
         },
         "email":{
             "help_desc":"Contact us for support, teaching enquires and more!",
-            "url":"hello@tryhackme.com",
+            "url":"support@tryhackme.com",
             "title":"Contact us for support, teaching enquires and more!",
             "pic":"https://tryhackme.com/img/THMlogo.png"
         }

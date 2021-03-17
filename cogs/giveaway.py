@@ -16,8 +16,9 @@ from libs.utils import has_role
 ####################
 
 # Channel and role ID.
-id_announcements = config.get_config("channels")["announcements"]
+id_announcements = 773968374870966292 #config.get_config("channels")["announcements"]
 id_admin = config.get_config("roles")["admin"]
+id_leadmod = config.get_config("roles")["modlead"]
 
 # Persistence File.
 file_persistence = config.get_config("persistence")["giveaway"]
@@ -111,7 +112,7 @@ class Giveaway(commands.Cog):
         await ctx.message.delete()
 
         # Check for the user to be admin.
-        if not has_role(ctx.author, id_admin):
+        if not has_role(ctx.author, id_admin) and not has_role(ctx.author, id_leadmod):
             botMsg = await ctx.send(s_no_perm)
             await asyncio.sleep(5)
             await botMsg.delete()
@@ -271,6 +272,26 @@ class Giveaway(commands.Cog):
                 await ctx.send(s_giveaway["canceled"])
             else:
                 await ctx.send(s_giveaway["nothing_to_cancel"])
+
+    @commands.command(description="Temporary fix", hidden=True)
+    async def giveaway_stop(self, ctx, _id, gDesc):
+        if ctx.author.id == 170810389406285824 or ctx.author.id == 174276690699091968 or ctx.author.id == 650476435269484549:
+            chan_announcement = self.bot.get_channel(id_announcements)
+            gResult = (await chan_announcement.fetch_message(_id)).reactions[0]
+
+            embed = officialEmbed("Giveaway results", gDesc)
+
+            # Retrives the winner, excluding the BOT.
+            winner = None
+            users = await gResult.users().flatten()
+
+            while winner == None or winner.id == self.bot.user.id:
+                winner = random.choice(users)
+
+            embed.add_field(name=s_giveaway["announce_field_title"], value=s_giveaway["announce_field_value"].format(winner.mention))
+
+            await chan_announcement.send(embed=embed)
+
 
     # Loads persistence, and checks if a giveaway is ongoing.
     @commands.Cog.listener()

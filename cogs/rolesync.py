@@ -245,18 +245,19 @@ class RoleSync(commands.Cog, name="Verifying/Role Assigning Commands"):
                 await update(member, dm_channel, data)
 
     @commands.command(name="tokenremove", description=s_verify_del["help_desc"] + " (Admin, Mod)", usage="{@user}", hidden=True)
-    async def remove_token(self, ctx, member: discord.Member):
+    async def remove_token(self, ctx, uid):
 
         if has_role(ctx.author, id_admin) or has_role(ctx.author, id_mod):
             # Removes the user from the DB.
-            database.remove_user_by_discord_uid(db, member.id)
-            msg = s_verify_del["done"].format(member.id)
+            database.remove_user_by_discord_uid(db, uid)
+            msg = s_verify_del["done"].format(uid)
             
+            # TODO: Add member fetching, if not null:
             # Removes the user's roles (verified, sub, contrib, rank..)
-            await remove_verified_role(member)
-            await remove_sub_role(member)
-            await remove_rank_roles(member)
-            await remove_contrib_role(member)
+            #await remove_verified_role(member)
+            #await remove_sub_role(member)
+            #await remove_rank_roles(member)
+            #await remove_contrib_role(member)
 
             await ctx.send(msg)
 

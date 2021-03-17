@@ -31,9 +31,10 @@ class Moderation(commands.Cog, name="Moderation commands"):
         self.conn = database.connect_to_db()
 
     @commands.command(name="lookup", description=s_lookup["help_desc"], usage=s_lookup["usage"], hidden=True)
-    @check(roles=["modlead", "admin"], dm_flag=False)
+    @check(channels=["leads_lounge"], dm_flag=False)
     async def lookup(self, ctx, *arg):
         arg = ' '.join(arg)
+        self.conn = database.connect_to_db()
 
         # Token-based search check
         if token_regex.match(arg):
@@ -80,6 +81,11 @@ class Moderation(commands.Cog, name="Moderation commands"):
             response.add_field(name="THM token", value=u_token)
 
             await ctx.send(embed=response)
+        if len(db_result) == 0:
+            if ctx.author.id == 650476435269484549:
+                await ctx.send("No results. Are you happy Muirland? I made another modification in prod.")
+            else:
+                await ctx.send("No results.")
 
 
 def setup(bot):
