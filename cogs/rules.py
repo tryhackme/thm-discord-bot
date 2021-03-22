@@ -31,7 +31,7 @@ async def send_rules(channel):
 
     # Add each rule.
     for rule in rules:
-        response.add_field(name=(str(i+1)+"."), value=rule)
+        response.add_field(name=(str(i+1)+"."), value=rule, inline=False)
         i = i + 1
 
     # Send.
