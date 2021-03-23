@@ -115,7 +115,7 @@ class Docs(commands.Cog):
             response.set_thumbnail(url=(c_docs_picture))
 
             for i in range(1, len(s_commands)):
-                response.add_field(name=s_commands[i], value=s_topics[i])
+                response.add_field(name=s_commands[i], value=s_topics[i], inline=False)
 
             await ctx.send(embed=response)
             return
@@ -163,7 +163,8 @@ class Docs(commands.Cog):
 
         # If anything other then the arguments are provided, say that the topic provided does not exist
         else:
-            response = officialEmbed(title="That topic does not exist!")
+            response = officialEmbed()
+            response.add_field(name="That topic does not exist!", value="Use !docs to list all of the available topics.", inline=False)
             response.set_thumbnail(url=(c_docs_picture))
 
             await ctx.send(embed=response)
