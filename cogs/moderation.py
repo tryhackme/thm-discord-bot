@@ -82,10 +82,7 @@ class Moderation(commands.Cog, name="Moderation commands"):
 
             await ctx.send(embed=response)
         if len(db_result) == 0:
-            if ctx.author.id == 650476435269484549:
-                await ctx.send("No results. Are you happy Muirland? I made another modification in prod.")
-            else:
-                await ctx.send("No results.")
+            await ctx.send("No results.")
 
 
 def setup(bot):
