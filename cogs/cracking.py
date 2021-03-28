@@ -5,12 +5,15 @@ import json
 from search_that_hash import api
 from name_that_hash.runner import api_return_hashes_as_json
 
+
 class Hashes(commands.Cog, name="Hash Cracking"):
     def __init__(self, bot):
         self.bot = bot
-        self.bot.cache = {} # If the bot gets the same hash, it can store the result for faster retrieval 
+        self.bot.cache = (
+            {}
+        )  # If the bot gets the same hash, it can store the result for faster retrieval
 
-    def get_discord_embed(self, color): 
+    def get_discord_embed(self, color):
         embed = discord.Embed(title=self.title, description=self.desc, color=color)
         embed.set_footer(text="Search that hash is licensed under GPLv3")
         return embed
@@ -25,7 +28,7 @@ class Hashes(commands.Cog, name="Hash Cracking"):
             types = json.loads(api_return_hashes_as_json([self.hash]))
             for i in range(len(types[self.hash])):
                 if i > 5:
-                    break # Dont want to flood the channel with the hash types
+                    break  # Dont want to flood the channel with the hash types
                 to_print.append(types[self.hash][i]["name"])
 
             value = "Type(s): " + ", ".join(to_print)
@@ -55,7 +58,7 @@ class Hashes(commands.Cog, name="Hash Cracking"):
         else:
             r = api.return_as_fast_json([self.hash])[0]
             self.bot.cache[self.hash] = r
-            return r # Cacheing the results for later
+            return r  # Cacheing the results for later
 
     def get_results(self):
 
