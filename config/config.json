@@ -27,7 +27,8 @@
     "cogs.exploit-db",
     "cogs.docs",
     "cogs.pingmods",
-    "cogs.moderation"
+    "cogs.moderation",
+    "cogs.cracking"
   ],
   "disabled_cogs": [],
   "info": {
