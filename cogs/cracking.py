@@ -51,7 +51,7 @@ class Hashes(commands.Cog, name="Hash Cracking"):
         return embed
 
     def get_json_result(self):
-        if len(self.bot.cache) > 10:
+        if len(self.bot.cache) > 100:
             self.bot.cache.pop(next(iter(self.bot.cache)))
         if self.hash in self.bot.cache:
             return self.bot.cache[self.hash]
