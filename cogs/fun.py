@@ -19,7 +19,7 @@ class Fun(commands.Cog, name="Fun Commands"):
     ### Skidy, Ashu, Dark's quotes. ###
     ###################################
 
-    @commands.command(description="Sends Skidy's emote.")
+    @commands.command(description="Skidy's emote.")
     async def skidy(self, ctx):
 
         message = ":slight_smile:"
@@ -33,13 +33,13 @@ class Fun(commands.Cog, name="Fun Commands"):
                                  author="Skidy", author_img="https://i.imgur.com/fSMnXPt.png", footer="")
         await ctx.send(embed=response)
 
-    @commands.command(description="Send Ashu's emote.")
+    @commands.command(description="Ashu's emote.")
     async def ashu(self, ctx):
         response = officialEmbed(title=":slight_smile:", color=0x225999,
                                  author="Ashu", author_img="https://i.imgur.com/ojiqdem.png", footer="")
         await ctx.send(embed=response)
 
-    @commands.command(description="Send a random Darkstar quote.")
+    @commands.command(description="Send a random Dark quote.")
     async def dark(self, ctx):
         darkQuotes = config.get_string("quotes")["dark"]
         quote = darkQuotes[random.randint(0, len(darkQuotes)-1)]
@@ -93,13 +93,13 @@ class Fun(commands.Cog, name="Fun Commands"):
     ########################
     ### Shiba And Spaniel###
     ########################
-    @commands.command(description="Sends a shibe picture.")
+    @commands.command(description="Sends a shibe pic.")
     async def shibe(self, ctx):
         response = officialEmbed("Shiba Inu", color=0xff4500, footer="Images from dog.ceo ❤")
         response.set_image(url=self._get_dog_image("shiba"))
         await ctx.send(embed=response)
 
-    @commands.command(description="Sends a spaniel picture.")
+    @commands.command(description="Sends a spaniel pic.")
     async def spaniel(self, ctx):
         response = officialEmbed("Spaniel", color=0xff4500, footer="Images from dog.ceo ❤")
         response.set_image(url=self._get_dog_image("spaniel"))
@@ -123,7 +123,7 @@ class Fun(commands.Cog, name="Fun Commands"):
     ###     Ollie Bot    ###
     ########################
     
-    @commands.command(description="Sends a Ollie picture.")
+    @commands.command(description="Sends a Ollie pic.")
     async def ollie(self, ctx):
         response = officialEmbed("Ollie", color=0xff4500, footer="Ollie Unix Montgomery")
         response.set_image(url=self._get_hosted_image_for('ollie'))
