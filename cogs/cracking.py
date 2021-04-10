@@ -107,7 +107,7 @@ class Hashes(commands.Cog, name="Hash Cracking"):
             )
             return embed
 
-    @commands.command()
+    @commands.command(description="Crack a hash via Search-That-Hash.", usage="{hash}")
     async def crack(self, ctx, hash):
         self.ctx = ctx
         self.hash = hash.lower()
