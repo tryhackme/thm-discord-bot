@@ -42,8 +42,7 @@ class Hashes(commands.Cog, name="Hash Cracking"):
         )
         return embed
 
-    def defult_search(self):
-
+    def default_search(self):
         self.desc = f"Searching {self.hash} :sunglasses:"
         color = 0xFFA500
         self.title = "Cracks hashes via Search-That-Hash API"
@@ -61,7 +60,6 @@ class Hashes(commands.Cog, name="Hash Cracking"):
             return r  # Cacheing the results for later
 
     def get_results(self):
-
         self.result = self.get_json_result()
         desc = self.hash
 
@@ -113,7 +111,7 @@ class Hashes(commands.Cog, name="Hash Cracking"):
     async def crack(self, ctx, hash):
         self.ctx = ctx
         self.hash = hash.lower()
-        message = await ctx.send(embed=self.defult_search())
+        message = await ctx.send(embed=self.default_search())
         await message.edit(embed=self.get_results())
 
 
