@@ -82,7 +82,7 @@ class Hashes(commands.Cog, name="Hash Cracking"):
                 embed.add_field(name="Failed : ", value="Hash type not found")
                 embed.add_field(
                     name="Ciphey : ",
-                    value=f"Maybe this isn't actually a hash and instead, encrypted text. Check out our sister project ciphey for more info - https://github.com/Ciphey/Ciphey \n\n{self.ctx.author.mention}\nhttps://github.com/HashPals/Search-That-Hash",
+                    value=f"Maybe this isn't actually a hash and instead, encrypted text. Check out our sister project ciphey for more info - https://github.com/Ciphey/Ciphey \n\nhttps://github.com/HashPals/Search-That-Hash",
                     inline=False,
                 )
 
@@ -112,7 +112,7 @@ class Hashes(commands.Cog, name="Hash Cracking"):
         self.ctx = ctx
         self.hash = hash.lower()
         message = await ctx.send(embed=self.default_search())
-        await message.edit(embed=self.get_results())
+        await message.edit(ctx.author.mention, embed=self.get_results())
 
 
 def setup(bot):
