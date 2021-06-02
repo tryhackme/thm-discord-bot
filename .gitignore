@@ -1,8 +1,5 @@
 # Data and config
 config/*
-config
-config/config.json
-config/database.json
 data/*
 
 # Generated Images and data
