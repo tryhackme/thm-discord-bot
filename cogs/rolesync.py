@@ -202,17 +202,6 @@ class RoleSync(commands.Cog, name="Verifying/Role Assigning Commands"):
                 if len(user_tokens) > 0 and not user_tokens[0][1] == input_token:
                     cmdResult = s_verify["already_verified"]
 
-                    channel = discord.utils.get(guild.text_channels, name="staff_lounge")
-                    embed = officialEmbed("Alert! Re-verification detected/Token reused!")
-
-                    timestamp = datetime.now()
-                    embed.add_field(name="Username: ", value="{}".format(ctx.author), inline=False)
-                    embed.add_field(name="User ID:", value=' '.join(ctx.author.id), inline=False)
-                    embed.add_field(name="Timestamp:", value=timestamp, inline=False)
-
-                    await channel.send(embed=embed)
-
-
                     await ctx.send(cmdResult)
                     return    
 
