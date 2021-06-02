@@ -1,0 +1,9 @@
+{
+    "host":"localhost",
+    "db":"thm_bot",
+    "user":"ubuntu",
+    "pass":"test",
+    "user_table":"account_link",
+    "discord_uid":"discord_uid",
+    "thm_discord_token":"thm_token"
+}
