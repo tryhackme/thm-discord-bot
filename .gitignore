@@ -1,5 +1,6 @@
 # Data and config
 config/*
+config
 data/*
 
 # Generated Images and data
