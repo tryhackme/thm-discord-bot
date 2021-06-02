@@ -43,9 +43,9 @@
             "Is your room stuck on converting in the upload menu? Here are some small fixes to try.",
             "If these do not work", 
             "Ask for help in <#641405008864083968> or <#626875976508506112>.",
-            "Does your VM OVA name have spaces in it? Try removing them and reuploading.",
+            "Does your VM OVA name have spaces or any special characters in it? Try to remove them (make it camel case?) and reupload.",
             "Check on that the OS you chose for the VM is in one of these on this page, under supported operating systems",
-            "Check the kernel version, did you modify it manually? Check the TryHackMe upload page to see the supported kernel versions per OS.",
+            "Check the kernel version, did you modify it manually? Check the TryHackMe upload page (https://tryhackme.com/upload) to see the supported kernel versions per OS.",
             "https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html"
         ],
         "aocfaq":[
