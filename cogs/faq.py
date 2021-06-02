@@ -67,11 +67,14 @@ class FAQ(commands.Cog):
     @commands.command(name="convertissues", description=s_faq["convertissues"][0])
     async def convertissues(self, ctx):
         response = officialEmbed()
-        response.add_field(name=s_faq["convertissues"][1], value=s_faq["convertissues"][2])
-        for i in range(2, len(s_faq["convertissues"]) - 2):
-            response.add_field(name="• Fix "+str(i - 1), value=s_faq["convertissues"][i + 1])
+        response.add_field(name=s_faq["convertissues"][0], value=s_faq["convertissues"][1])
+        for i in range(2, len(s_faq["convertissues"])):
+            if i == 4:
+                response.add_field(name="• Fix "+str(i - 1), value=s_faq["convertissues"][i], inline=True)
+                continue
+            response.add_field(name="• Fix "+str(i - 1), value=s_faq["convertissues"][i])
         
-        response.add_field(name="Website: ", value=s_faq["convertissues"][6])
+        #response.add_field(name="Website: ", value=s_faq["convertissues"][6])
         
         await ctx.send(embed=response)
 
