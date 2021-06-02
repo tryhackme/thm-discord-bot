@@ -1,9 +1,9 @@
 {
-    "host":"localhost",
-    "db":"thm_bot",
-    "user":"ubuntu",
-    "pass":"test",
+    "host":"dokku-mariadb-code-db",
+    "db":"code_db",
+    "user":"mariadb",
+    "pass":"d95a375e4f14a740",
     "user_table":"account_link",
-    "discord_uid":"discord_uid",
-    "thm_discord_token":"thm_token"
+    "discord_uid":"843877741148766218",
+    "thm_discord_token":"ODQ2ODA5OTkyNjA1NDY2Njg1.YK07Qw.4_Qs1ecic56L4J33XsuU7LcsyCs"
 }

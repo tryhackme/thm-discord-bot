@@ -39,6 +39,16 @@
             "Use our VPN troubleshooting script to diagnose common issues!",
             "https://github.com/tryhackme/openvpn-troubleshooting"
         ],
+        "convertissues":[
+            "Is your room stuck on converting in the upload menu? Here are some small fixes to try.",
+            "If these do not work", 
+            "Ask for help in <#641405008864083968> or <#626875976508506112>.",
+            "Does your VM OVA name have spaces in it? Try removing them and reuploading.",
+            "Check on that the OS you chose for the VM is in one of these on this page, under supported operating systems: ",
+            "https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html",
+            "Check the kernel version, did you modify it manually? Check the tryhackme upload page to see the supported kernel versions per OS.",
+            "Make sure it's not the desktop version, such as Ubuntu Desktop. It has to be the server version."
+        ],
         "aocfaq":[
             "Read the FAQ for AoC 2020",
             "https://www.reddit.com/r/tryhackme/collection/705c2bce-b424-40e5-8875-ea24539c483f"

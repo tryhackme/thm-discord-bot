@@ -8,11 +8,9 @@
     "cogs.core",
     "cogs.vote",
     "cogs.giveaway",
-    "cogs.rolesync",
     "cogs.room",
     "cogs.welcome",
     "cogs.announcementrole",
-    "cogs.stats",
     "cogs.leaderboard",
     "cogs.userrank",
     "cogs.faq",
@@ -40,7 +38,7 @@
   "colors": {
     "site": 0
   },
-  "server": 521382216299839518,
+  "server": 843877741148766218,
   "roles": {
     "ranks": [
       638047504822173726,
