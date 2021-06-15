@@ -39,6 +39,14 @@
             "Use our VPN troubleshooting script to diagnose common issues!",
             "https://github.com/tryhackme/openvpn-troubleshooting"
         ],
+        "convertissues":[
+            "Is your room stuck on converting in the upload menu?",
+            "Here are some small fixes to try.",
+            "Does your VM OVA name have spaces or any special characters in it? Try to remove them (make it camel case?) and reupload.",
+            "Check that the OS you chose for the VM is in one of these on the AWS page, under supported operating systems: https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html",
+            "Make sure that if your Ubuntu version is not 16.04 that you choose the Server image and not the Desktop version. 16.04 Desktop does work, but 18.04 does not.",
+            "Check the kernel version, did you replace it manually from the standard kernel version?"
+        ],
         "aocfaq":[
             "Read the FAQ for AoC 2020",
             "https://www.reddit.com/r/tryhackme/collection/705c2bce-b424-40e5-8875-ea24539c483f"

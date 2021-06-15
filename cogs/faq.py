@@ -18,6 +18,10 @@ s_faq = config.get_string("faq")
 img_openvpn = config.get_config("images")["openvpn"]
 img_aocfaq = config.get_config("images")["aocfaq"]
 
+# Creators-Lounge channel
+c_cl = config.get_config("channels")["creators_lounge"]
+
+
 ############
 # COG Body #
 ############
@@ -63,5 +67,22 @@ class FAQ(commands.Cog):
         response.add_field(name=s_faq["aocfaq"][0], value=s_faq["aocfaq"][1])
 
         await ctx.send(embed=response)       
+
+    @commands.command(name="convertissues", description=s_faq["convertissues"][0])
+    async def convertissues(self, ctx):
+        if ctx.channel.id != c_cl:
+            return
+        response = officialEmbed()
+        response.add_field(name=s_faq["convertissues"][0], value=s_faq["convertissues"][1])
+        for i in range(2, len(s_faq["convertissues"])):
+            if i == 4:
+                response.add_field(name="• Fix "+str(i - 1), value=s_faq["convertissues"][i], inline=True)
+                continue
+            response.add_field(name="• Fix "+str(i - 1), value=s_faq["convertissues"][i])
+        
+        #response.add_field(name="Website: ", value=s_faq["convertissues"][6])
+        
+        await ctx.send(embed=response)
+
 def setup(bot):
     bot.add_cog(FAQ(bot))
