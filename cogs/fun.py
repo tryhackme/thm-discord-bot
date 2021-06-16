@@ -63,13 +63,13 @@ class Fun(commands.Cog, name="Fun Commands"):
             url="https://cdn.discordapp.com/attachments/433685563674198016/630100135623524363/JPEG_20191003_021216.jpg")
         await ctx.send(embed=response)
 
-    @commands.command(description="Boop someone!", usage="{@user}")
-    async def boop(self, ctx, member: discord.Member):
-        desc = "<@{}> was booped by <@{}>!".format(member.id, ctx.author.id)
-        response = officialEmbed("!boop", desc, color=0xFFFFFF)
-        response.set_image(url="http://giphygifs.s3.amazonaws.com/media/99LhY1qc6jG8w/giphy.gif")
+    #@commands.command(description="Boop someone!", usage="{@user}")
+    #async def boop(self, ctx, member: discord.Member):
+    #    desc = "<@{}> was booped by <@{}>!".format(member.id, ctx.author.id)
+    #    response = officialEmbed("!boop", desc, color=0xFFFFFF)
+    #    response.set_image(url="http://giphygifs.s3.amazonaws.com/media/99LhY1qc6jG8w/giphy.gif")
 
-        await ctx.send(embed=response)
+    #    await ctx.send(embed=response)
 
     @commands.command(description="NOOT NOOT!")
     async def noot(self,ctx):
