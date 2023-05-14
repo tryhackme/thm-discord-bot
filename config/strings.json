@@ -219,8 +219,8 @@
         },
         "api":{
             "help_desc":"Read about the TryHackMe API",
-            "url":"https://thm-community.github.io/api-docs/",
-            "title":"Read about the TryHackMe API!"
+            "url":"https://help.tryhackme.com/en/articles/6498330-enterprise-api",
+            "title":"Read about the TryHackMe business/education API!"
         },
         "koth":{
             "help_desc":"How to play TryHackMe's King of the Hill (KoTH)",
